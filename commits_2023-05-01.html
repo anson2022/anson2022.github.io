@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel=stylesheet href=https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css />
+   <script src=https://code.jquery.com/jquery-3.5.1.js ></script>
+   <script src=https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js ></script>
+   <script>
+       $(document).ready(function () {
+           $('#dt').DataTable();
+       });
+   </script>
+   <style>
+       a {
+         color: #007bff;
+         text-decoration: none;
+       }
+       a:hover {
+         text-decoration: underline;
+       }
+   </style>
+</head>
+<body>
+   <p style=font-size:20px;>2023-05-01 00:00:00 ~ 2023-05-04 23:59:59</p>   <p style=font-size:20px;>Total commits:<font style=color:blue;font-weight:bold;>8</font> (without meta-xxx)   <table id=dt class=display hover>
+       <thead>
+           <tr>
+               <th/>
+               <th>URL</th>
+               <th>Module</th>
+               <th style>Content</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>1</td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/8eb20f282bb52dc40bccf336ecb0feb0882e24df>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>responder: Add PollForPlatformEventMessage APIs<br/><br/>Added APIs to encode/decode PollForPlatformEventMessage command(0x0B)<br/>which is defined in DSP0248 Version 1.2.2 sec:16.7.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>2</td>
+               <td><a href=https://github.com/openbmc/dbus-top/commit/8c5208f16572b65a88b669f113ac73cb46255e5f>Link</a></td>
+               <td class='module'>dbus-top</td>
+               <td class='content'>Populate info in background thread<br/><br/>This change incorporates<br/><a href=https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50784 and>https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50784 and</a><br/><a href=https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50088.>https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50088.</a><br/><br/>The function `ListAllSensors` populates a list of DBus sensor objects.<br/>Currently it runs in the main thread before the UI gets created.<br/><br/>To enhance user experience, this routine is moved to a separate thread,<br/>so the information is populated by that thread, so the main thread does<br/>not get blocked while the list is being filled.<br/><br/>Originally, change 50784's ListAllSensors function includes the<br/>following steps:<br/>1) List DBus connections currently on the Bus<br/>2) Get Creds for each of the DBus connections<br/>3) Examine objects in ObjectMapper to ..<br/>  * See if they are Sensor objects<br/>  * If so mark a "Sensor" as "visible in ObjectMapper"<br/>4) List all Associations recorded in the ObjectMapper<br/>  * So they can be shown in the sensor info panel<br/>5) Find association definitions<br/>6) Find association endpoints<br/>7) Check all objects from HwMon daemons<br/>  * Objects from the DBus-Sensors daemon will be added later<br/>8) Check `ipmitool sdr`<br/><br/>Step 8) is currently removed in this change since running `ipmitool sdr`<br/>can potentially take a long time.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>3</td>
+               <td><a href=https://github.com/openbmc/phosphor-buttons/commit/395c764c2bb51a108b76dd80c3a7db16c8ec28d2>Link</a></td>
+               <td class='module'>phosphor-buttons</td>
+               <td class='content'>Remove power button long-press<br/><br/>So far, counting power button's pressing duration is supported.<br/>There's no need to handle redundant case for button long-press.<br/><br/>Tested:<br/>Press buttons and check corresponding behaviors.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>4</td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/2ea4d28e130f0019a3a060f249783ecc4d2022d0>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>ibm: Add new properties to Logging.PEL.Entry interface<br/><br/>Expose four more PEL (IBM's event log format) fields on D-Bus so they<br/>are available for other applications.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>5</td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/46b302837c3c44376da3ba6b72fb70b7b2ce1c11>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Aggregation: Process subordinate top collections<br/><br/>Adds a function to process responses from URIs that are uptree from<br/>a top level collection.  A follow-up patch will hook this into the<br/>aggregation code to allow adding links to top level collections which<br/>are only supported by satellite BMCs.<br/><br/>Adds test cases to validate this function is working correctly.<br/><br/>Tested:<br/>New test cases pass<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>6</td>
+               <td><a href=https://github.com/openbmc/phosphor-ecc/commit/c0b4eae01f4919531ef4eaef3df67df3928f6f18>Link</a></td>
+               <td class='module'>phosphor-ecc</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>7</td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/df7f12f0d4111a4646d5cad261473894676df132>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix PCIeDevice redfish validator failure<br/><br/>Specify correct  interface for getSubTreePaths in getPCIeDeviceList.<br/><br/>This commit addresses a Redfish validator failure that occurred after a<br/>previous commit.<br/>'''<br/><a href=https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5>https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5</a><br/>'''<br/>Both the inventory path and interface were incorrect, and the inventory<br/>path was fixed in the previous commit. This commit fixes the interface<br/>in the getSubTreePaths function to ensure that it returns the correct<br/>PCIeDevice list. Without the correct interface, the function was<br/>returning incorrect devices, which was causing the Redfish validator<br/>failure.<br/><br/>Tested: Validator passed for PCIeDevice<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>8</td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Revert:
+Cleanup pcie code<br/><br/>Remove unused variable pcieService, fix pciePath and use global<br/>variables pciePath and pcieDeviceInterface.<br/><br/>Tested: tested PCIeDeviceCollection and PCIeDevice, and tested<br/>the changes with the peci-pcie commit<br/><a href=https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100>https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100</a><br/><br/></td>
+           </tr>
+
+
+       </tbody>
+   </table>
+</html>
+</head>
