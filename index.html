@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>	
-    <script>
-		$(document).ready(function () {
-			$('#dt').DataTable();
-		});
-    </script>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+   <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js" ></script>
+   <script>
+       $(document).ready(function () {
+           $('#dt').DataTable();
+       });
+   </script>
+   <style>
+       a {
+         color: #007bff;
+         text-decoration: none;
+       }
+       a:hover {
+         text-decoration: underline;
+       }
+   </style>
 </head>
 <body>
-   <p style=font-size:20px;>2023-05-01 00:00:00 ~ 2023-05-04 23:59:59</p>   <p style=font-size:20px;>Total commits:<font style=color:blue;font-weight:bold;>8</font> (without meta-xxx)   <table id=dt class=display hover>
+   <p style=font-size:20px;>2023-04-01 00:00:00 ~ </p>   <p style=font-size:20px;>Total commits:<font style=color:blue;font-weight:bold;>143</font> (without meta-xxx)   <table id=dt class=display hover>
        <thead>
            <tr>
                <th/>
+               <th>Commit date</th>
                <th>URL</th>
                <th>Module</th>
                <th style>Content</th>
@@ -23,48 +33,485 @@
        <tbody>
            <tr>
                <td>1</td>
-               <td><a href=https://github.com/openbmc/libpldm/commit/8eb20f282bb52dc40bccf336ecb0feb0882e24df>Link</a></td>
+               <td>2023-04-28 21:48:06 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/3a6a001b6c1d755df762868a686adf57daefb8e1>Link</a></td>
                <td class='module'>libpldm</td>
-               <td class='content'>responder: Add PollForPlatformEventMessage APIs<br/><br/>Added APIs to encode/decode PollForPlatformEventMessage command(0x0B)<br/>which is defined in DSP0248 Version 1.2.2 sec:16.7.<br/><br/></td>
+               <td class='content'>oem-ibm : Define file type for new VPD record consumed by host via PLDM<br/><br/>This commit defines file type to handle new VPD record to be handled by<br/>PLDM. The new VPD record data is transfered through file I/O operation<br/>to host and this file type will be used in the PLDM request command to<br/>identify file operation for PSPD data.<br/><br/></td>
            </tr>
 
 
            <tr>
                <td>2</td>
-               <td><a href=https://github.com/openbmc/dbus-top/commit/8c5208f16572b65a88b669f113ac73cb46255e5f>Link</a></td>
-               <td class='module'>dbus-top</td>
-               <td class='content'>Populate info in background thread<br/><br/>This change incorporates<br/><a href=https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50784 and>https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50784 and</a><br/><a href=https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50088.>https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50088.</a><br/><br/>The function `ListAllSensors` populates a list of DBus sensor objects.<br/>Currently it runs in the main thread before the UI gets created.<br/><br/>To enhance user experience, this routine is moved to a separate thread,<br/>so the information is populated by that thread, so the main thread does<br/>not get blocked while the list is being filled.<br/><br/>Originally, change 50784's ListAllSensors function includes the<br/>following steps:<br/>1) List DBus connections currently on the Bus<br/>2) Get Creds for each of the DBus connections<br/>3) Examine objects in ObjectMapper to ..<br/>  * See if they are Sensor objects<br/>  * If so mark a "Sensor" as "visible in ObjectMapper"<br/>4) List all Associations recorded in the ObjectMapper<br/>  * So they can be shown in the sensor info panel<br/>5) Find association definitions<br/>6) Find association endpoints<br/>7) Check all objects from HwMon daemons<br/>  * Objects from the DBus-Sensors daemon will be added later<br/>8) Check `ipmitool sdr`<br/><br/>Step 8) is currently removed in this change since running `ipmitool sdr`<br/>can potentially take a long time.<br/><br/></td>
+               <td>2023-04-28 21:47:57 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/25c999c98fbcf5142aefccf99790ce8b6ec99153>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>Revert "oem-ibm : New record to backplane vpd"<br/><br/>This reverts commit 9eee2518cabb21790dceef847eae5fe39d3c4792.<br/><br/>The patch in question breaks the build in multiple ways:<br/><br/>```<br/>../oem/ibm/libpldmresponder/file_io_type_vpd.cpp: In member function ‘virtual int pldm::responder::keywordHandler::read(uint32_t, uint32_t&, pldm::responder::Response&, pldm::responder::oem_platform::Handler*)’:<br/>../oem/ibm/libpldmresponder/file_io_type_vpd.cpp:30:21: error: ‘DBusHandler’ has not been declared<br/>   30 |         auto& bus = DBusHandler::getBus();<br/>      |                     ^~~~~~~~~~~<br/>../oem/ibm/libpldmresponder/file_io_type_vpd.cpp:74:19: error: ‘pldm::PelSeverity’ has not been declared<br/>   74 |             pldm::PelSeverity::ERROR);<br/>      |                   ^~~~~~~~~~~<br/>../oem/ibm/libpldmresponder/file_io_type_vpd.cpp:106:48: error: cannot bind non-const lvalue reference of type ‘uint32_t&’ {aka ‘unsigned int&’} to a value of type ‘long unsigned int’<br/>  106 |     auto rc = readFile(keywrdFilePath, offset, keywrdSize, response);<br/>      |                                                ^~~~~~~~~~<br/>In file included from ../oem/ibm/libpldmresponder/file_io_type_vpd.hpp:3,<br/>                 from ../oem/ibm/libpldmresponder/file_io_type_vpd.cpp:1:<br/>../oem/ibm/libpldmresponder/file_io_by_type.hpp:90:36: note:   initializing argument 3 of ‘virtual int pldm::responder::FileHandler::readFile(const std::string&, uint32_t, uint32_t&, pldm::responder::Response&)’<br/>   90 |                          uint32_t& length, Response& response);<br/>      |                          ~~~~~~~~~~^~~~~~<br/>../oem/ibm/libpldmresponder/file_io_type_vpd.cpp:114:19: error: ‘pldm::PelSeverity’ has not been declared<br/>  114 |             pldm::PelSeverity::ERROR);<br/>      |                   ^~~~~~~~~~~<br/>[53/71] Compiling C++ object libpldmresponder/libpldmresponder.so.0.1.p/.._oem_ibm_libpldmresponder_file_io_by_type.cpp.o<br/>FAILED: libpldmresponder/libpldmresponder.so.0.1.p/.._oem_ibm_libpldmresponder_file_io_by_type.cpp.o<br/>...<br/>responder_file_io_by_type.cpp.o -c ../oem/ibm/libpldmresponder/file_io_by_type.cpp<br/>../oem/ibm/libpldmresponder/file_io_by_type.cpp: In function ‘std::unique_ptr<pldm::responder::FileHandler> pldm::responder::getHandlerByType(uint16_t, uint32_t)’:<br/>../oem/ibm/libpldmresponder/file_io_by_type.cpp:173:14: error: ‘PLDM_FILE_TYPE_PSPD_VPD_PDD_KEYWORD’ was not declared in this scope<br/>  173 |         case PLDM_FILE_TYPE_PSPD_VPD_PDD_KEYWORD:<br/>      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br/>ninja: build stopped: subcommand failed.<br/>```<br/><br/>Let's get that fixed and try again.<br/><br/></td>
            </tr>
 
 
            <tr>
                <td>3</td>
-               <td><a href=https://github.com/openbmc/phosphor-buttons/commit/395c764c2bb51a108b76dd80c3a7db16c8ec28d2>Link</a></td>
-               <td class='module'>phosphor-buttons</td>
-               <td class='content'>Remove power button long-press<br/><br/>So far, counting power button's pressing duration is supported.<br/>There's no need to handle redundant case for button long-press.<br/><br/>Tested:<br/>Press buttons and check corresponding behaviors.<br/><br/></td>
+               <td>2023-04-28 21:47:35 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/df32eb57476e86044a996c5f2b6765a772c10de4>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Add association between FabricAdapter and Port<br/><br/>As a course of implementing PortCollection and Port schemas,<br/>this commit adds a new association to describe the links<br/>between FabricAdapter and Port.<br/><br/> - FabricAdapter may be "connected_to" one or more ports,<br/> - A port may also be "connecting" one or more items.<br/><br/>The generic associations of 'containing' and 'contained_by'<br/>are considered, but they are for the physically "containing" items.<br/><br/>Related schemas are:<br/><br/>- <a href=https://redfish.dmtf.org/schemas/v1/Port.v1_8_0.json>https://redfish.dmtf.org/schemas/v1/Port.v1_8_0.json</a><br/><br/>```<br/>       "Links": {<br/>           "description": "The links to other resources that are related to this resource.",<br/>            "properties": {<br/>                "AssociatedEndpoints": {<br/>                    "description": "An array of links to the endpoints at the other end of the link.",<br/>                    "items": {<br/>                        "$ref": "<a href=http://redfish.dmtf.org/schemas/v1/Endpoint.json#/definitions/Endpoint">http://redfish.dmtf.org/schemas/v1/Endpoint.json#/definitions/Endpoint"</a><br/>                    },<br/>                    "longDescription": "This property shall contain an array of links to resources of type Endpoint that represent the endpoints to which this port is connected.",<br/>                    "readonly": true,<br/>                    "type": "array"<br/>                },<br/>                "AssociatedEndpoints@odata.count": {<br/>                    "$ref": "<a href=http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/count">http://redfish.dmtf.org/schemas/v1/odata-v4.json#/definitions/count"</a><br/>                },<br/>```<br/><br/>- <a href=https://redfish.dmtf.org/schemas/v1/FabricAdapter.v1_5_0.json>https://redfish.dmtf.org/schemas/v1/FabricAdapter.v1_5_0.json</a><br/><br/>```<br/>                "Ports": {<br/>                    "$ref": "<a href=http://redfish.dmtf.org/schemas/v1/PortCollection.json#/definitions/PortCollection",>http://redfish.dmtf.org/schemas/v1/PortCollection.json#/definitions/PortCollection",</a><br/>                    "description": "The link to the collection of ports that exist on the fabric adapter.",<br/>                    "longDescription": "This property shall contain a link to a Resource Collection of type PortCollection.",<br/>                    "readonly": true<br/>                },<br/>```<br/><br/></td>
            </tr>
 
 
            <tr>
                <td>4</td>
-               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/2ea4d28e130f0019a3a060f249783ecc4d2022d0>Link</a></td>
-               <td class='module'>phosphor-dbus-interfaces</td>
-               <td class='content'>ibm: Add new properties to Logging.PEL.Entry interface<br/><br/>Expose four more PEL (IBM's event log format) fields on D-Bus so they<br/>are available for other applications.<br/><br/></td>
+               <td>2023-04-28 21:47:23 </td>
+               <td><a href=https://github.com/openbmc/phosphor-time-manager/commit/f93c405fd2af186a36cdbbe763d51edd846a3f32>Link</a></td>
+               <td class='module'>phosphor-time-manager</td>
+               <td class='content'>Enable modernize tidy checks on the repo<br/><br/>This commit enables the modernize clang-tidy<br/>checks.<br/><br/></td>
            </tr>
 
 
            <tr>
                <td>5</td>
-               <td><a href=https://github.com/openbmc/bmcweb/commit/46b302837c3c44376da3ba6b72fb70b7b2ce1c11>Link</a></td>
-               <td class='module'>bmcweb</td>
-               <td class='content'>Aggregation: Process subordinate top collections<br/><br/>Adds a function to process responses from URIs that are uptree from<br/>a top level collection.  A follow-up patch will hook this into the<br/>aggregation code to allow adding links to top level collections which<br/>are only supported by satellite BMCs.<br/><br/>Adds test cases to validate this function is working correctly.<br/><br/>Tested:<br/>New test cases pass<br/><br/></td>
+               <td>2023-04-28 21:47:04 </td>
+               <td><a href=https://github.com/openbmc/peci-pcie/commit/de3bae3845a8ddb27209f2c07c9772e81f2d332f>Link</a></td>
+               <td class='module'>peci-pcie</td>
+               <td class='content'>Moving to correct PCIe Device interface<br/><br/>Move PCIe device interface to<br/>"xyz.openbmc_project.Inventory.Item.PCIeDevice".<br/><br/>Move peciPCIePath to ""/xyz/openbmc_project/inventory".<br/><br/>bmcweb commit:<br/><a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62064/1>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62064/1</a><br/><br/>Tested: None<br/><br/>I don't have environment to test, need help testing this commit.<br/><br/></td>
            </tr>
 
 
            <tr>
                <td>6</td>
-               <td><a href=https://github.com/openbmc/phosphor-ecc/commit/c0b4eae01f4919531ef4eaef3df67df3928f6f18>Link</a></td>
-               <td class='module'>phosphor-ecc</td>
+               <td>2023-04-28 20:40:52 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Cleanup pcie code<br/><br/>Remove unused variable pcieService, fix pciePath and use global<br/>variables pciePath and pcieDeviceInterface.<br/><br/>Tested: tested PCIeDeviceCollection and PCIeDevice, and tested<br/>the changes with the peci-pcie commit<br/><a href=https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100>https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>7</td>
+               <td>2023-04-28 16:00:59 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/c9f4a556ddc4154909c8d83323ac3b7b3dc38a1c>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>Adding myself as a reviewer<br/><br/>Requesting to add me as a reviewer.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>8</td>
+               <td>2023-04-28 15:33:54 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/50f1daeacb9c27a4fb1439bad0e8487ce850ad55>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>sdbus++: async: client: example: add a few comments for clarity<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>9</td>
+               <td>2023-04-28 15:30:36 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/b85561683b4d9af6f13526768618e41e4baa20d9>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>build: enable sdbus++ common.hpp output<br/><br/>This repository is [incorrectly] not using the sdbus++-gen-meson,<br/>but instead is hand-rolling the sdbus++ calls.  The newest version<br/>of sdbus++ adds a dependency between `server.hpp` and `common.hpp`,<br/>so add the invocations as necessary.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>10</td>
+               <td>2023-04-27 21:35:43 </td>
+               <td><a href=https://github.com/openbmc/openpower-debug-collector/commit/407e5b6587597e5cd75956b6d2281ad095b15730>Link</a></td>
+               <td class='module'>openpower-debug-collector</td>
+               <td class='content'>meson: Move config file creation out of executable block<br/><br/>The configuration file generation within the executable block does not<br/>define the necessary macros. Moving the configuration_file() outside the<br/>executable block creates proper cofig.h file<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>11</td>
+               <td>2023-04-27 21:35:34 </td>
+               <td><a href=https://github.com/openbmc/phosphor-time-manager/commit/864e173e246383b5bb9c08917d286eed540639e4>Link</a></td>
+               <td class='module'>phosphor-time-manager</td>
+               <td class='content'>Add clang-tidy file<br/><br/>This commit implements a clang-tidy file, and makes<br/>some changes to get it to pass.<br/>Most changes are naming or mechanical in nature.<br/><br/>Tested:<br/>CI passed in docker.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>12</td>
+               <td>2023-04-27 21:35:19 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/e340325b66fe62b00706ab50d58ad4c00c7425eb>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Update host watchdog timeout event name<br/><br/>watchdog: Update host watchdog event name triggered<br/><br/>When the host watchdog timer hits, if the hostboot-dump-collection flag<br/>is disabled in openpower-debug-collector, the<br/>org.open_power.Host.Boot.Error.WatchdogTimedOut event is triggered.<br/><br/>Whereas if the hostboot-dump-collection flag is enabled,<br/>the org.open_power.Host.Boot.Error.WatchdogTimeout event is triggered<br/><br/>Due to this, when host dump collection is disabled, the event did not<br/>match any entry in registry entry. Changing the event name and the<br/>message registry in both enabled and disabled cases to<br/>org.open_power.Host.Boot.Error.WatchdogTimedOut to see the expected PEL<br/><br/>Fix:<br/>Update the event name to org.open_power.Host.Boot.Error.WatchdogTimedOut<br/><br/>Test:<br/>Tested and verified that in both scenarios it creates SRC BD5EC101 PEL<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>13</td>
+               <td>2023-04-27 21:32:31 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/68e82947f66545f014dc8fd1dde1807b0cc1989c>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>build: enable sdbus++ common.hpp output<br/><br/>The generated server.hpp file now requires a common.hpp to also be<br/>generated.  Add that to the meson.build.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>14</td>
+               <td>2023-04-27 21:31:42 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/0f6147ca2518bd7401e94e5551322a7892e27d77>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Display eventlog status button based on condition<br/><br/>Resolved and Unresolved status button in event log page is shown<br/>or hidden based on the environment variable<br/>VUE_APP_EVENT_LOGS_TOGGLE_BUTTON_DISABLED<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>15</td>
+               <td>2023-04-27 21:31:26 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/6af2a2936c40f4e1e275c39a88a41ba954a254bc>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>instance-id: Setup default database on install<br/><br/>Make sure that libpldm's implementation and configuration is<br/>self-contained. The database must be present otherwise applications<br/>calling through the instance ID API will fail at runtime.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>16</td>
+               <td>2023-04-27 21:30:45 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/c2a311b0055b5af0d93bf5db0e9834271d93d458>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>Handle InterfacesRemoved signal under /xyz/openbmc_project/sensor path<br/><br/>Listen for InterfacesRemoved signal and restart control loops. Without<br/>this, the pid loop may run with staled sensor value if the corresponding<br/>object or interface is removed.<br/><br/>Tested:<br/>  ...<br/>  PID Zone 0 max SetPoint 16800 requested by ...<br/>  PID Zone 0 max SetPoint 16800 requested by ...<br/><- systemctl stop  xyz.openbmc_project.nvmesensor here -><br/>  New configuration detected, reloading<br/>  .1 Failed during restartControlLoops, try again: wait for count back to 1<br/>  Zone Zone 1 is at ZoneIndex 1<br/>  Zone Zone 0 is at ZoneIndex 0<br/>  Zone Zone 2 is at ZoneIndex 2<br/>  ...<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>17</td>
+               <td>2023-04-27 21:30:13 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/c6fa66671b948811794de1144d360f574c548013>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>psu-ng: Validate PSUs voltage input<br/><br/>Added logic to verify all power supplies have same input<br/>voltage. When detecting different input voltage an error is<br/>logged.<br/><br/>Tested:<br/>The power input verification test was done on a system with two<br/>different input voltage (110v and 220v) in the following scenarios:<br/><br/>- Chassis Off/On.<br/>- Restart the PSU monitor.<br/>- Stop entity manager and stop PSU monitor then start PSU monitor<br/>  after few seconds start entity manager.<br/>- AC power Off/On.<br/>- Hot-Plug power supply.<br/><br/>All scenarios listed above verified to report one error log.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>18</td>
+               <td>2023-04-27 21:29:55 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/28f4b387a0f448f0be1b746a85fc58458ece8db3>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Remove nameStr from router<br/><br/>It isn't used anywhere in the code, so it can be removed, and the router<br/>simplified.  These common data structures have caused problems, in that<br/>they're not copied to child handlers, and cause bugs like #249.<br/><br/>Tested: Redfish service validator passes.  Basic sanity tests of both<br/>static file routes such as $metadata (which use DynamicRule) as well as<br/>method routes, such as /redfish/v1, return valid data.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>19</td>
+               <td>2023-04-27 21:29:43 </td>
+               <td><a href=https://github.com/openbmc/phosphor-settingsd/commit/de7ccfb2e815f1f289edf799b1ae981e5fa6a8b3>Link</a></td>
+               <td class='module'>phosphor-settingsd</td>
+               <td class='content'>meson: Remove autotools build files<br/><br/>Remove autotools build files as switching to meson.<br/><br/>Tested: meson build passes 'ninja -C build'<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>20</td>
+               <td>2023-04-27 21:29:16 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/defbc2acdbdf7827706ddd7fee53d193b3d849b3>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>Update sst-compare-redfish-os.py for TPMI based CPUs<br/><br/>The output of `intel-speed-select` is slightly different for TPMI-based<br/>CPUs. Filter out some unnecessary info and check two possible JSON keys<br/>for the SSE turbo buckets.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>21</td>
+               <td>2023-04-27 21:28:52 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/c361e222997b94f08a38975826a25ba6ab8ffa86>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>add support for hpe's gxpfan type<br/><br/>Adds basic support for handling HPE's GXPFan sensors<br/><br/>Tested: confirmed that HPE's GXP fans appear in webUI<br/>with this change + appropriate entity-manager config entries<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>22</td>
+               <td>2023-04-27 19:17:59 </td>
+               <td><a href=https://github.com/openbmc/phosphor-settingsd/commit/4d28bcd31f55a98505ec6dbe090a45b1cdf84952>Link</a></td>
+               <td class='module'>phosphor-settingsd</td>
+               <td class='content'>meson: Switch autoconf build to meson<br/><br/>Summary:<br/>- Add meson build flow.<br/>- Remove the options not being configured from yocto as configure<br/>  args and add them as constants/define in settings_manager.hpp<br/><br/>Tested:<br/>- autotools build passes.<br/>- meson build passes with "ninja -C build".<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>23</td>
+               <td>2023-04-27 11:00:38 </td>
+               <td><a href=https://github.com/openbmc/host-error-monitor/commit/03ed41b37b9feba12d8dcf42f5580557b9e0f13f>Link</a></td>
+               <td class='module'>host-error-monitor</td>
+               <td class='content'>Make libpeci dependency optional<br/><br/>This option is disabled by default as libpeci uses the old out-of-tree<br/>PECI driver's API and is thus incompatible with current OpenBMC kernels.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>24</td>
+               <td>2023-04-25 22:00:46 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/636391010b138d25165a35a0db31ab4fddd53f78>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>vpd-tool:UTF-8 encoding support on hardware read<br/><br/>Keyword values when in unreadable format may need to be converted<br/>to Hex. This code converts data from HW to readable format.<br/><br/>Test:<br/>root@bonn003:~# tmp/vpd-tool -r -H -O "/sys/bus/i2c/drivers/at24/8-0050/eeprom" -R VINI -K SN<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "SN": "YF30UF31C007"<br/>    }<br/>}<br/>root@bonn003:~# tmp/vpd-tool -r -H -O "/sys/bus/i2c/drivers/at24/8-0050/eeprom" -R VINI -K HW<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "HW": "0x8001"<br/>    }<br/>}<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>25</td>
+               <td>2023-04-25 22:00:33 </td>
+               <td><a href=https://github.com/openbmc/openpower-debug-collector/commit/85c1ebf5ff4a48b7c2b8b264cf1c81a2bf14ecfc>Link</a></td>
+               <td class='module'>openpower-debug-collector</td>
+               <td class='content'>regenerate-meson: re-run with latest from sdbusplus<br/><br/>The sdbus++-gen-meson has a new version, which requires regenerating<br/>all the meson in this repository.  Re-run the `regenerate-meson`<br/>script.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>26</td>
+               <td>2023-04-25 22:00:23 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/9a472e8ed1a0da677d2e28446db87b55677b8d83>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>detect fan type by matching against 'compatible'<br/><br/>Switches fan-type detection to key off well-known 'compatible' strings,<br/>as documented<br/>@ <a href=https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/hwmon/>https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/devicetree/bindings/hwmon/</a><br/><br/>Change was created in response to the comment:<br/>"I'd much prefer we query compatible attribute through the<br/>of_node symlink" as discussed with Andrew J. and Ed T. in the<br/>gerrit review<br/>@ <a href=https://gerrit.openbmc.org/c/openbmc/dbus-sensors/+/58458>https://gerrit.openbmc.org/c/openbmc/dbus-sensors/+/58458</a><br/><br/>Tested: confirmed fans appear in WebUI only when<br/>valid 'compatible' strings are found<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>27</td>
+               <td>2023-04-25 21:59:52 </td>
+               <td><a href=https://github.com/openbmc/phosphor-networkd/commit/f78a415e154bac274e1d07ce8128c69e9d1cd710>Link</a></td>
+               <td class='module'>phosphor-networkd</td>
+               <td class='content'>logging: switch networkd static_library to lg2<br/><br/>This commit switches logging to lg2 in the following files -<br/>1. src/network_manager.cpp<br/>2. src/util.cpp<br/>3. src/ethernet_interface.cpp<br/><br/>Tested: Build passes with "ninja -C build".<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>28</td>
+               <td>2023-04-25 21:59:36 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/02e01b5108d46720a0b438c0d79952464320d954>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'><a href=http_connection: Allow empty json objects>http_connection: Allow empty json objects</a><br/><br/>Currently <a href=http_connection will produce empty body in the response if the>http_connection will produce empty body in the response if the</a><br/>res.jsonValue is empty, including empty array, object.<br/><br/>This makes the output confusing in case a response does contain an empty<br/>object or array.<br/><br/>Change the code to print the json object even if it's empty object or<br/>array, so that the output is consistent with the `res.jsonValue`.<br/><br/>Tested: With an OEM URL that returns empty array depending on the system<br/>        config, the response becomes `[]` instead of empty.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>29</td>
+               <td>2023-04-25 21:59:09 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/87083f266c48d195b531ccefed160d141ad1a927>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>Fix a bug in libpldmresponder<br/><br/>This commit fixes the bug in the getStateSensorReading<br/>command handler. We need to check the correct request bytes for<br/>getStateSensorReading command (Section 20.2 in DSP0248)<br/>and not getSensorReading command (Section 18.2 in DSP0248).<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>30</td>
+               <td>2023-04-24 18:50:13 </td>
+               <td><a href=https://github.com/openbmc/fb-ipmi-oem/commit/7430e8d26a835e34ea162f6091b2b0e54fb5146e>Link</a></td>
+               <td class='module'>fb-ipmi-oem</td>
+               <td class='content'>usb-dbg: critical sel frame: Support critical sel show on debug card<br/><br/>Description:<br/> - Show all critical sel messages on debug card<br/><br/>Design:<br/> - This feature will iterate loggers from xyz.openbmc_project.<br/>   Logging.Entry to parse all the critical sels and show its<br/>   message property on debug card.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>31</td>
+               <td>2023-04-24 01:20:50 </td>
+               <td><a href=https://github.com/openbmc/phosphor-post-code-manager/commit/a4c19b0032900982b4e8ae85791f4dbd498457a8>Link</a></td>
+               <td class='module'>phosphor-post-code-manager</td>
+               <td class='content'>Support OCP debug card postcode display<br/><br/>Description:<br/> - Meson option postcode display path is supported<br/> - Support OCP debug card postcode display<br/><br/>Example of test process:<br/>   1. Set postcode-display-path as /sys/bus/i2c/devices/12-<br/>      000f/postcode-display-slot in project layer<br/>   2. Press OCP debug card uart button to the host to check<br/>   3. Host power on<br/>   4. The postcode should start displaying on the OCP debug card screen<br/>      with user-readable string representation for those codes<br/>Note:<br/> - The postcode-display-path was setting by CLD driver, which<br/>   will though CPLD setting ocp-debug card<br/>   (link: <a href=https://lore.kernel.org/lkml/20230117094425.19004-1-Delphine_CC_Chiu@Wiwynn.com/)>https://lore.kernel.org/lkml/20230117094425.19004-1-Delphine_CC_Chiu@Wiwynn.com/)</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>32</td>
+               <td>2023-04-22 00:30:45 </td>
+               <td><a href=https://github.com/openbmc/phosphor-networkd/commit/b03a760fa265a2f583719d542a617de3e5dfe3e2>Link</a></td>
+               <td class='module'>phosphor-networkd</td>
+               <td class='content'>regenerate-meson: re-run with latest from sdbusplus<br/><br/>The sdbus++-gen-meson has a new version, which requires regenerating<br/>all the meson in this repository.  Re-run the `regenerate-meson`<br/>script.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>33</td>
+               <td>2023-04-21 23:44:49 </td>
+               <td><a href=https://github.com/openbmc/dbus-top/commit/12bf50dda0072dc069336d9b27b567bc806bd353>Link</a></td>
+               <td class='module'>dbus-top</td>
+               <td class='content'>Add LICENSE file and remove outdated bitbake recipe<br/><br/>Signed-off-By: Sui Chen <suichen6@gmail.com><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>34</td>
+               <td>2023-04-21 23:44:38 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/949f634d652e074f4b2afbd88e94791a261f6326>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>Add EMR support<br/><br/>EMR was not accounted for in the main cpuinfoapp check, nor in the check<br/>for SST control support.<br/><br/>Tested: Verified Model and ProtectedIdentificationNumber were populated<br/>under /redfish/v1/Systems/system/Processors/cpu0 for an EMR CPU.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>35</td>
+               <td>2023-04-21 23:44:28 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/6c84a8c5d963cd2d871dbee7ab5508bb70f78769>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>36</td>
+               <td>2023-04-21 23:44:20 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/cdc8dca44b5a60af4bb86598043b54f955b81bcd>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>fix default root directory logging path<br/><br/>Currently, log files will be written into root directory if we only<br/>touch /etc/thermal.d/logging.<br/><br/>Before fix:<br/>$ mkdir -p /etc/thermal.d && touch /etc/thermal.d/logging && systemctl restart phosphor-pid-control.service<br/>$ systemctl status -n 10000 phosphor-pid-control.service | grep enabled<br/>swampd[10391]: Logging enabled:<br/>$ ls /zone*<br/>zone_0.log  zone_1.log  zone_2.log<br/><br/>After fix:<br/>Logging enabled: /tmp<br/>$ ls /tmp/zone*<br/>/tmp/zone_0.log  /tmp/zone_1.log  /tmp/zone_2.log<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>37</td>
+               <td>2023-04-21 23:43:39 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/140d496e6a18f66cc225316465dfe5f4b6469456>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>Address markdownlint warnings<br/><br/>Addressed markdownlint warnings reported by<br/>"../openbmc-build-scripts/scripts/format-code.sh --enable markdownlint"<br/><br/>Tested: Verified and fixed warnings using<br/>"../openbmc-build-scripts/scripts/format-code.sh --enable markdownlint"<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>38</td>
+               <td>2023-04-21 23:42:19 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/927d0930ca70a3767ffae6ae092d51d3a8415250>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Add a new dbus interface to get list of consoles<br/><br/>The "xyz.openbmc_project.Console.Access" interface will provide a<br/>single property containing the name of the abstract socket for the<br/>object hosting the interface. The caller can use mapper function to<br/>find the list of registered consoles.  The bmcweb can exploit this<br/>interface by putting console for each console object.<br/><br/>The SocketName attribute provides unix abstract socket name and it's<br/>first character is always null, the attribute type is an array of bytes<br/>types instead of string type. The byte array does not include a null<br/>terminator.<br/><br/>For example, object path and property exposed for host console is as<br/>follows:<br/>Object:<br/>    /xyz/openbmc_project/console/host<br/>Property:<br/>    SocketName  -> "\0obmc-console.host"<br/><br/>The tree for console0:<br/>$ busctl tree xyz.openbmc_project.Console.console0<br/>`-/xyz<br/>  `-/xyz/openbmc_project<br/>    `-/xyz/openbmc_project/console<br/>      `-/xyz/openbmc_project/console/console0<br/><br/>The introspect for console0:<br/>busctl introspect xyz.openbmc_project.Console.console0 /xyz/openbmc_project/console/console0<br/>NAME                                TYPE      SIGNATURE RESULT/VALUE                             FLAGS<br/>org.freedesktop.DBus.Introspectable interface -         -                                        -<br/>.Introspect                         method    -         s                                        -<br/>org.freedesktop.DBus.Peer           interface -         -                                        -<br/>.GetMachineId                       method    -         s                                        -<br/>.Ping                               method    -         -                                        -<br/>org.freedesktop.DBus.Properties     interface -         -                                        -<br/>.Get                                method    ss        v                                        -<br/>.GetAll                             method    s         a{sv}                                    -<br/>.Set                                method    ssv       -                                        -<br/>.PropertiesChanged                  signal    sa{sv}as  -                                        -<br/>xyz.openbmc_project.Console.Access  interface -         -                                        -<br/>.SocketName                         property  ay        22 0 111 98 109 99 45 99 111 110 115 ... -<br/><br/>   Related commits:<br/>        1) phosphor-dbus-interface: <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/61486>https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/61486</a><br/>        2) obmc-console: <a href=https://gerrit.openbmc.org/c/openbmc/obmc-console/+/62496>https://gerrit.openbmc.org/c/openbmc/obmc-console/+/62496</a><br/>        3) bmcweb: <a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62525>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62525</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>39</td>
+               <td>2023-04-21 23:42:03 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/1caa5e8a5ad9e9f26ddf2effe095ba1670911bc1>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>sdbus++: add common header file<br/><br/>There are some items generated under server and client which are<br/>overlapping and some currently in server that will also be needed<br/>for async bindings.  Create a common header file that they can<br/>all include in order to reduce the content generated across all these<br/>types.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>40</td>
+               <td>2023-04-21 23:40:59 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/9667f58239302e6053da27876981cdd0bf9c5de2>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>platform: pldm_msgbuf for decode_set_event_receiver_req()<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+           <tr>
+               <td>41</td>
+               <td>2023-04-21 13:55:15 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/86e3fd70f003264a05a09452c60ea8b9da6be287>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>meson: Install obmc-console-server in $sbindir for consistency<br/><br/>Currently the autotools build and the systemd service units expect<br/>obmc-console-server to be installed in ${sbindir}. This probably still<br/>isn't quite right (`${libexecdir}/obmc-console/` might be a better<br/>choice by [1]) but at least it's consistent.<br/><br/>[1] <a href=https://github.com/openbmc/docs/blob/master/anti-patterns.md#incorrect-placement-of-executables-in-sbin-usrsbin-or-bin-usrbin>https://github.com/openbmc/docs/blob/master/anti-patterns.md#incorrect-placement-of-executables-in-sbin-usrsbin-or-bin-usrbin</a><br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>42</td>
+               <td>2023-04-20 20:50:38 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/6c5418f599c6cd87941331a970c03f68eec66c39>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Remove hardcoded chassis from Fan store<br/><br/>This change removes the hardcoded chassis URL from FanStore. Now<br/>the URL is taken from the odata.id.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>43</td>
+               <td>2023-04-20 20:43:27 </td>
+               <td><a href=https://github.com/openbmc/ipmbbridge/commit/3e9bd93c8479ebefe13a5cc3806f5d9554ef8776>Link</a></td>
+               <td class='module'>ipmbbridge</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>44</td>
+               <td>2023-04-20 20:43:21 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/a412ca8f94c110239b578c61c6f73b56095f8597>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>Remove duplicate std::move<br/><br/>In the effort to remove copies, we removed one that was neccesary, given<br/>that this variable is std::moved twice.  This generally doesn't seem to<br/>cause an issue in upstream code, given that most upstream handlers are<br/>trivial, but there have been reports of this failing for more complex<br/>handlers, passing non-trivial types.  This should correct it by moving<br/>back to a copy.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>45</td>
+               <td>2023-04-20 20:43:02 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/72e21377372245b076c151f62a141153ab318bdd>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>log_services: Fix isContentTypeAllowed checks<br/><br/>The commit <a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/56694>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/56694</a><br/>inadvertently changed the polarity on the if checks using the newly<br/>introduced isContentTypeAllowed function which caused 'Bad Request' to<br/>be returned when the content type was allowed.<br/><br/>Tested:<br/>Getting the EventLog and PostCodes attachment would return the data<br/>instead of 'Bad Request'.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>46</td>
+               <td>2023-04-20 20:42:53 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/21f4cb4a76858d7dec71a04883894b8bc54d774f>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>socket-handler: Fix void pointer arithmetic<br/><br/>```<br/>cc -Iobmc-console-server.p -I. -I.. -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wextra -Wpedantic -Werror -std=gnu17 -O2 -g '-DLOCALSTATEDIR="/var/local"' '-DSYSCONFDIR="etc"' -MD -MQ obmc-console-server.p/socket-handler.c.o -MF obmc-console-server.p/socket-handler.c.o.d -o obmc-console-server.p/socket-handler.c.o -c ../socket-handler.c<br/>../socket-handler.c: In function ‘send_all’:<br/>../socket-handler.c:125:35: error: pointer of type ‘void *’ used in arithmetic [-Werror=pointer-arith]<br/>  125 |                 rc = send(fd, buf + pos, len - pos, flags);<br/>      |                                   ^<br/>cc1: all warnings being treated as errors<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>47</td>
+               <td>2023-04-20 20:42:35 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/f457a3ef9b58a824f0608c16fe5bdb445ee24ef0>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>Additional change to support ee1004 driver<br/><br/> changed the code to remove hardcoding of driver<br/> changed read parser executable to take driver as input<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>48</td>
+               <td>2023-04-20 20:42:25 </td>
+               <td><a href=https://github.com/openbmc/phosphor-bmc-code-mgmt/commit/dde1828ec05bbca76ed09e814d08631c0d9886c7>Link</a></td>
+               <td class='module'>phosphor-bmc-code-mgmt</td>
+               <td class='content'>meson: Disable 'verify-signature' option by default<br/><br/>Currently the 'verify-signature' option is enabled by default, and<br/>there is no way to disable it via recipe PACKAGECONFIG.<br/>As a result 'Software::Version::Error::InvalidSignature' is generated<br/>on unsigned updates even if user did not enable signature verification<br/>feature.<br/>Disable 'verify-signature' option by default to correct the issue.<br/>If user enables signature verification feature the option<br/>'verify-full-signature' is enabled which provides desired functionality.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>49</td>
+               <td>2023-04-20 20:41:59 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/891781e945318290d657a621dd0ce592c0b43ddd>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>platform: pldm_msgbuf for decode_get_pdr_req()<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>50</td>
+               <td>2023-04-20 20:41:40 </td>
+               <td><a href=https://github.com/openbmc/phosphor-post-code-manager/commit/65a66543d3ef4f5e68b3fd3c6b66e4238a164eaf>Link</a></td>
+               <td class='module'>phosphor-post-code-manager</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>51</td>
+               <td>2023-04-20 20:41:19 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/af29361cd6250566513bdae992695275f3dc88fe>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>build: fix missing nlohmann_json dependency<br/><br/>Subproject builds are currently broken due to a missing dependency<br/>in the `topology` unit-tests.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>52</td>
+               <td>2023-04-20 20:40:54 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/e456925b7361c8f95f1a80f510fe0dfff86d026c>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>Deassert thresholds when sensor is unavailable<br/><br/>Some dbus-sensors applications allows you to specify "PowerState"<br/>parameter for its sensors in the configarition. With this parameter<br/>sensor is sampled/checked against its thresholds only if certain<br/>system conditions are met.<br/>Therefore if sensor becomes unavailable because of the "PowerState"<br/>parameter, all its threshold states must be deasserted.<br/><br/>Tested: tested on the AMD DaytonaX CRB. It is a 2-socket board. For<br/>the test only 1 CPU was installed. In this case voltage sensors that<br/>measure voltages for CPU2 and configured with '"PowerState": "On"'<br/>assert their thresholds when the system is powered on.<br/>Before the patch even if the system is powered off after that, these<br/>voltage sensors stay with the asserted thresholds. Because of that<br/>webui will continue to displays these sensors with a 'Critical' status.<br/>After the patch if system is powered off, the voltage sensors deasset<br/>all their thresholds and the sensors correctly change their status to<br/>'OK' in webui.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>53</td>
+               <td>2023-04-20 20:38:29 </td>
+               <td><a href=https://github.com/openbmc/bios-settings-mgr/commit/c76391be84632617e1c302fe11d423891a3b56b1>Link</a></td>
+               <td class='module'>bios-settings-mgr</td>
                <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
            </tr>
 
@@ -72,19 +519,822 @@
 
 
            <tr>
-               <td>7</td>
-               <td><a href=https://github.com/openbmc/bmcweb/commit/df7f12f0d4111a4646d5cad261473894676df132>Link</a></td>
-               <td class='module'>bmcweb</td>
-               <td class='content'>Fix PCIeDevice redfish validator failure<br/><br/>Specify correct  interface for getSubTreePaths in getPCIeDeviceList.<br/><br/>This commit addresses a Redfish validator failure that occurred after a<br/>previous commit.<br/>'''<br/><a href=https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5>https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5</a><br/>'''<br/>Both the inventory path and interface were incorrect, and the inventory<br/>path was fixed in the previous commit. This commit fixes the interface<br/>in the getSubTreePaths function to ensure that it returns the correct<br/>PCIeDevice list. Without the correct interface, the function was<br/>returning incorrect devices, which was causing the Redfish validator<br/>failure.<br/><br/>Tested: Validator passed for PCIeDevice<br/><br/></td>
+               <td>54</td>
+               <td>2023-04-19 01:05:34 </td>
+               <td><a href=https://github.com/openbmc/openpower-pnor-code-mgmt/commit/fe34ccd9dafbacfae567c8c5bdce488bb94bd798>Link</a></td>
+               <td class='module'>openpower-pnor-code-mgmt</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
            </tr>
 
 
            <tr>
-               <td>8</td>
-               <td><a href=https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5>Link</a></td>
+               <td>55</td>
+               <td>2023-04-19 01:04:53 </td>
+               <td><a href=https://github.com/openbmc/openpower-hw-diags/commit/415860077f72b12e31894d2fdc76ac1c064c6fff>Link</a></td>
+               <td class='module'>openpower-hw-diags</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>56</td>
+               <td>2023-04-19 01:04:19 </td>
+               <td><a href=https://github.com/openbmc/phosphor-networkd/commit/cc7f5bf00c24ed5a7c5d74c95a7f1d9549aec1d3>Link</a></td>
+               <td class='module'>phosphor-networkd</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>57</td>
+               <td>2023-04-18 13:32:15 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/9d192c74ab336adb662312e955ad292e5e48b44e>Link</a></td>
                <td class='module'>bmcweb</td>
-               <td class='content'>Revert:
-Cleanup pcie code<br/><br/>Remove unused variable pcieService, fix pciePath and use global<br/>variables pciePath and pcieDeviceInterface.<br/><br/>Tested: tested PCIeDeviceCollection and PCIeDevice, and tested<br/>the changes with the peci-pcie commit<br/><a href=https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100>https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100</a><br/><br/></td>
+               <td class='content'>Copy privilegeset into websocket rule<br/><br/>Resolves #249<br/><br/>Tested: Running websockets now shows rules being applied<br/>```<br/>Apr 10 20:26:35 p10bmc bmcweb[745]: (2023-04-10 20:26:35) [INFO "<a href=http_connection.hpp":209] Request: 0x11e3248 HTTP/1.1 GET /console0 ::ffff:X.XX.XX.XXX>http_connection.hpp":209] Request: 0x11e3248 HTTP/1.1 GET /console0 ::ffff:X.XX.XX.XXX</a><br/>|<br/>Apr 10 20:26:35 p10bmc bmcweb[745]: (2023-04-10 20:26:35) [DEBUG "routing.hpp":1460] Matched rule (upgrade) '/console0' 1 / 2<br/>Apr 10 20:26:36 p10bmc bmcweb[745]: (2023-04-10 20:26:36) [DEBUG "routing.hpp":1299] userName = admin userRole = priv-admin<br/>Apr 10 20:26:36 p10bmc bmcweb[745]: (2023-04-10 20:26:36) [DEBUG "routing.hpp":101] checkPrivileges: Active BASE priv: ConfigureManager <<<<<<<br/>Apr 10 20:26:36 p10bmc bmcweb[745]: (2023-04-10 20:26:36) [DEBUG "routing.hpp":101] checkPrivileges: Active BASE priv: ConfigureComponents <<<<<<<br/>Apr 10 20:26:36 p10bmc bmcweb[745]: (2023-04-10 20:26:36) [ERROR "routing.hpp":1361] isUserPrivileged: URL: /console0 IsPrivelegeSetEmpty: 0 Username: admin<br/>```<br/><br/>Tested-by: Ninad Palsule <ninadpalsule@us.ibm.com><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>58</td>
+               <td>2023-04-18 13:28:14 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/d90aadbf53587ff24837e26e69431fd0eed543a7>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>Remove adding parent's presence for child FRUs<br/><br/>In the existing code, vpd-tool emplaces the parent FRU's presence for<br/>child FRU whose "Present" property is not available on d-bus. This<br/>gives a misleading information on presence state of non embedded FRU's,<br/>which can either be present or absent on a machine.<br/><br/>Fix:<br/>This commit modifies the vpd-tool code to print "Unknown" if the FRU's<br/>Present property is not available on d-bus.<br/><br/>Test:<br/>1. When Present property is not published on d-bus<br/>vpd-tool -o -O /system/chassis/motherboard/powersupply0<br/>[<br/>    {<br/>        "/system/chassis/motherboard/powersupply0": {<br/>            "LocationCode": "U78DA.ND0.WZS0065-E0",<br/>            "Present": "Unknown",<br/>            "TYPE": "FRU",<br/>            "type": "xyz.openbmc_project.Inventory.Item.PowerSupply"<br/>        }<br/>    }<br/>]<br/><br/>2. When Present property is set to true on dbus<br/>:~# vpd-tool -o -O /system/chassis/motherboard/powersupply0<br/>[<br/>    {<br/>        "/system/chassis/motherboard/powersupply0": {<br/>            "CC": "51DA",<br/>            "DR": "IBM PS",<br/>            "FN": "03FP221",<br/>            "LocationCode": "U780C.ND0.RCH0014-E0",<br/>            "PN": "03FP207",<br/>            "Present": "true",<br/>            "SN": "YL31KY12K0CX",<br/>            "TYPE": "FRU",<br/>            "type": "xyz.openbmc_project.Inventory.Item.PowerSupply"<br/>        }<br/>    }<br/>]<br/><br/>3. When Present property is set to false on dbus<br/>:~# vpd-tool -o -O /system/chassis/motherboard/powersupply0<br/>[<br/>    {<br/>        "/system/chassis/motherboard/powersupply0": {<br/>            "CC": "51DA",<br/>            "DR": "IBM PS",<br/>            "FN": "03FP221",<br/>            "LocationCode": "U780C.ND0.RCH0014-E0",<br/>            "PN": "03FP207",<br/>            "Present": "false",<br/>            "SN": "YL31KY12K0CX",<br/>            "TYPE": "FRU",<br/>            "type": "xyz.openbmc_project.Inventory.Item.PowerSupply"<br/>        }<br/>    }<br/>]<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>59</td>
+               <td>2023-04-18 11:40:28 </td>
+               <td><a href=https://github.com/openbmc/phosphor-user-manager/commit/6ceeb4c08ec858182a847634f976be0c45e76e6e>Link</a></td>
+               <td class='module'>phosphor-user-manager</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>60</td>
+               <td>2023-04-17 22:10:49 </td>
+               <td><a href=https://github.com/openbmc/openpower-debug-collector/commit/1485d7cd773c1a853f8d37ce6211b6d2ca8a611e>Link</a></td>
+               <td class='module'>openpower-debug-collector</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>61</td>
+               <td>2023-04-17 22:10:22 </td>
+               <td><a href=https://github.com/openbmc/openpower-libhei/commit/925c3edccffa1a8d9baeb806da56a8709e57f705>Link</a></td>
+               <td class='module'>openpower-libhei</td>
+               <td class='content'>Rename chip data attention types to be more descriptive<br/><br/>Instead of CS, UCS, RE, SPA, and HA, using CHIP_CS, UNIT_CS, RECOV,<br/>SP_ATTN, and HOST_ATTN. This is mostly in an effort to clarify a chip<br/>checkstop is not necessarily a system checkstop. Notice that I didn't<br/>change any of the register names for P10 or Explorer. This is to prevent<br/>the inevitable code level mismatches between drivers and the peltool<br/>parsers used to parse field data.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>62</td>
+               <td>2023-04-17 22:10:06 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/c68829ad97f8de8e2b58eecc1c0011a2a2f82df9>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>63</td>
+               <td>2023-04-17 22:09:44 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/6c39c7a7af9c1adaa247d8a1d7f6980219f3a146>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>Populate correct terminusId<br/><br/>Hardcoded terminus id 0 is used at multiple places in the current code.<br/>Made changes to populate correct terminus id instead of hardcoded one.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>64</td>
+               <td>2023-04-15 22:37:33 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/cc07530fdb356b7750f58c2a6b35c9cf180ed99c>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>Support systemd socket activation<br/><br/>Check if systemd passed us a socket when starting obmc-console before<br/>creating the socket ourselves. This will support use cases where we<br/>don't need obmc-console until a SoL is activated by the user.<br/><br/>Tested: Verified that existing unit file installation is unchanged -<br/>statically enabled obmc-console@.service instances will be started.<br/><br/>Then disabled obmc-console@ttyS2.service and enabled<br/>obmc-console@ttyS2.socket (with a drop-in change to override<br/>ListenStream to "obmc-console") and verifed that activating Redfish and<br/>SSH SoL would start obmc-console@ttyS2.service and console redirection<br/>worked.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>65</td>
+               <td>2023-04-15 21:05:08 </td>
+               <td><a href=https://github.com/openbmc/obmc-ikvm/commit/673ba88dd86708fd932f215cf93626bc970e21bc>Link</a></td>
+               <td class='module'>obmc-ikvm</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>66</td>
+               <td>2023-04-15 21:04:59 </td>
+               <td><a href=https://github.com/openbmc/ssifbridge/commit/6f25d7b4d08c55d24b04fb66b1758ad5454a304c>Link</a></td>
+               <td class='module'>ssifbridge</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>67</td>
+               <td>2023-04-15 21:04:50 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/35a15c39b735300f9f0848099a136aea2d2ea5fa>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>oem: ibm: fileTable: Add lid files for peltool parsing<br/><br/>These lid files contain debug strings to be parsed by the OpenPower<br/>peltool and display error information:<br/>```<br/><a href=https://github.com/openbmc/phosphor-logging/tree/master/extensions/openpower-pels>https://github.com/openbmc/phosphor-logging/tree/master/extensions/openpower-pels</a><br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>68</td>
+               <td>2023-04-15 21:04:32 </td>
+               <td><a href=https://github.com/openbmc/phosphor-time-manager/commit/4c5143f08a9da57a5abe814ef8e561a89cafc0e7>Link</a></td>
+               <td class='module'>phosphor-time-manager</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>69</td>
+               <td>2023-04-15 21:04:24 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/946c940434a7d5403f469ce2ab56f9136293ff38>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>Request name with default non-zero flags<br/><br/>Adds default flags to be used when calling sd_bus_request_name:<br/>SD_BUS_NAME_ALLOW_REPLACEMENT and SD_BUS_NAME_REPLACE_EXISTING. This<br/>fixes sporadical issue observed in one of our services, where, after its<br/>restart with systemctl command, exception was thrown when calling<br/>request_name(), with code "FileExists".<br/><br/>Tested:<br/>Confirmed that exception no longer appears after service restart.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>70</td>
+               <td>2023-04-15 21:04:14 </td>
+               <td><a href=https://github.com/openbmc/phosphor-psu-code-mgmt/commit/200adf8fa81459195372f47135f2daf7f9fbbcdf>Link</a></td>
+               <td class='module'>phosphor-psu-code-mgmt</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>71</td>
+               <td>2023-04-15 21:04:06 </td>
+               <td><a href=https://github.com/openbmc/phosphor-bmc-code-mgmt/commit/e80b5bcb42d3d6ed094b52840543299ffb45be01>Link</a></td>
+               <td class='module'>phosphor-bmc-code-mgmt</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>72</td>
+               <td>2023-04-15 21:03:58 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/4efe3e0c02ed5d955175fd863a575e2709a6e461>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>73</td>
+               <td>2023-04-15 21:03:50 </td>
+               <td><a href=https://github.com/openbmc/phosphor-fan-presence/commit/ab877f66c6a9ecc6fe29191b3520c42a1cfe3473>Link</a></td>
+               <td class='module'>phosphor-fan-presence</td>
+               <td class='content'>control:configs:rainier-2u: Add new hot card<br/><br/>Add the Lassen InfiniBand adapter to the hot cards list for the Rainier<br/>2U.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>74</td>
+               <td>2023-04-15 21:03:41 </td>
+               <td><a href=https://github.com/openbmc/phosphor-net-ipmid/commit/e81b7c9d1aa571694200cc2afdca238cb23a7442>Link</a></td>
+               <td class='module'>phosphor-net-ipmid</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>75</td>
+               <td>2023-04-15 21:03:33 </td>
+               <td><a href=https://github.com/openbmc/phosphor-led-sysfs/commit/3778f8efaa6ea351bb4d23042cbfa06b22c86a6f>Link</a></td>
+               <td class='module'>phosphor-led-sysfs</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>76</td>
+               <td>2023-04-15 21:03:25 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/e46b4444708a8b32e68b7d03465f46bb62fc40ed>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>77</td>
+               <td>2023-04-15 21:03:16 </td>
+               <td><a href=https://github.com/openbmc/kcsbridge/commit/e8d514f1fddf52d5546f7f64fccbe9d411bd6f2d>Link</a></td>
+               <td class='module'>kcsbridge</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>78</td>
+               <td>2023-04-15 21:03:07 </td>
+               <td><a href=https://github.com/openbmc/phosphor-inventory-manager/commit/8a1ccdc642317579327db5a1ad562ce16dba1352>Link</a></td>
+               <td class='module'>phosphor-inventory-manager</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>79</td>
+               <td>2023-04-15 21:02:59 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/8d1ac3a244732635bd1c4fd711130cd82bfe61b7>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>Ignore uninteresting IA/IR signals<br/><br/>Currently, entity-manager will parse every JSON file and do its full<br/>D-Bus scan and probe on any interfacesAdded or interfacesRemoved signal,<br/>without regard for which interface was added or removed.<br/><br/>Since the interfaces that are involved in the probes are known to<br/>entity-manager via the Probe statements in the JSON files, it is<br/>possible to only actually look for new or removed entities when the<br/>signals received contain one of those interfaces.<br/><br/>This implements something I saw suggested in an abandoned commit[1]: to<br/>extract the probe interfaces from the JSON files for use with the<br/>matches.  Since the argX matches can only be done when the arg is a<br/>string, it can't build the interfaces into the match string, but it can<br/>check for a probe interface in the message payload before doing any real<br/>processing.<br/><br/>Note that the NameOwnerChanged signal doesn't contain interfaces, only<br/>well known bus names, so no interface checking can be done against it.<br/><br/>I imagine some further simplification could be done, such as not also<br/>parsing all the JSON files as part of propertiesChangedCallback(), or at<br/>least sharing more code, if desired.<br/><br/>[1] <a href=https://gerrit.openbmc.org/c/openbmc/entity-manager/+/56723>https://gerrit.openbmc.org/c/openbmc/entity-manager/+/56723</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>80</td>
+               <td>2023-04-15 21:02:51 </td>
+               <td><a href=https://github.com/openbmc/slpd-lite/commit/55aac8e1bd6fafbbd9dcc8205dabec9c32ca2da4>Link</a></td>
+               <td class='module'>slpd-lite</td>
+               <td class='content'>build: remove autotools support<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>81</td>
+               <td>2023-04-15 21:02:42 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/6b424f998068f2336d0f2c0d8b806124554855e8>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Added the use of HttpPushUri<br/><br/>According to the Redfish specification, the address to update the<br/>firmware is set in redfish/v1/UpdateService with the HttpPushUri<br/>variable.<br/>```<br/><a href=https://github.com/openbmc/bmcweb/commit/4dc23f3fb6c9a7cef84658f8ab3b703d29ec7d57>https://github.com/openbmc/bmcweb/commit/4dc23f3fb6c9a7cef84658f8ab3b703d29ec7d57</a><br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>82</td>
+               <td>2023-04-15 07:40:23 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/5293ec2e5750456f705b6c06dcb7a4a106e4b296>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>Allow indefinite retries in tryRestartControlLoops()<br/><br/>On some platforms, when the BMC first starts up the sensors used in<br/>swampd's PID loops may not yet exist, and may not start existing until<br/>the host is first powered on.  Since that may not happen for an<br/>arbitrarily long time, swampd can end up crashing after exhausting its<br/>artificially-limited retry budget in tryRestartControlLoops(), at which<br/>point it gets restarted by systemd and the loop continues.  Each time it<br/>crashes we generate a warning in the Redfish event log though, which<br/>isn't ideal since nothing truly erroneous has actually happened (aside<br/>from the daemon somewhat spuriously dying).<br/><br/>With this change we instead allow tryRestartControlLoops() to retry<br/>indefinitely without crashing the process, so that it can simply wait<br/>until the sensors it's configured to use eventually appear.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>83</td>
+               <td>2023-04-14 14:36:32 </td>
+               <td><a href=https://github.com/openbmc/intel-ipmi-oem/commit/c8b0c46e431cc0348e5c2d0301b2446081c670de>Link</a></td>
+               <td class='module'>intel-ipmi-oem</td>
+               <td class='content'>Remove MDRv1 SMBIOS commands<br/><br/>MDRv1 SMBIOS commands are no longer supported. This removes the IPMI<br/>handlers.<br/><br/>Tested: builds and runs as expected; MDRv1 commands are not present<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+           <tr>
+               <td>84</td>
+               <td>2023-04-12 21:43:42 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/ff5f42fa41eb037bccba164dbc6c8f58cf6a6d7b>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>85</td>
+               <td>2023-04-12 21:43:34 </td>
+               <td><a href=https://github.com/openbmc/phosphor-state-manager/commit/c079c3f0a348b1f1e32b05b07fdb6414c8d3b53f>Link</a></td>
+               <td class='module'>phosphor-state-manager</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>86</td>
+               <td>2023-04-12 21:43:17 </td>
+               <td><a href=https://github.com/openbmc/phosphor-hostlogger/commit/c0c8706a364fe49dd5ed6360b3ff647bd6fa1b50>Link</a></td>
+               <td class='module'>phosphor-hostlogger</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>87</td>
+               <td>2023-04-12 21:43:08 </td>
+               <td><a href=https://github.com/openbmc/phosphor-hwmon/commit/6b5af74c59b68df253eda964604735f309913922>Link</a></td>
+               <td class='module'>phosphor-hwmon</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>88</td>
+               <td>2023-04-12 21:43:02 </td>
+               <td><a href=https://github.com/openbmc/phosphor-fan-presence/commit/d7343561403d2a553af826049dbda89625e28ac9>Link</a></td>
+               <td class='module'>phosphor-fan-presence</td>
+               <td class='content'>meson: update required version<br/><br/>In meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument, but instead it uses a positional argument<br/>which applies to all search-types.  This repository is already using<br/>a variant which is only supported on meson 0.58 (or later) so ensure<br/>the 0.58 version is required.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>89</td>
+               <td>2023-04-12 21:42:40 </td>
+               <td><a href=https://github.com/openbmc/phosphor-gpio-monitor/commit/0c60faaa0b53dad6561b95e66c0a601e442aeecf>Link</a></td>
+               <td class='module'>phosphor-gpio-monitor</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>90</td>
+               <td>2023-04-12 21:42:28 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-postd/commit/65d1753ca99624e9f6e8479b66a82764a75d4b88>Link</a></td>
+               <td class='module'>phosphor-host-postd</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>91</td>
+               <td>2023-04-12 21:42:14 </td>
+               <td><a href=https://github.com/openbmc/phosphor-sel-logger/commit/9b2f8db0c841b7f2d1ee6e0b359f70281b849476>Link</a></td>
+               <td class='module'>phosphor-sel-logger</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>92</td>
+               <td>2023-04-12 21:41:35 </td>
+               <td><a href=https://github.com/openbmc/x86-power-control/commit/f56ef594d779e5992584b9fd7e83c5643b73a456>Link</a></td>
+               <td class='module'>x86-power-control</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>93</td>
+               <td>2023-04-12 21:41:17 </td>
+               <td><a href=https://github.com/openbmc/phosphor-health-monitor/commit/67d40593eb46d0d23d72850d4c23e15bfd49f9ee>Link</a></td>
+               <td class='module'>phosphor-health-monitor</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>94</td>
+               <td>2023-04-12 21:40:21 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/391ca890904dda6077fa2e7bca5fb1e96b2e44ce>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>scheduled_host_transition: new object path<br/><br/>The D-Bus path for the ScheduledTime property had to change. The details<br/>of this can be found over in the change:<br/><br/>  <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-state-manager/+/61361>https://gerrit.openbmc.org/c/openbmc/phosphor-state-manager/+/61361</a><br/><br/>Update PLDM to utilize this new object path.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>95</td>
+               <td>2023-04-12 21:38:32 </td>
+               <td><a href=https://github.com/openbmc/phosphor-virtual-sensor/commit/209a88063836e6dc8c175cecac53d450b3222cf9>Link</a></td>
+               <td class='module'>phosphor-virtual-sensor</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>96</td>
+               <td>2023-04-12 21:38:24 </td>
+               <td><a href=https://github.com/openbmc/phosphor-certificate-manager/commit/75111af1e550ba091055bcc149fa12d97231567b>Link</a></td>
+               <td class='module'>phosphor-certificate-manager</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>97</td>
+               <td>2023-04-12 21:38:17 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/95f6aab2909b45cdb273240da75ced29e5b22f39>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>98</td>
+               <td>2023-04-12 21:36:51 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/7c26338edd6fdb16e72702910987a8e5fd899c10>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Added a "solved" check<br/><br/>Now Health status will be "Ok" if there are no unsolved problems in the<br/>log.<br/>Before this patch, the flag "solved" was not considered.<br/>Test:<br/>Created a log entry with the status of "Critical" and "Warning".<br/>Health became Critical.<br/>Event Critical pressed Resolved. Health became "Warning".<br/>Event Warning pressed Resolved. Health became "Ok".<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>99</td>
+               <td>2023-04-12 21:36:29 </td>
+               <td><a href=https://github.com/openbmc/bios-bmc-smm-error-logger/commit/55ce2f28b1e24b8f7a3f1a3aa8b7c151cb01c147>Link</a></td>
+               <td class='module'>bios-bmc-smm-error-logger</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>100</td>
+               <td>2023-04-12 21:35:57 </td>
+               <td><a href=https://github.com/openbmc/phosphor-objmgr/commit/403027426d684b62459a2fe7225a7c60accb0e5c>Link</a></td>
+               <td class='module'>phosphor-objmgr</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>101</td>
+               <td>2023-04-12 21:35:35 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ipmi-flash/commit/7fb9abd296ea5acad60ac3e28800a20905bc8724>Link</a></td>
+               <td class='module'>phosphor-ipmi-flash</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>102</td>
+               <td>2023-04-12 21:35:23 </td>
+               <td><a href=https://github.com/openbmc/phosphor-nvme/commit/f4d018b930017b60c63518e4642980569bedafa6>Link</a></td>
+               <td class='module'>phosphor-nvme</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>103</td>
+               <td>2023-04-12 21:35:17 </td>
+               <td><a href=https://github.com/openbmc/estoraged/commit/0ff7100bd97febe126a2873b7e6a34b053a51033>Link</a></td>
+               <td class='module'>estoraged</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>104</td>
+               <td>2023-04-12 21:33:26 </td>
+               <td><a href=>Link</a></td>
+               <td class='module'></td>
+               <td class='content'>phosphor-buttons and phosphor-dbus-interfaces: srcrev bumps</td>
+           </tr>
+
+
+           <tr>
+               <td>105</td>
+               <td>2023-04-12 19:20:13 </td>
+               <td><a href=https://github.com/openbmc/google-misc/commit/4c4e94f051ce2165cc1f6fa01879e6410d7e26d2>Link</a></td>
+               <td class='module'>google-misc</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>106</td>
+               <td>2023-04-12 01:54:18 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/3a1cbe232a8819cd9b2ae6cbea83f216b07a6455>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>aggregation: add support to ibm tacoma system<br/><br/>The IBM Tacoma Rack Controller is a bringup system to start prototyping<br/>the concept of a rack controller and will be utilizing the aggregation<br/>feature offered by bmcweb.<br/><br/>For now, just put some dummy data in. Future work in this area will look<br/>into how to discover satellite BMCs and update this EM data<br/>dynamically. This work will most likely include hosting these EM objects<br/>outside of the EM service.<br/><br/>Tested:<br/>- Built into image and verified:<br/>  - Entity manager created "Tacoma Rack Controller" object<br/>  - xyz.openbmc_project.Configuration.SatelliteController was on D-Bus<br/>    with expected properties<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>107</td>
+               <td>2023-04-12 01:53:47 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/7a2bb2c9561a57dd23d1de44f5f38a95fdd806af>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix PowerSubsystem/PowerSupplies causing validator to fail<br/><br/>In the following commit[1], the member of Members was removed by<br/>mistake, causing the validator to fail. This commit fixes this<br/>problem.<br/><br/>Redfish validator failing with the following:<br/><br/>ERROR - Members: Mandatory prop does not exist<br/><br/>1 failMandatoryExist errors in<br/>/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies<br/>1 failMandatoryExist errors in<br/>/redfish/v1/Chassis/motherboard/PowerSubsystem/PowerSupplies<br/><br/>[1] <a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/57668/26..29//COMMIT_MSG#b15>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/57668/26..29//COMMIT_MSG#b15</a><br/><br/>Tested: Validator passes<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>108</td>
+               <td>2023-04-12 01:45:34 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/a38e561df2cc8949603310ad14142e0b2704a24e>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>Fix for CpuSensor warning observed after bmc reset<br/><br/>In case of peci cdev open failed we are now exiting CpuSensor service<br/>with error code. Since this is unexpected behaviour we will now retry<br/>the detectCpu function.<br/><br/>Tested: No warning observed on platform.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>109</td>
+               <td>2023-04-12 01:45:14 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/0600cf797151b010c768126357d66df888ab15bd>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Add Bonnell callouts to certain fan PELs<br/><br/>Add Bonnell system callouts to the fan related PELs that have system<br/>based callouts.<br/><br/>Also, add Bonnell callouts to the standby regulator error.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>110</td>
+               <td>2023-04-12 01:45:07 </td>
+               <td><a href=https://github.com/openbmc/openpower-hw-diags/commit/adda05404a381d45762804b3a6f1f8d49c37a0c3>Link</a></td>
+               <td class='module'>openpower-hw-diags</td>
+               <td class='content'>Clarify definition of chip checkstop<br/><br/>Previously, the ATTN_TYPE_CHECKSTOP associated with a signature was<br/>synonymous with a system checkstop event. This is certainly true for<br/>if a processor chip checkstops. However, this is not true if a connected<br/>OCMB chip checkstops because it is possible in some cases for a system<br/>to recover. To differentiate an OCMB chip checkstop from a system<br/>checkstop they were previously reported as unit checkstops. With the<br/>addition Odyssey OCMBs, which have ability to report both chip and unit<br/>checkstops, we decided to fix the confusion and disassociate a chip<br/>checkstop from a system checkstop. Now the signatures will properly<br/>report the chip attention type and the signature filtering code has been<br/>modified to simply associate only chip checkstops from processor chips<br/>as system checkstop attentions.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>111</td>
+               <td>2023-04-12 01:44:32 </td>
+               <td><a href=https://github.com/openbmc/openpower-libhei/commit/a8658733bc6ab33cc949829f92162a09057f18d9>Link</a></td>
+               <td class='module'>openpower-libhei</td>
+               <td class='content'>Updated chip data json for Odyssey ODP_FIR FFDC<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>112</td>
+               <td>2023-04-12 01:43:58 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/7992eb8415cb8d9939d8b635654b238a0848ee91>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>Add numeric sensor PDR and sensor aux names PDR<br/><br/>1. Added struct for numeric sensor PDR in DSP0248_1.2.2 table78 and<br/>decode_numeric_sensor_pdr_data API to unpack pdr data to struct<br/>2. Added struct for sensor auxiliary names PDR in DSP0248_1.2.2 table83<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>113</td>
+               <td>2023-04-12 01:43:49 </td>
+               <td><a href=https://github.com/openbmc/estoraged/commit/9be2f0fc2a5cb7a93a1831fb979d7553b01a35ef>Link</a></td>
+               <td class='module'>estoraged</td>
+               <td class='content'>Add type "SD" to allow eStoraged on sd devices<br/><br/>This change will allow eMMC to work with SD devices.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>114</td>
+               <td>2023-04-12 01:43:19 </td>
+               <td><a href=https://github.com/openbmc/ipmbbridge/commit/315002a0083ea88b1d5caabb84e72734ffbe36e0>Link</a></td>
+               <td class='module'>ipmbbridge</td>
+               <td class='content'>The executable was renamed to ipmbbridge<br/><br/>  - The executable was renamed ipmbbridge while deleting CMake support, but ipmb.service expected it to be ipmbbridged.<br/><br/>  ipmb.service: Failed to locate executable /usr/bin/ipmbbridged: No such file or directory<br/>  ipmb.service: Failed at step EXEC spawning /usr/bin/ipmbbridged: No such file or directory<br/>  ipmb.service: Main process exited, code=exited, status=203/EXEC<br/>  ipmb.service: Failed with result 'exit-code'.<br/><br/>  Test:<br/>$ systemctl status ipmb<br/>* ipmb.service - IPMB bridge<br/>     Loaded: loaded (/lib/systemd/system/ipmb.service; enabled; preset: enabled)<br/>     Active: active (running) since Fri 2023-03-03 09:49:51 UTC; 1 month 4 days ago<br/>   Main PID: 476 (ipmbbridged)<br/>        CPU: 599ms<br/>     CGroup: /system.slice/ipmb.service<br/>             `-476 /usr/bin/ipmbbridged<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>115</td>
+               <td>2023-04-12 01:41:26 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/7589306482171ce274873d590448cf52203ce3a3>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>dbus-sdr: define the global const LUN parameter<br/><br/>- Define global const LUN number parameter to make code more readable<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>116</td>
+               <td>2023-04-12 00:40:15 </td>
+               <td><a href=https://github.com/openbmc/phosphor-net-ipmid/commit/2c95dd1ab69e1b7dcfd2a456d6b1a28e9df363f6>Link</a></td>
+               <td class='module'>phosphor-net-ipmid</td>
+               <td class='content'>netipmid: Make pam_auth configurable<br/><br/>Allow people to disable pam_authenticate if it is not working for their<br/>system.<br/><br/>Tested:<br/>Testing on a system with no dropbear and was able to pass the check.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>117</td>
+               <td>2023-04-10 21:12:01 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/03f93acdcd1ffe9a2f03d6509a59d857017b3074>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>IntelCPUSensor: Fix threshold hysteresis is nan<br/><br/>Threshold's hysteresis is set to nan as default in constructor, the<br/>function parseThresholdsFromAttr will forcely update threshold's<br/>hysteresis as nan[1].<br/><br/>Because IntelCPUSensor will run parseThresholdsFromAttr in<br/>IntelCPUSensor::handleResponse, this nan will not be updated by<br/>hysteresisTrigger in function setInitialProperties[2].<br/><br/>When the threshold's hysteresis is always nan, the condition of<br/>deassert will never be satisfied.<br/><br/>Update theshold's hysteresis to be 0 base on max/min chosed in<br/>IntelCPUSensor[3] because the function parseThresholdsFromAttr is only<br/>used by IntelCPUSensor for now.<br/><br/>Refs:<br/>```<br/>[1] <a href=https://github.com/openbmc/dbus-sensors/blob/master/src/Thresholds.cpp#L519>https://github.com/openbmc/dbus-sensors/blob/master/src/Thresholds.cpp#L519</a><br/>[2] <a href=https://github.com/openbmc/dbus-sensors/blob/master/src/sensor.hpp#L277>https://github.com/openbmc/dbus-sensors/blob/master/src/sensor.hpp#L277</a><br/>[3] <a href=https://github.com/openbmc/dbus-sensors/blob/master/src/IntelCPUSensor.cpp#L46>https://github.com/openbmc/dbus-sensors/blob/master/src/IntelCPUSensor.cpp#L46</a><br/>```<br/><br/>Tested:<br/>DIMM_B0_CPU0 sensor with threshold 93/95 as UWT/UCT, respectively.<br/>Enable flag 'insecure-sensor-override' and then set sensor value to<br/>100 on dbus and then set sensor value to 50 on dbus.<br/><br/>Before change:<br/>```<br/>root@qbmc:~# busctl introspect xyz.openbmc_project.IntelCPUSensor /xyz/openbmc_project/sensors/temperature/DIMM_B0_CPU0<br/>NAME                                                  TYPE      SIGNATURE RESULT/VALUE                             FLAGS<br/>org.freedesktop.DBus.Introspectable                   interface -         -                                        -<br/>.Introspect                                           method    -         s                                        -<br/>org.freedesktop.DBus.Peer                             interface -         -                                        -<br/>.GetMachineId                                         method    -         s                                        -<br/>.Ping                                                 method    -         -                                        -<br/>org.freedesktop.DBus.Properties                       interface -         -                                        -<br/>.Get                                                  method    ss        v                                        -<br/>.GetAll                                               method    s         a{sv}                                    -<br/>.Set                                                  method    ssv       -                                        -<br/>.PropertiesChanged                                    signal    sa{sv}as  -                                        -<br/>xyz.openbmc_project.Association.Definitions           interface -         -                                        -<br/>.Associations                                         property  a(sss)    1 "chassis" "all_sensors" "/xyz/openb... emits-change<br/>xyz.openbmc_project.Sensor.Threshold.Critical         interface -         -                                        -<br/>.CriticalAlarmHigh                                    property  b         true                                     emits-change<br/>.CriticalAlarmLow                                     property  b         false                                    emits-change<br/>.CriticalHigh                                         property  d         95                                       emits-change writable<br/>.CriticalLow                                          property  d         nan                                      emits-change writable<br/>xyz.openbmc_project.Sensor.Threshold.Warning          interface -         -                                        -<br/>.WarningAlarmHigh                                     property  b         true                                     emits-change<br/>.WarningAlarmLow                                      property  b         false                                    emits-change<br/>.WarningHigh                                          property  d         93                                       emits-change writable<br/>.WarningLow                                           property  d         nan                                      emits-change writable<br/>xyz.openbmc_project.Sensor.Value                      interface -         -                                        -<br/>.MaxValue                                             property  d         127                                      emits-change<br/>.MinValue                                             property  d         -128                                     emits-change<br/>.Unit                                                 property  s         "xyz.openbmc_project.Sensor.Value.Uni... emits-change<br/>.Value                                                property  d         50                                       emits-change writable<br/>xyz.openbmc_project.State.Decorator.Availability      interface -         -                                        -<br/>.Available                                            property  b         true                                     emits-change writable<br/>xyz.openbmc_project.State.Decorator.OperationalStatus interface -         -                                        -<br/>.Functional                                           property  b         true                                     emits-change<br/>```<br/>After:<br/>```<br/>root@qbmc:~# busctl introspect xyz.openbmc_project.IntelCPUSensor /xyz/openbmc_project/sensors/temperature/DIMM_B0_CPU0<br/>NAME                                                  TYPE      SIGNATURE RESULT/VALUE                             FLAGS<br/>org.freedesktop.DBus.Introspectable                   interface -         -                                        -<br/>.Introspect                                           method    -         s                                        -<br/>org.freedesktop.DBus.Peer                             interface -         -                                        -<br/>.GetMachineId                                         method    -         s                                        -<br/>.Ping                                                 method    -         -                                        -<br/>org.freedesktop.DBus.Properties                       interface -         -                                        -<br/>.Get                                                  method    ss        v                                        -<br/>.GetAll                                               method    s         a{sv}                                    -<br/>.Set                                                  method    ssv       -                                        -<br/>.PropertiesChanged                                    signal    sa{sv}as  -                                        -<br/>xyz.openbmc_project.Association.Definitions           interface -         -                                        -<br/>.Associations                                         property  a(sss)    1 "chassis" "all_sensors" "/xyz/openb... emits-change<br/>xyz.openbmc_project.Sensor.Threshold.Critical         interface -         -                                        -<br/>.CriticalAlarmHigh                                    property  b         false                                    emits-change<br/>.CriticalAlarmLow                                     property  b         false                                    emits-change<br/>.CriticalHigh                                         property  d         95                                       emits-change writable<br/>.CriticalLow                                          property  d         nan                                      emits-change writable<br/>xyz.openbmc_project.Sensor.Threshold.Warning          interface -         -                                        -<br/>.WarningAlarmHigh                                     property  b         false                                    emits-change<br/>.WarningAlarmLow                                      property  b         false                                    emits-change<br/>.WarningHigh                                          property  d         93                                       emits-change writable<br/>.WarningLow                                           property  d         nan                                      emits-change writable<br/>xyz.openbmc_project.Sensor.Value                      interface -         -                                        -<br/>.MaxValue                                             property  d         127                                      emits-change<br/>.MinValue                                             property  d         -128                                     emits-change<br/>.Unit                                                 property  s         "xyz.openbmc_project.Sensor.Value.Uni... emits-change<br/>.Value                                                property  d         50                                       emits-change writable<br/>xyz.openbmc_project.State.Decorator.Availability      interface -         -                                        -<br/>.Available                                            property  b         true                                     emits-change writable<br/>xyz.openbmc_project.State.Decorator.OperationalStatus interface -         -                                        -<br/>.Functional                                           property  b         true                                     emits-change<br/>```<br/>and the signal "ThresholdAsserted" for deassert is triggered.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>118</td>
+               <td>2023-04-10 21:11:45 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/e21b2fed5f0a5f3a2ad5d6017b859b1389557c9e>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Filter the event log data by severity and status<br/><br/>In the event logs page, if the filter options are selected for both<br/>severity and status, it displays row that falls into either of the<br/>two categories: severity or status.<br/><br/>The filter options are in two categories:<br/>severity [OK, Warning, Critical], and status [Resolved, Unresolved]<br/><br/>If select the filter options "Critical" on severity and "Unresolved"<br/>on status, it shows every row whose status is "Unresolved" whether its<br/>severity is "Ok" or "Warning", If the row data is "Critical" or<br/>"Unresolved", it shows in the table. As per the filter selection, it<br/>shouldn't show the row data that has "Ok" or "Warning" but the status<br/>is "Unresolved"; it should show only the row data that is in both<br/>"Critical" and "Unresolved".<br/><br/>This commit will work as follows: if different categories are<br/>selected, that will be applied with an "and" logic, and within the<br/>same category, it will be applied with an "or" logic.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>119</td>
+               <td>2023-04-10 15:50:29 </td>
+               <td><a href=https://github.com/openbmc/phosphor-sel-logger/commit/8cb7d0a9bfc021c5fcefe2a8e68f8878adf32d7b>Link</a></td>
+               <td class='module'>phosphor-sel-logger</td>
+               <td class='content'>Fix eventType not used<br/><br/>If SEL_LOGGER_SEND_TO_LOGGING_SERVICE was not used, then during<br/>compilation an error `error: variable 'eventType' set but not used`.<br/>This patch fixes that bug.<br/><br/>Test: compilation with SEL_LOGGER_SEND_TO_LOGGING_SERVICE successfully<br/>Compiling without SEL_LOGGER_SEND_TO_LOGGING_SERVICE is also successful<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>120</td>
+               <td>2023-04-07 13:23:19 </td>
+               <td><a href=https://github.com/openbmc/phosphor-bmc-code-mgmt/commit/42089e34cc9bf2ca38a9f518c00f271df9d99f77>Link</a></td>
+               <td class='module'>phosphor-bmc-code-mgmt</td>
+               <td class='content'>side-switch: adapt do chassis state instance change<br/><br/>phosphor-state-manager moved to a multi chassis and multi host design<br/>point. This made their corresponding service files instance based. For<br/>backwards support, instance 0 will always represent the entire system,<br/>so utilize that as the dependency in this service file.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>121</td>
+               <td>2023-04-07 13:22:26 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/3fce1bf44e13b339d2d13eb0063858761cb512ed>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>code-format fixes for PSUSensorMain<br/><br/>Accepting code-fromat changes as suggested by build CI following the<br/>latest (as of today) code-format rules.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>122</td>
+               <td>2023-04-07 13:22:08 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/5961693877d31224b2ae1c51910b014c09213336>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>Add effectiveModel and Step to cpu property<br/><br/>Add effectiveModel and Step to cpu property. And correct the<br/>effectiveFamily of cpu property.<br/><br/>Reference:<br/><a href=https://en.wikipedia.org/wiki/CPUID#EAX=1:_Processor_Info_and_Feature_Bits>https://en.wikipedia.org/wiki/CPUID#EAX=1:_Processor_Info_and_Feature_Bits</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>123</td>
+               <td>2023-04-07 13:21:35 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/d640f696092d1167c2620d3971961f9699add65e>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>More changes to support JEDEC format VPD<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>124</td>
+               <td>2023-04-07 13:21:07 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/e61c679babda7f21aa5fce54b55f06e7af20bdcc>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>stdexec: update to latest commit<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>125</td>
+               <td>2023-04-07 13:20:26 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/b66ae50a93860ac0fee18cf65d09c0243dd089c4>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>psu-ng: Dynamically assign the device driver name<br/><br/>Replaced hardcoded device driver name with a method to build the device<br/>driver name dynamically and assign it to a private data member.<br/><br/>The dynamically built device driver name used during bind/unbind.<br/><br/>Tested the changes in simulation and actual system, compared journalctl<br/>entries of phosphor-psu-monitor with modified phosphor-psu-monitor. The<br/>following test were conducted and verified same journal output:<br/>- Verified driver name assigned correcty to PSU<br/>- Good Machine Path<br/>- Removed Power Supply<br/>- Inserted Power Supply<br/>- Missing Power Supply<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>126</td>
+               <td>2023-04-07 13:20:18 </td>
+               <td><a href=https://github.com/openbmc/phosphor-fan-presence/commit/9431a37d0a623880cd81be816ef30a4127b063d3>Link</a></td>
+               <td class='module'>phosphor-fan-presence</td>
+               <td class='content'>control:configs:rainier-*4u: Add new hot card<br/><br/>Add the Dragonhead PCIe card to the hot cards list pcie_cards.json for<br/>the Rainier 4U and 1S4U.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>127</td>
+               <td>2023-04-07 13:18:28 </td>
+               <td><a href=https://github.com/openbmc/phosphor-net-ipmid/commit/b601994f29c713f63325c4f366f0a0bb8d0c260b>Link</a></td>
+               <td class='module'>phosphor-net-ipmid</td>
+               <td class='content'>ipmi-net: ensure eth device present<br/><br/>Some OpenBMC systems may support a mix of eth0-only and eth0/eth1 ports<br/>on their BMC device. In some cases, this support may be in a shared<br/>flash image that supports both systems.<br/><br/>For example, IBM is building a system under the "p10bmc" bitbake machine<br/>that only has a single ethernet port, eth0, wired up on it. The system<br/>is still utilizing an AST2600, but only wired eth0 out of the system for<br/>cost purposes.<br/><br/>Since the "p10bmc" machine is a shared target there is no way to remove<br/>services that assume eth1 is present during the build process. Instead,<br/>rely on the fact that the device will be present in /sys/class/net/<br/>if in fact the system supports the network device.<br/><br/>Tested:<br/>- Verified that a p10bmc Rainier machine with 2 eth ports still ran<br/>  these units for both ports<br/>- Verified that a p10bmc Bonnell machine with only eth0 ran these units<br/>  for eth0 but not eth1<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>128</td>
+               <td>2023-04-07 13:18:03 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/9e666cdaab413193d2e723f3060fe4c14db3e513>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>chassishandler: Read chassis intrusion status<br/><br/>This patch supports reading chassis intrusion status from "Status"<br/>property under xyz.openbmc_project.Chassis.Intrusion on Dbus and<br/>shows it to "Chassis Intrusion" field of ipmi command "chassis status".<br/>This is corresponding to patch:<br/><a href=https://gerrit.openbmc.org/c/openbmc/dbus-sensors/+/61433 which modifies>https://gerrit.openbmc.org/c/openbmc/dbus-sensors/+/61433 which modifies</a><br/>dbus-sensors intrusionsensor object path.<br/><br/>Tested:<br/>$ ipmitool chassis status | grep -i "Chassis Intrusion"<br/>Chassis Intrusion: active means "HardwareIntrusion"<br/>Chassis Intrusion: inactive means "Normal"<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>129</td>
+               <td>2023-04-07 13:15:12 </td>
+               <td><a href=https://github.com/openbmc/ipmbbridge/commit/3f37900caf10ba7cd01ec131144753b10b461e88>Link</a></td>
+               <td class='module'>ipmbbridge</td>
+               <td class='content'>build: delete CMake support<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>130</td>
+               <td>2023-04-07 13:14:46 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/2a38ab51843a095f70cc62ac3b83f24f909c60ae>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>pdr: Fix doxygen on pldm_pdr_remove_pdrs_by_terminus_handle()<br/><br/>This was missed as part of the series fixing the code-base to enable<br/>clang-tidy.<br/><br/>Fixes: 6005f1c87fdd ("clang-tidy: Fix readability-identifier-naming diagnostic")<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>131</td>
+               <td>2023-04-07 13:14:25 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/37e8a59a908010cc467c38f9cce8f74be8a2d42b>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>Add Manoj as maintainer<br/><br/>I would like to help out on the reviews. Have been officially<br/>reviewing pldm code since almost 6-7 months now. And i believe<br/>that i am ready enough to share some of the maintanence burden<br/>going forward.<br/><br/>Here are my contributions to pldm repository:<br/><a href=https://github.com/openbmc/pldm/commits?author=manojkiraneda>https://github.com/openbmc/pldm/commits?author=manojkiraneda</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>132</td>
+               <td>2023-04-07 09:51:00 </td>
+               <td><a href=https://github.com/openbmc/phosphor-networkd/commit/c8a5b7b7b4e773d5384339286e757f756d5edfb3>Link</a></td>
+               <td class='module'>phosphor-networkd</td>
+               <td class='content'>Add DHCP functionalities to hypervisor eth interfaces<br/><br/>This commit adds methods that provides dhcp functionalities on<br/>the ethernet interface like - disable dhcp on an ethernet interface,<br/>to check if dhcp is enabled on an interface.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>133</td>
+               <td>2023-04-06 12:00:57 </td>
+               <td><a href=https://github.com/openbmc/slpd-lite/commit/43dc41fbcd087cc53c8bf47a2540e83ebfceb05b>Link</a></td>
+               <td class='module'>slpd-lite</td>
+               <td class='content'>build: add meson support<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>134</td>
+               <td>2023-04-05 22:49:56 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/80d697d8a6e9343aeba1a4955fdbbc4627bf2e9e>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Fix popup-box authenticate on session disconnect<br/><br/>On the session Web UI page, when we disconnect the current session,<br/>instead of navigating to the login page, the browser populates the<br/>authentication window for basic authorization.<br/><br/>If basic authentication is enabled, we are adding the www-authenticate<br/>header to unauthorizing requests.<br/><br/>As per redfish, we have to set the "Accept" and "X-Requested-With"<br/>header for the request from Web UI. This patch set will add those<br/>headers.<br/><br/>Tested:<br/><br/>Logged in to the WebUI and navigated to the sessions page. Clicked<br/>"Disconnect" to the current session and the WebUI is navigated to login.<br/>page as expected.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>135</td>
+               <td>2023-04-05 22:49:49 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/79a7f6c23f367e35704d2fb07988ef7ce4deb81d>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>CPU: Update processor family table<br/><br/>Add few Intel CPU definitions to processor family table.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>136</td>
+               <td>2023-04-05 22:49:37 </td>
+               <td><a href=https://github.com/openbmc/phosphor-networkd/commit/d43d12e31add067d7ef77bd83f1f50ba37658f7a>Link</a></td>
+               <td class='module'>phosphor-networkd</td>
+               <td class='content'>Add Johnathan Mantey to reviewers list<br/><br/>Adding Johnathan Mantey to the reviewers list<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>137</td>
+               <td>2023-04-05 20:20:51 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/2ec5b14d046e287c740ef59360f3d7637efb8085>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Revisit OEM schemas<br/><br/>This documentation was written a while ago, and needs some updates in<br/>its statements, as well as updates that have happened to the Redfish<br/>spec in the meantime.<br/><br/>There's lots of wording here that implies a level of control for<br/>maintainers, when really, it's about the ecosystem as a whole.  Overall<br/>goals in the rewording:<br/>- Added emphasis on the Redfish specification rules, not maintainers.<br/>- Addition of the OpenBMC namespace (now called out int he<br/>  specification) and guides to reuse.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>138</td>
+               <td>2023-04-05 00:50:54 </td>
+               <td><a href=https://github.com/openbmc/ipmbbridge/commit/f254b06fd12c0a7dddd9c4705f984d819b256dd6>Link</a></td>
+               <td class='module'>ipmbbridge</td>
+               <td class='content'>build: add meson and subproject wrap files<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>139</td>
+               <td>2023-04-04 11:50:10 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/819ca0ba209ba9eb590a5e53cd37b2ba0f878107>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>Make dbus_interface uncopyable and unmovable<br/><br/>The dbus_interface class is meant to be unique, constructed once, and<br/>never copied, given the internal pointers that are taken within itself.<br/>Make that requirement explicit.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>140</td>
+               <td>2023-04-03 22:03:31 </td>
+               <td><a href=https://github.com/openbmc/libmctp/commit/2608b2943b7751b6de3abf83cc16d83f913c1651>Link</a></td>
+               <td class='module'>libmctp</td>
+               <td class='content'>core: check for __mctp_alloc() failure in mctp_pktbuf_alloc()<br/><br/>Check for allocation failure in mctp_pktbuf_alloc(), as done<br/>elsewhere in the code.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>141</td>
+               <td>2023-04-03 22:03:10 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/0b1d942d8521ab2b1e1c48ad4636836c67a3e95f>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>Fix memory extendedSize type<br/><br/>Modify "extendedSize" type to support 64-bit environment.<br/>The size_t type uses 8 bytes in a 64-bit environment, the<br/>properties "MemorySizeInKB" and "MemoryConfiguredSpeedInMhz"<br/>will get wrong values from smbios file.<br/><br/>Tested:<br/>```<br/>root@qbmc:~# busctl introspect xyz.openbmc_project.Smbios.MDR_V2 \<br/>> /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0 \<br/>> xyz.openbmc_project.Inventory.Item.Dimm<br/>.AllowedSpeedsMT                        property  aq        0                                        emits-change writable<br/>.CASLatencies                           property  q         0                                        emits-change writable<br/>.ECC                                    property  s         "xyz.openbmc_project.Inventory.Item.D... emits-change writable<br/>.FormFactor                             property  s         "xyz.openbmc_project.Inventory.Item.D... emits-change writable<br/>.MaxMemorySpeedInMhz                    property  q         4800                                     emits-change writable<br/>.MemoryAttributes                       property  y         2                                        emits-change writable<br/>.MemoryConfiguredSpeedInMhz             property  q         1100                                     emits-change writable<br/>.MemoryDataWidth                        property  q         64                                       emits-change writable<br/>.MemoryDeviceLocator                    property  s         "P0 CHANNEL A DIMM0"                     emits-change writable<br/>.MemoryMedia                            property  s         "xyz.openbmc_project.Inventory.Item.D... emits-change writable<br/>.MemorySizeInKB                         property  t         3479875137107394560                      emits-change writable<br/>.MemoryTotalWidth                       property  q         0                                        emits-change writable<br/>...<br/>```<br/>After<br/>```<br/>root@qbmc:~# busctl introspect xyz.openbmc_project.Smbios.MDR_V2 \<br/>> /xyz/openbmc_project/inventory/system/chassis/motherboard/dimm0 \<br/>> xyz.openbmc_project.Inventory.Item.Dimm<br/>NAME                                    TYPE      SIGNATURE RESULT/VALUE                             FLAGS<br/>.AllowedSpeedsMT                        property  aq        0                                        emits-change writable<br/>.CASLatencies                           property  q         0                                        emits-change writable<br/>.ECC                                    property  s         "xyz.openbmc_project.Inventory.Item.D... emits-change writable<br/>.FormFactor                             property  s         "xyz.openbmc_project.Inventory.Item.D... emits-change writable<br/>.MaxMemorySpeedInMhz                    property  q         4800                                     emits-change writable<br/>.MemoryAttributes                       property  y         2                                        emits-change writable<br/>.MemoryConfiguredSpeedInMhz             property  q         4800                                     emits-change writable<br/>.MemoryDataWidth                        property  q         64                                       emits-change writable<br/>.MemoryDeviceLocator                    property  s         "P0 CHANNEL A DIMM0"                     emits-change writable<br/>.MemoryMedia                            property  s         "xyz.openbmc_project.Inventory.Item.D... emits-change writable<br/>.MemorySizeInKB                         property  t         33554432                                 emits-change writable<br/>.MemoryTotalWidth                       property  q         0                                        emits-change writable<br/>...<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>142</td>
+               <td>2023-04-03 22:02:55 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/e4e6a28f391984564fe9fb3c804c5094908b9d76>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>psusensor: Add CPU presence detection in psusensor<br/><br/>Add same CPU presence that's in ADCSensorMain into PSUSensorMain<br/><br/>Tested:<br/>Sensors with non-present CPUs are not being added.<br/>Sensors with present CPU or no CPURequired field still being added.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>143</td>
+               <td>2023-04-03 17:31:03 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/a1cbc1920833ae7f7cf9c2e7df06e37dc7f9f530>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix If Match header in Http layer<br/><br/>Commit [1] prevents the clients performing methods if missing ETag<br/>from the If-Match header.<br/>For the "If-Match: *" [2] that representing any resource, it should<br/>be the valid command.<br/><br/>[1] <a href=https://github.com/openbmc/bmcweb/commit/2d6cb56b6b47c3fbb0d234ade5c1208edb69ef1f>https://github.com/openbmc/bmcweb/commit/2d6cb56b6b47c3fbb0d234ade5c1208edb69ef1f</a><br/>[2] <a href=https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match</a><br/><br/>Tested:<br/>Can performing methods GET/POST/PATCH/DELETE with "If-Match: *"<br/>header.<br/><br/></td>
            </tr>
 
 
