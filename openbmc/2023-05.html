@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+   <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js" ></script>
+   <script>
+       $(document).ready(function () {
+           $('#dt').DataTable();
+       });
+   </script>
+   <style>
+       a {
+         color: #007bff;
+         text-decoration: none;
+       }
+       a:hover {
+         text-decoration: underline;
+       }
+   </style>
+</head>
+<body>
+   <p style=font-size:20px;>2023-05-01 00:00:00 ~ 2023-05-31 23:59:59</p>   <p style=font-size:20px;>Total commits:<font style=color:blue;font-weight:bold;>179</font> (without meta-xxx)   <table id=dt class=display hover>
+       <thead>
+           <tr>
+               <th/>
+               <th>Commit date</th>
+               <th>URL</th>
+               <th>Module</th>
+               <th style>Content</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>1</td>
+               <td>2023-05-31 02:23:32 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/f8ca6d79390b7f7fac5dbb82635dd6384810c668>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Allow async resolver to be optional<br/><br/>This commit adds a meson option to allow selecting which dns resolver<br/>bmcweb uses.  There are use cases, like Open Compute Project Inband<br/>Management Agent, that would require not using dbus, which would require<br/>us to fall back to the asio resolver.  This commit makes the existing<br/>asio resolver constructor, and async_resolve methods match the<br/>equivalents in asio (which we intended to do anyway), then adds a macro<br/>and configure option for being able to select which resolver backend to<br/>rely on.<br/><br/>Tested: Code can now compile without sdbusplus.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>2</td>
+               <td>2023-05-31 01:39:50 </td>
+               <td><a href=https://github.com/openbmc/openpower-pnor-code-mgmt/commit/b119dca11c8fcc4bceff2d823399851240705b7f>Link</a></td>
+               <td class='module'>openpower-pnor-code-mgmt</td>
+               <td class='content'>fix GCC 13 issues<br/><br/>GCC 13 removes `uint*_t` family of types from one of the common<br/>includes so we need to explicitly include cstdint.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>3</td>
+               <td>2023-05-31 01:39:43 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/77930f20466965b9521079b9b6c4998e8aea8b7c>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Up the state PEL journal lines to 100<br/><br/>Change the number of journal lines captured to the max of 100 for state<br/>related PELs, since it seems like there's always interesting things<br/>going on when those are created.  The resulting PEL was about 11KB,<br/>which is still well under the max of 16KB.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>4</td>
+               <td>2023-05-31 01:39:33 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/3cc9c302f0030d7b81ad52410223eca282e242e0>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>Fix coroutine disable option<br/><br/>6c97486f has broken this option.  yield_context.hpp is not pulled in if<br/>this option is enabled, so we cannot reference it in that context.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>5</td>
+               <td>2023-05-31 01:38:55 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/abb61a0ff2d9ca0351292a48f8980ca7dd0127a7>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>bmc-ready: include new error codes in interfaces<br/><br/>This will generate the appropriate bindings and ensure the error is<br/>passed back to the caller allowing them to properly handle this type of<br/>error.<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+           <tr>
+               <td>6</td>
+               <td>2023-05-30 21:22:12 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/558714d08032996301863d7b72d6104485de9f7d>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>remove OSStart as indication host is running<br/><br/>The host firmware (at least for IBM) never implemented this boot<br/>progress when starting the OS. Instead, another host firmware team is<br/>utilizing it to indicate an earlier part of the boot.<br/><br/>Therefore this boot progress code should not be treated as if the host<br/>is running.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>7</td>
+               <td>2023-05-30 21:21:58 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/5d16a8ed4d2755c70767036f11dfc1b438fe2632>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>async: context: remove pending_exception handling<br/><br/>With the move from scope to exec::async_scope there is no possibility<br/>for pending-exceptions so clean up all the associated code.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>8</td>
+               <td>2023-05-30 17:50:22 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/86a5ac983f9715f7b1a0f8dee355906ac648e1d3>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Break out methods<br/><br/>"Like we do other places.. blah"<br/><br/>Tested: Top commit was tested.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>9</td>
+               <td>2023-05-30 14:38:09 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/69c945ea004377ded41b46c51f3b66832f830afb>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>fix GCC 13 issues<br/><br/>GCC 13 has moved `uint*_t` family from being included in a default<br/>include tree.  Explicitly add `#include <cstdint>` to give these types.<br/><br/>Also remove one useless `std::move`.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>10</td>
+               <td>2023-05-30 13:39:08 </td>
+               <td><a href=https://github.com/openbmc/phosphor-bmc-code-mgmt/commit/b36a3ebfa48a18eff75b9b1b0c27bb068d998237>Link</a></td>
+               <td class='module'>phosphor-bmc-code-mgmt</td>
+               <td class='content'>fix GCC 13 issues<br/><br/>GCC 13 removes `uint*_t` family of types from one of the common<br/>includes so we need to explicitly include cstdint.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>11</td>
+               <td>2023-05-30 13:38:55 </td>
+               <td><a href=https://github.com/openbmc/fb-ipmi-oem/commit/2405ae98b39a97e9d7753d8dc5c673a4a8885b85>Link</a></td>
+               <td class='module'>fb-ipmi-oem</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>12</td>
+               <td>2023-05-25 20:27:05 </td>
+               <td><a href=https://github.com/openbmc/stdplus/commit/cae9d14ae5ccbafb0446ea3109e6119ac5b8e293>Link</a></td>
+               <td class='module'>stdplus</td>
+               <td class='content'>pinned: Add noexcept<br/><br/>The reference operations can't have any exceptions.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>13</td>
+               <td>2023-05-25 20:26:54 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/02839e372a32d3a346c956d545b7fe97a91bd755>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>Fix wrong link in README<br/><br/>`OEM-IPMI Definitions` should link to `ipmi.md` instead of `ipmid.md`<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>14</td>
+               <td>2023-05-25 20:26:40 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/b4e8cfde8021000c24b6bfd90d2a3aef57188955>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>requester: Check duplicate key when call registerRequest<br/><br/>Add checking the existing of key {eid, instanceId, type, command}<br/>when call registerRequest.<br/><br/>Tested:<br/>1. Stress polling PLDM sensors.<br/>2. Call pldmtool command to get sensor quickly.<br/>3. Check message "The eid:InstanceID <eid>:<InstanceID> is using."<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>15</td>
+               <td>2023-05-25 20:25:12 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/5aa765a07ccebc1f3afdc618519b8ad9f6397e92>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>transport: Document the parameters to pldm_transport_poll()<br/><br/>The behaviour of the timeout value was under-specified. The behaviour is<br/>as for POSIX poll(2), but make it concrete that users of the API can<br/>expect that behaviour.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>16</td>
+               <td>2023-05-25 20:25:03 </td>
+               <td><a href=https://github.com/openbmc/phosphor-sel-logger/commit/d067a6bc2977b0535284f17f86fcac40f095cbc5>Link</a></td>
+               <td class='module'>phosphor-sel-logger</td>
+               <td class='content'>Correct message for threshold events<br/><br/>Thresholds can be deasserted not only because of the actual sensor<br/>data, but also because of the change in the general system state.<br/>For example some sensors can be configured to be measured only when<br/>the system is powered on.<br/>In such cases current messages can be confusing:<br/>"PVPP_ABCD_CPU2 sensor crossed a critical low threshold going high.<br/>Reading=0.033000 Threshold=2.410000".<br/>Replace message template to be more generic to cover discussed cases:<br/>"PVPP_ABCD_CPU2 critical low threshold deassert.<br/>Reading=0.033000 Threshold=2.410000".<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>17</td>
+               <td>2023-05-25 20:24:36 </td>
+               <td><a href=https://github.com/openbmc/phosphor-settingsd/commit/e568fcad2ca4c41487d6cd2f8ff5969aac32a2b0>Link</a></td>
+               <td class='module'>phosphor-settingsd</td>
+               <td class='content'>Convert to lg2<br/><br/>Convert the remaining logging statements to lg2.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>18</td>
+               <td>2023-05-25 18:20:29 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/a6c4ba7d4d3694dc2d6da98331a1d4f731bac16b>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Use uppercase hex in message registry<br/><br/>The code in the Registry class requires the ReasonCode field in the<br/>message registry to use upper case hex digits (A-F) to be able to find a<br/>match to print the description in peltool, so change the message<br/>registry schema to require that.  Also fix an entry that had lower case.<br/><br/>Alternatively, the code could be fixed, but with the schema checking<br/>that runs in CI to catch errors this method seems less impactful.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>19</td>
+               <td>2023-05-25 15:10:11 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/052ffb0e1ab72ccdb5859ea715f9a296cd078749>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>bmc-ready: new error def for when bmc not ready<br/><br/>phosphor-state-manager is introducing a new optional feature that users<br/>can enable which will not allow chassis or host power on operations if<br/>the BMC is not at its "Ready" state.<br/><br/>This commit defines some new error codes so callers will have the<br/>appropriate return information when this situation arises.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>20</td>
+               <td>2023-05-24 21:51:24 </td>
+               <td><a href=https://github.com/openbmc/pam-ipmi/commit/9e7627a5fff4cb72abd10d96d3aee794e588b2ee>Link</a></td>
+               <td class='module'>pam-ipmi</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>21</td>
+               <td>2023-05-24 21:51:01 </td>
+               <td><a href=https://github.com/openbmc/kcsbridge/commit/43c83c56507cd35982537e5a646ee716f8335b6c>Link</a></td>
+               <td class='module'>kcsbridge</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>22</td>
+               <td>2023-05-24 21:50:52 </td>
+               <td><a href=https://github.com/openbmc/openpower-libhei/commit/029fe6f1a2cd0967dc139cf3043df05cc97a0569>Link</a></td>
+               <td class='module'>openpower-libhei</td>
+               <td class='content'>Fix markstore register names in Odyssey chip data<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>23</td>
+               <td>2023-05-24 21:50:36 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/f19ab44ac9141e6aec10426914bd0075043ca173>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Add Links/Triggers to MetricReportDefinition<br/><br/>This change is adding Triggers property to Links when GET is called on<br/>MetricReportDefinition. It contains array of @odata.id pointing to<br/>Trigger resource if it is also linking to given MRD.<br/><br/>Testing done:<br/>- Links/Trigger property is returned by GET request on<br/>  /redfish/v1/TelemetryService/MetricReportDefinitions/<str>/<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>24</td>
+               <td>2023-05-24 21:50:21 </td>
+               <td><a href=https://github.com/openbmc/libpeci/commit/5f1d7f7adeef902d5776d1af528129892a53d1c3>Link</a></td>
+               <td class='module'>libpeci</td>
+               <td class='content'>Reset the cc when looping<br/><br/>It's possible if one loop passes and the next fails early that the cc<br/>will be left at the previous value. This resets it for each loop so we<br/>don't get stale ccs reported.<br/><br/>Tested:<br/>Confirmed that the cc changes to 0 on failures while looping.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>25</td>
+               <td>2023-05-24 20:30:12 </td>
+               <td><a href=https://github.com/openbmc/host-error-monitor/commit/08d16db2cbd8c1930490ab70d66548674b2a7aa2>Link</a></td>
+               <td class='module'>host-error-monitor</td>
+               <td class='content'>Make use of crashdump service optional<br/><br/>This service isn't currently in upstream OpenBMC, so let's turn it off<br/>by default and avoid the "failed to start Crashdump" errors it produces.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>26</td>
+               <td>2023-05-23 15:40:54 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/3b451ad4b07f6f88d4d2924e99eddfb7bfb34cce>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>stdexec: pick up fixes for unused parameters<br/><br/>Pull in fixes submitted under NVIDIA/stdexec#939 in order to<br/>resolve some clang warnings.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>27</td>
+               <td>2023-05-23 15:40:24 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/c39d3dfca789d7ad5de9b7bd0856fc5b79c589df>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>28</td>
+               <td>2023-05-23 15:40:15 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/f84c8314635b93fa003869876ce71db62438944c>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>Archive not getting added to shared object<br/><br/>The archive needs to be added with link_whole so that all the symbols<br/>get added to the shared object or gcc will optimize them out.<br/><br/>Tested: ran to see that no missing symbols are logged<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>29</td>
+               <td>2023-05-23 15:39:49 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/479e899d5f57a67647f83b7f615d2c8565290bcf>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Switched bmcweb to use new telemetry service API<br/><br/>Added support for multiple MetricProperties. Added support for new<br/>parameters: CollectionTimeScope, CollectionDuration. ReadingParameters<br/>was not yet changed in telemetry backend, instead temporary property<br/>ReadingParametersFutureVersion was introduced. Once bmcweb is adapted to<br/>use ReadingParametersFutureVersion this property will be renamed in<br/>backend to ReadingParameters. Then bmcweb will change to use<br/>ReadingParameters. Then ReadingParametersFutureVersion will be removed<br/>from backend and everything will be exactly like described in<br/>phosphor-dbus-interfaces without introducing breaking changes.<br/><br/>Related change in phosphor-dbus-interfaces [1], [2]. This change needs<br/>to be bumped together with [3].<br/><br/>Tested:<br/>  - It is possible to create MetricReportDefinitions with multiple<br/>    MetricProperties.<br/>  - Stub values for new parameters are correctly passed to telemetry<br/>    service.<br/>  - All existing telemetry service functionalities remain unchanged.<br/><br/>[1]: <a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/4f9c09144b60edc015291d2c120fc5b33aa0bec2>https://github.com/openbmc/phosphor-dbus-interfaces/commit/4f9c09144b60edc015291d2c120fc5b33aa0bec2</a><br/>[2]: <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/60750>https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/60750</a><br/>[3]: <a href=https://gerrit.openbmc.org/c/openbmc/telemetry/+/58229>https://gerrit.openbmc.org/c/openbmc/telemetry/+/58229</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>30</td>
+               <td>2023-05-23 15:39:24 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/953bc8c1a4e9f21981897d06b71159e403dfff1b>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>libpldm: Enable API/ABI compliance checks<br/><br/>This catches breaks to the API and ABI of the library at compile time,<br/>providing feedback to developers that they should probably not be doing<br/>whatever it is they have done.<br/><br/>abi-compliance-checker is only enabled if tests are enabled and the<br/>necessary external programs can be found. The check can be forcefully<br/>disabled with `-Dabi-compliance-check=disabled`.<br/><br/>A further constraint is that compliance is only checked with GCC. There<br/>are some minor issues with abi-compliance-checker if the new dump is<br/>generated with a different compiler (e.g. clang) to the reference dump.<br/>The GCC limitation will remain until I can find a comfortable way<br/>forward.<br/><br/>Below is an example of a detected violation where an existing API is<br/>changed:<br/><br/>```<br/>    $ git diff<br/>    diff --git a/include/libpldm/platform.h b/include/libpldm/platform.h<br/>    index ead3421af4f9..44654bc6f0c3 100644<br/>    --- a/include/libpldm/platform.h<br/>    +++ b/include/libpldm/platform.h<br/>    @@ -1385,7 +1385,7 @@ int encode_get_pdr_repository_info_resp(<br/>            const uint8_t *update_time, const uint8_t *oem_update_time,<br/>            uint32_t record_count, uint32_t repository_size,<br/>            uint32_t largest_record_size, uint8_t data_transfer_handle_timeout,<br/>    -       struct pldm_msg *msg);<br/>    +       struct pldm_msg *msg, int test);<br/><br/>     /** @brief Decode GetPDRRepositoryInfo response data<br/>      *<br/>    diff --git a/src/platform.c b/src/platform.c<br/>    index 5da538cfa36e..69e5f87b0e41 100644<br/>    --- a/src/platform.c<br/>    +++ b/src/platform.c<br/>    @@ -366,7 +366,7 @@ int encode_get_pdr_repository_info_resp(<br/>            const uint8_t *update_time, const uint8_t *oem_update_time,<br/>            uint32_t record_count, uint32_t repository_size,<br/>            uint32_t largest_record_size, uint8_t data_transfer_handle_timeout,<br/>    -       struct pldm_msg *msg)<br/>    +       struct pldm_msg *msg, int test __attribute__((unused)))<br/>     {<br/>            if (msg == NULL) {<br/>                    return PLDM_ERROR_INVALID_DATA;<br/>    diff --git a/tests/libpldm_platform_test.cpp b/tests/libpldm_platform_test.cpp<br/>    index 0b3370dec60e..6fc1dd005535 100644<br/>    --- a/tests/libpldm_platform_test.cpp<br/>    +++ b/tests/libpldm_platform_test.cpp<br/>    @@ -405,7 +405,7 @@ TEST(GetPDRRepositoryInfo, testGoodEncodeResponse)<br/>         auto rc = encode_get_pdr_repository_info_resp(<br/>             0, PLDM_SUCCESS, repositoryState, updateTime, oemUpdateTime,<br/>             recordCount, repositorySize, largestRecordSize,<br/>    -        dataTransferHandleTimeout, response);<br/>    +        dataTransferHandleTimeout, response, 1);<br/><br/>         EXPECT_EQ(rc, PLDM_SUCCESS);<br/>         struct pldm_pdr_repository_info_resp* resp =<br/>    @@ -436,7 +436,7 @@ TEST(GetPDRRepositoryInfo, testBadEncodeResponse)<br/>         auto rc = encode_get_pdr_repository_info_resp(<br/>             0, PLDM_SUCCESS, repositoryState, updateTime, oemUpdateTime,<br/>             recordCount, repositorySize, largestRecordSize,<br/>    -        dataTransferHandleTimeout, nullptr);<br/>    +        dataTransferHandleTimeout, nullptr, 1);<br/>         EXPECT_EQ(rc, PLDM_ERROR_INVALID_DATA);<br/>     }<br/><br/>    $ meson compile -C build<br/>    INFO: autodetecting backend as ninja<br/>    INFO: calculating backend command to run: /usr/bin/ninja -C /mnt/host/andrew/home/andrew/src/openbmc/libpldm/build<br/>    ninja: Entering directory `/mnt/host/andrew/home/andrew/src/openbmc/libpldm/build'<br/>    [9/10] Generating abi-dump with a custom command<br/>    Detect public symbols<br/>    Reading debug-info<br/>    WARNING: a "Struct" type with no attributes detected in the DWARF dump (192)<br/>    ERROR: invalid debug_loc section of object, please fix your elf utils<br/>    ERROR: missed type id 13275<br/>    ERROR: missed type id 13632<br/>    ERROR: missed type id 11631<br/>    ERROR: missed type id 13540<br/>    ERROR: missed type id 702<br/>    ERROR: missed type id 60867<br/>    ERROR: missed type id 60369<br/>    ERROR: missed type id 30341<br/>    ERROR: missed type id 3570<br/>    ERROR: missed type id 3881<br/>    ERROR: missed type id 65373<br/>    ERROR: missed type id 66112<br/>    ERROR: missed type id 66916<br/>    Creating ABI dump<br/><br/>    The object ABI has been dumped to:<br/>      current.dump<br/>    [10/10] Generating abi-compliance with a custom command<br/>    FAILED: abi-compliance<br/>    /usr/bin/abi-compliance-checker -l libpldm -old /mnt/host/andrew/home/andrew/src/openbmc/libpldm/abi/baseline.dump -new current.dump<br/>    Preparing, please wait ...<br/>    Comparing ABIs ...<br/>    Comparing APIs ...<br/>    Creating compatibility report ...<br/>    Binary compatibility: 99.8%<br/>    Source compatibility: 99.8%<br/>    Total binary compatibility problems: 1, warnings: 0<br/>    Total source compatibility problems: 1, warnings: 0<br/>    Report: compat_reports/libpldm/0.2.0_to_0.2.0/compat_report.html<br/>    ninja: build stopped: subcommand failed.<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>31</td>
+               <td>2023-05-23 15:39:08 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/9460809dffb1e7f99cb8b61b9892e968533958b8>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Use createDump method to create different types of BMC dumps<br/><br/>There are two create interfaces for phosphor-debug-collector.<br/>1- external create - this interface<br/>Which accepts a list of key-value pairs as input,<br/>but initially, this was not accepting any parameters.<br/><br/>2- A create interface in phosphor-debug-collector,<br/>which accepts the type of the BMC dump and a set of<br/>paths to dbus or files to collect as part of dump creation.<br/><br/>The internal create is called by core-monitor or ramoops monitor<br/>to create BMC dump when the error has occurred, or a core is created,<br/>and now there is a new requirement to pass error log id along with<br/>these create calls.<br/><br/>The internal create is added to pass parameters, and the external<br/>one is always assumed as user-initiated. Since now the createDump method<br/>is accepting additional parameters, internal create can be removed<br/>and both system-generated and user-initiated dumps can use the<br/>same interface and method.<br/><br/>This commit adds the dump type and enumeration for the types,<br/>additionally changing the path parameter from the array of strings<br/>to a single string because only for the core dump, there is an attempt<br/>to send multiple paths but that can be captured in the packaging script<br/>if the folder is sent.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>32</td>
+               <td>2023-05-23 14:10:40 </td>
+               <td><a href=https://github.com/openbmc/telemetry/commit/cff70c14ef8cadb7fffd0cd41e06b972fa240e56>Link</a></td>
+               <td class='module'>telemetry</td>
+               <td class='content'>Removed FutureVersion from API<br/><br/>Instead of using FutureVersion API currently used version is updated.<br/>This change needs to be bumped together with [1]. API that utilized map<br/>of variants to be more flexible and backwards compatible was reverted.<br/>It was decided that straight forward API that is commonly used should be<br/>used instead.<br/><br/>Removed MetricId property from Metric. In telemetry it was implemented<br/>as a name for Metric, but it was supposed to work as described in [2].<br/>Currently MetricId is not supported by telemetry service and property<br/>was removed.<br/><br/>Tested:<br/>- After chaging bmcweb to use new API old and new features are working<br/>  as expected<br/><br/>[1]: <a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/44270>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/44270</a><br/>[2]: <a href=https://redfish.dmtf.org/schemas/v1/MetricReportDefinition.v1_4_2.json>https://redfish.dmtf.org/schemas/v1/MetricReportDefinition.v1_4_2.json</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>33</td>
+               <td>2023-05-22 20:05:36 </td>
+               <td><a href=https://github.com/openbmc/phosphor-time-manager/commit/6facad52b580682a31ab19efb36be2c3ac4f459f>Link</a></td>
+               <td class='module'>phosphor-time-manager</td>
+               <td class='content'>README: Move to "meson setup [options]"<br/><br/>Fixes the warning:<br/>WARNING: Running the setup command as `meson [options]` instead of<br/>`meson setup [options]` is ambiguous and deprecated.<br/><br/>Tested: The following work:<br/>meson setup builddir<br/>ninja -C builddir<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>34</td>
+               <td>2023-05-22 20:05:06 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/680960e2a4ef0ca4fcb7b2dd842da269d809569c>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>Added CCIN for ISDIMM<br/><br/>  CCIN values added based on Bonnell_IS_DIMM Service Plan_v2<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>35</td>
+               <td>2023-05-22 20:04:49 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-monitor/commit/c5fe26a60b7a5f1c3c1a08d9cf2da71467356798>Link</a></td>
+               <td class='module'>phosphor-dbus-monitor</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>36</td>
+               <td>2023-05-22 20:03:23 </td>
+               <td><a href=https://github.com/openbmc/libmctp/commit/4df106db7766a56d6db67556b0072295c2d5659d>Link</a></td>
+               <td class='module'>libmctp</td>
+               <td class='content'>astlpc: Add mctp_astlpc_tx_done() API<br/><br/>Add the mctp_astlpc_tx_done() API to help with packet transfer<br/>performance when using the LPC binding with the Aspeed BMC. The goal<br/>of the API is to tell the caller that the Transmit buffer has been<br/>consumed by the remote side, i.e. the Rx_complete command has been<br/>received locally. It can be helpful on the host side because of the<br/>way the Aspeed BMC implements the KCS devices.<br/><br/>The Aspeed BMC's KCS device doesn't provide an interrupt when the ODR<br/>register is read by the remote client/host. To workaround it, the<br/>linux KCS driver for Aspeed arms a timer to periodically check (every<br/>0.5 second in the current implementation) the state of the register<br/>and generate an "Output Buffer Empty" (OBE) event to wake up any<br/>client on the BMC, for example the mctp-demux-daemon.<br/><br/>Typically, the mctp-demux-daemon waits in the poll() system call and<br/>wakes up when it receives a packet. When it's coming from the LPC bus<br/>and KCS device, the remote writes a Tx_begin command in the IDR<br/>register, which does generate an interrupt. To acknowledge the packet,<br/>the mctp-demux-daemon writes a Tx_complete command in the ODR and can<br/>then dispatch the request to the proper recipient (i.e. the PLDM<br/>daemon).  When it wants to send a message on the LPC bus, the<br/>mctp-demux-daemon needs to wait till the ODR register has been read by<br/>the remote. Because we don't have an interrupt to know when that<br/>happens, the mctp-demux-daemon waits in poll() and will be awaken when<br/>an OBE event is generated by a background thread processing the timer<br/>interrupt. So when the mctp-demux-daemon enters poll() with something<br/>to send on the LPC bus, if the ODR is not available immediately, it<br/>will only be sent after the timer fires. Which could take up to 0.5s<br/>with the current driver implementation.<br/><br/>So when the host sends a PLDM request, it is therefore crucial, for<br/>good performance, that it reads the Rx_complete command out of the ODR<br/>very quickly when it's sending a MCTP packet as to free it and make<br/>sure the mctp-demux-daemon can send the reply immediately instead of<br/>having to wait in poll(). That's where the new mctp_astlpc_tx_done()<br/>helps: immediately after sending a message, the host can call<br/>repeatedly mctp_astlpc_poll() to read the KCS device status and read<br/>the ODR as fast as possible and with the mctp_astlpc_tx_done() API, it<br/>knows when to stop. Pseudo code looks like this (ignoring that we<br/>should timeout out of the loop after a while):<br/><br/>     mctp_message_tx()<br/>     while (!mctp_astlpc_tx_done(astlpc)) {<br/>     	   mctp_astlpc_poll(astlpc);<br/>     }<br/><br/>Note that the API, while generic, is (so far) only useful when called<br/>from a remote LPC endpoint.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>37</td>
+               <td>2023-05-22 20:03:15 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/a330b2f074b8d552143fe62c2d1843857c12637f>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>pldmd: Migrate instance ID allocation to pldm::InstanceIdDb<br/><br/>This removes use of `pldm::dbus_api::Requester` from around the<br/>code-base. This makes progress towards removing the DBus API entirely<br/>once all its consumers are converted to the libpldm instance ID APIs.<br/><br/>There was never a good reason for the code using the class to have<br/>knowledge that it was related to DBus anyway, so this is, in-effect, a<br/>double clean up improving separation of concerns.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>38</td>
+               <td>2023-05-22 20:02:40 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/b443b487266bb752a7339e9b05b9a6ce97b82916>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>include: Move installed transport.h under libpldm/<br/><br/>The in-tree location for the header is<br/>`${includedir}/libpldm/transport.h`. Make the installed location<br/>equivalent so we don't have an inconsistency. Nothing is yet using<br/>this header file so it's not quite an API break.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>39</td>
+               <td>2023-05-22 20:02:30 </td>
+               <td><a href=https://github.com/openbmc/telemetry/commit/3a1c297a36bcd78d33ee45c603cb1b46e4619f49>Link</a></td>
+               <td class='module'>telemetry</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>40</td>
+               <td>2023-05-22 20:02:17 </td>
+               <td><a href=https://github.com/openbmc/phosphor-sel-logger/commit/56ccc249f3f45bcb7486c93a19ab271173c64c68>Link</a></td>
+               <td class='module'>phosphor-sel-logger</td>
+               <td class='content'>Add pulse sensor log events to logging service<br/><br/>Add logging for host power on/off events with SEL_LOGGER_SEND_TO_LOGGING_SERVICE<br/>enabled.<br/><br/>Tested: Check current log entries by using busctl command:<br/>busctl tree xyz.openbmc_project.Logging<br/>Turn on host power. Check new log entry message:<br/>busctl get-property xyz.openbmc_project.Logging /xyz/openbmc_project/logging/entry/<id> xyz.openbmc_project.Logging.Entry Message<br/>Message must contain text:<br/>"Host system DC power is on"<br/>Turn off host power. Check new log entry message. Message must contain text:<br/>"Host system DC power is off"<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>41</td>
+               <td>2023-05-22 20:01:56 </td>
+               <td><a href=https://github.com/openbmc/phosphor-user-manager/commit/601d3db44097d89a7d24ae287e8bbe72e7e92d5d>Link</a></td>
+               <td class='module'>phosphor-user-manager</td>
+               <td class='content'>Added new pre-defined usergroup hostconsole<br/><br/>The new pre-defined usergroup named "hostconsole" is added to<br/>differentiate access between host console and manager console.<br/>The only users allowed to interact with host console are part of the<br/>"hostconsole" group.<br/><br/>Note: The changes are spread across multiple repositories listed under<br/>"Related commits:"<br/><br/>The phosphor-user-manager changes are as follows:<br/>- Added new pre-defined user group called "hostconsole"<br/>- Added CI tests to validate the new group.<br/><br/>Tested:<br/>  Loaded on system and qemu eumulator. Made sure that user is only<br/>  allowed to access host console if it is member of hostconsole group.<br/><br/>Related commits:<br/>  docs: <a href=https://gerrit.openbmc.org/c/openbmc/docs/+/60968>https://gerrit.openbmc.org/c/openbmc/docs/+/60968</a><br/>  phosphor-user-manager: <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-user-manager/+/61583>https://gerrit.openbmc.org/c/openbmc/phosphor-user-manager/+/61583</a><br/>  openbmc: <a href=https://gerrit.openbmc.org/c/openbmc/openbmc/+/61582>https://gerrit.openbmc.org/c/openbmc/openbmc/+/61582</a><br/>  obmc-console: <a href=https://gerrit.openbmc.org/c/openbmc/obmc-console/+/61581>https://gerrit.openbmc.org/c/openbmc/obmc-console/+/61581</a><br/>  bmcweb: <a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/61580>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/61580</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>42</td>
+               <td>2023-05-22 20:01:19 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/f263e09c81b798bcf123df8fb144499389e9cbd1>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Update schema packs to 2023.1<br/><br/>Redfish just released 2023.1, pull it in and update the packs.<br/><br/>This commit was generated automatically using update_schemas.py<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>43</td>
+               <td>2023-05-22 18:50:09 </td>
+               <td><a href=https://github.com/openbmc/intel-ipmi-oem/commit/b37abfb27f14c05f8cb366c5e382fe66595dd5bf>Link</a></td>
+               <td class='module'>intel-ipmi-oem</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>44</td>
+               <td>2023-05-22 16:37:59 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/3e72c2027aa4e64b9892ab0d3970358ba446f1fa>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Added new pre-defined usergroup called hostconsole<br/><br/>The new pre-defined usergroup named "hostconsole" is added to<br/>differentiate access between host console and manager console.<br/>The only users allowed to interact with host console are part of the<br/>"hostconsole" group and they are in an administrator role.<br/><br/>Note: The changes are spread across multiple repositories listed under<br/>"Related commits:"<br/><br/>The bmcweb changes to incorporate new group are as follows:<br/>- The new user is added in the hostconsole group only if it has an<br/>  administrative role.<br/>- The ssh usergroup is only translated to ManagerConsole redfish group<br/>  and hostconsole usergroup is translated to HostConsole redfish group.<br/>- The following changes are made to check the privileges for host console<br/>  access<br/>    - The new OEM privilege "OpenBMCHostConsole" added for host console<br/>      access. This privilege is not shared externally hence it is not<br/>      documented.<br/>    - Updated obmc_console BMCWEB_ROUTE to use the new privilege.<br/>    - Router functions now save user role and user groups in the session<br/>    - getUserPrivileges() function now takes session reference instead<br/>      of user role. This function now also checks for the user group<br/>      "hostconsole" and add the new privilege if user is member of this<br/>      group.<br/>    - Updated all callers of the getUserPrivileges to pass session<br/>      reference.<br/>    - Added test to validate that new privilege is set correctly.<br/><br/>Tested:<br/>  Loaded code on the system and validated that;<br/>  - New user gets added in hostconsole group. NOTE: Prior to this commit<br/>    all groups are assigned to new user. This drop does not change that<br/>    behavior.<br/>  - Access from the web gui is only available for users in hostconsole<br/>    group. Used IBM internal simulator called simics to test this. This<br/>    simulator allows accessing openbmc from GUI.<br/>  - Checked the role collection and there is no change.<br/>  $ curl -k -H "X-Auth-Token: $TOKEN" -X GET \<br/>         <a href=https://${bmc}/redfish/v1/AccountService/Roles>https://${bmc}/redfish/v1/AccountService/Roles</a><br/>  $ curl -k -H "X-Auth-Token: $TOKEN" -X GET \<br/>         <a href=https://${bmc}/redfish/v1/AccountService/Roles/Administrator>https://${bmc}/redfish/v1/AccountService/Roles/Administrator</a><br/>  $ curl -k -H "X-Auth-Token: $TOKEN" -X GET \<br/>         <a href=https://${bmc}/redfish/v1/AccountService/Roles/ReadOnly>https://${bmc}/redfish/v1/AccountService/Roles/ReadOnly</a><br/>  $ curl -k -H "X-Auth-Token: $TOKEN" -X GET \<br/>         <a href=https://${bmc}/redfish/v1/AccountService/Roles/Operator>https://${bmc}/redfish/v1/AccountService/Roles/Operator</a><br/><br/>  - HostConsole is in AccountType when hostconsole group is present in<br/>    UserGroups D-Bus property<br/><br/>  $ id user99<br/>  uid=1006(user99) gid=100(users) groups=1000(priv-admin),1005(web),\<br/>      1006(redfish),1013(hostconsole),100(users)<br/><br/>  $ curl -k <a href=https://${bmc}/redfish/v1/AccountService/Accounts/user99>https://${bmc}/redfish/v1/AccountService/Accounts/user99</a><br/>  {<br/>    "@odata.id": "/redfish/v1/AccountService/Accounts/user99",<br/>    "@odata.type": "#ManagerAccount.v1_4_0.ManagerAccount",<br/>    "AccountTypes": [<br/>      "HostConsole",<br/>      "Redfish",<br/>      "WebUI",<br/>      "ManagerConsole"<br/>    ],<br/>    "Description": "User Account",<br/>    "Enabled": true,<br/>    "Id": "user99",<br/>    "Links": {<br/>      "Role": {<br/>        "@odata.id": "/redfish/v1/AccountService/Roles/Administrator"<br/>      }<br/>    },<br/>    "Locked": false,<br/>    "Locked@Redfish.AllowableValues": [<br/>      "false"<br/>    ],<br/>    "Name": "User Account",<br/>    "Password": null,<br/>    "PasswordChangeRequired": false,<br/>    "RoleId": "Administrator",<br/>    "UserName": "user99"<br/><br/>  - The hostconsole group is not present for readonly or operator users<br/>    and also made sure that console access is not provided. This testing<br/>    is done one the system and console access was tried by modifying the<br/>    <a href=https://github.com/openbmc/bmcweb/blob/master/scripts/websocket_test.py>https://github.com/openbmc/bmcweb/blob/master/scripts/websocket_test.py</a><br/><br/>    + curl -k <a href=https://${bmc}/redfish/v1/AccountService/Accounts/user99>https://${bmc}/redfish/v1/AccountService/Accounts/user99</a><br/>    {<br/>      "@odata.id": "/redfish/v1/AccountService/Accounts/user99",<br/>      "@odata.type": "#ManagerAccount.v1_4_0.ManagerAccount",<br/>      "AccountTypes": [<br/>        "IPMI",<br/>        "Redfish",<br/>        "WebUI",<br/>        "ManagerConsole"<br/>      ],<br/>      "Description": "User Account",<br/>      "Enabled": true,<br/>      "Id": "user99",<br/>      "Links": {<br/>        "Role": {<br/>          "@odata.id": "/redfish/v1/AccountService/Roles/ReadOnly"<br/>        }<br/>      },<br/>      "Locked": false,<br/>      "Locked@Redfish.AllowableValues": [<br/>        "false"<br/>      ],<br/>      "Name": "User Account",<br/>      "Password": null,<br/>      "PasswordChangeRequired": false,<br/>      "RoleId": "ReadOnly",<br/>      "UserName": "user99"<br/><br/>    [INFO "http_connection.hpp":209] Request:  0x150ac38 HTTP/1.1 GET /console0 ::ffff:x.x.xx.xxx<br/>    [DEBUG "routing.hpp":1265] Matched rule (upgrade) '/console0' 1 / 2<br/>    [DEBUG "routing.hpp":1084] userName = user99 userRole = priv-user<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=ipmi<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=redfish<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=ssh<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=web<br/>    [DEBUG "routing.hpp":93] checkPrivileges: BASE USER: Login<br/>    [DEBUG "routing.hpp":93] checkPrivileges: BASE USER: ConfigureSelf<br/>    [DEBUG "routing.hpp":113] checkPrivileges: OEM REQUIRED: OpenBMCHostConsole<br/>    [ERROR "routing.hpp":1192] Insufficient Privilege<br/><br/>    + curl -k <a href=https://${bmc}/redfish/v1/AccountService/Accounts/user99>https://${bmc}/redfish/v1/AccountService/Accounts/user99</a><br/>    {<br/>      "@odata.id": "/redfish/v1/AccountService/Accounts/user99",<br/>      "@odata.type": "#ManagerAccount.v1_4_0.ManagerAccount",<br/>      "AccountTypes": [<br/>        "IPMI",<br/>        "Redfish",<br/>        "WebUI",<br/>        "ManagerConsole"<br/>      ],<br/>      "Description": "User Account",<br/>      "Enabled": true,<br/>      "Id": "user99",<br/>      "Links": {<br/>        "Role": {<br/>          "@odata.id": "/redfish/v1/AccountService/Roles/Operator"<br/>        }<br/>      },<br/>      "Locked": false,<br/>      "Locked@Redfish.AllowableValues": [<br/>        "false"<br/>      ],<br/>      "Name": "User Account",<br/>      "Password": null,<br/>      "PasswordChangeRequired": false,<br/>      "RoleId": "Operator",<br/>      "UserName": "user99"<br/><br/>    [INFO "http_connection.hpp":209] Request:  0x21c7c38 HTTP/1.1 GET /console0 ::ffff:x.x.xx.xxx<br/>    [DEBUG "routing.hpp":1265] Matched rule (upgrade) '/console0' 1 / 2<br/>    [DEBUG "routing.hpp":1084] userName = user99 userRole = priv-operator<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=ipmi<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=redfish<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=ssh<br/>    [DEBUG "routing.hpp":1123] IsUserPrivileged: group=web<br/>    [DEBUG "routing.hpp":93] checkPrivileges: BASE USER: Login<br/>    [DEBUG "routing.hpp":93] checkPrivileges: BASE USER: ConfigureComponents<br/>    [DEBUG "routing.hpp":93] checkPrivileges: BASE USER: ConfigureSelf<br/>    [DEBUG "routing.hpp":113] checkPrivileges: OEM REQUIRED: OpenBMCHostConsole<br/>    [ERROR "routing.hpp":1192] Insufficient Privilege<br/><br/>Related commits:<br/>  NOTE: docs, openbmc, obmc-console changes are already merged. bmcweb<br/>        and phosphor-user-manager will be merged together.<br/>  docs: <a href=https://gerrit.openbmc.org/c/openbmc/docs/+/60968>https://gerrit.openbmc.org/c/openbmc/docs/+/60968</a><br/>  phosphor-user-manager: <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-user-manager/+/61583>https://gerrit.openbmc.org/c/openbmc/phosphor-user-manager/+/61583</a><br/>  openbmc: <a href=https://gerrit.openbmc.org/c/openbmc/openbmc/+/61582>https://gerrit.openbmc.org/c/openbmc/openbmc/+/61582</a><br/>  obmc-console: <a href=https://gerrit.openbmc.org/c/openbmc/obmc-console/+/61581>https://gerrit.openbmc.org/c/openbmc/obmc-console/+/61581</a><br/>  bmcweb: <a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/61580>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/61580</a><br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>45</td>
+               <td>2023-05-19 19:20:03 </td>
+               <td><a href=https://github.com/openbmc/google-ipmi-sys/commit/444b5ea4847ea7c014114094d4b63672122f9786>Link</a></td>
+               <td class='module'>google-ipmi-sys</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>46</td>
+               <td>2023-05-19 18:14:24 </td>
+               <td><a href=https://github.com/openbmc/openpower-occ-control/commit/a49c987eebb63692bb60eed3c4cf0f2f359ba725>Link</a></td>
+               <td class='module'>openpower-occ-control</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>47</td>
+               <td>2023-05-19 16:20:13 </td>
+               <td><a href=https://github.com/openbmc/google-ipmi-sys/commit/6537122871e2732ad26a8deee16d121c7646cfb6>Link</a></td>
+               <td class='module'>google-ipmi-sys</td>
+               <td class='content'>sdbusplus: use shorter type aliases<br/><br/>The sdbusplus headers provide shortened aliases for many types.<br/>Switch to using them to provide better code clarity and shorter<br/>lines.  Possible replacements are for:<br/>  * bus_t<br/>  * exception_t<br/>  * manager_t<br/>  * match_t<br/>  * message_t<br/>  * object_t<br/>  * slot_t<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>48</td>
+               <td>2023-05-19 13:18:05 </td>
+               <td><a href=https://github.com/openbmc/phosphor-fan-presence/commit/12cb69064f5fe3f6de838d2f9cf567e5aa9b9e58>Link</a></td>
+               <td class='module'>phosphor-fan-presence</td>
+               <td class='content'>control:fanctl: Option to do dump before query<br/><br/>Add a -d option to the 'fanctl query_dump' command that will generate<br/>the dump and do the query in one step.  Previously the dump had to be<br/>generated first with the 'fanctl dump' command.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>49</td>
+               <td>2023-05-19 13:17:55 </td>
+               <td><a href=https://github.com/openbmc/phosphor-sel-logger/commit/6f5342d0bdb2b2b8c52323219656f88794abf54f>Link</a></td>
+               <td class='module'>phosphor-sel-logger</td>
+               <td class='content'>Make SEL logger messages more informative<br/><br/>Currently log entries are created using the "report" function from the<br/>phosphor-logging repo. The problem is that function uses YAML file<br/>"SEL.errors.yaml" for the message content. This leaves no space for the<br/>message customization. And because of that webui displays all SEL<br/>messages with a description<br/>"xyz.openbmc_project.Logging.SEL.Error.Created" which is not very<br/>informative.<br/>To correct that switch to using "xyz.openbmc_project.Logging.Create"<br/>function directly and create message content dynamically from all of<br/>the incoming parameters.<br/><br/>Example of a SEL message description in webui:<br/>- Before: "xyz.openbmc_project.Logging.SEL.Error.Created"<br/>- After: "SEL Entry from System: RecordType=2, GeneratorID=65,<br/>EventDir=1, EventData=01"<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>50</td>
+               <td>2023-05-19 13:15:20 </td>
+               <td><a href=https://github.com/openbmc/x86-power-control/commit/891bbde7eb6506a68b690b52b25dfa4f08904e88>Link</a></td>
+               <td class='module'>x86-power-control</td>
+               <td class='content'>Fix json exception when processing event_configs<br/><br/>power-control is crashing while processing the JSON config:<br/><br/>terminate called after throwing an instance of 'nlohmann::json_abi_v3_11_2::detail::type_error'<br/>  what():  [json.exception.type_error.302] type must be boolean, but is object<br/><br/>due to casting the `events` object to a `bool` when the underlying JSON<br/>type is not a boolean.<br/><br/>Tested: Added debug print to show the value of `nmiWhenPoweredOff` and<br/>confirmed that it worked for three cases: true, false, and not specified<br/>in config (defaults to true).<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>51</td>
+               <td>2023-05-19 13:14:51 </td>
+               <td><a href=https://github.com/openbmc/obmc-ikvm/commit/3c110335bd170a4b5ae6c591d3201c1ab7b03b00>Link</a></td>
+               <td class='module'>obmc-ikvm</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>52</td>
+               <td>2023-05-19 13:13:12 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/d87fdd9e37c975de8efebb298249b559ecf6969b>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix internal error caused by unknown PCIe SlotType<br/><br/>Previously, when the SlotType field of a PCIeSlot object in D-Bus was<br/>set to xyz.openbmc_project.Inventory.Item.PCIeSlot.SlotTypes.Unknown,<br/>pcie_slots was returning an internal service error. This commit<br/>updates the code to not return the SlotType if it is unknown.<br/><br/>Tested: Validator passed<br/><br/>'''<br/>busctl get-property -j xyz.openbmc_project.Inventory.Manager \<br/>/xyz/openbmc_project/inventory/system/chassis/motherboard/disk_backplane1/nvme5 \<br/> xyz.openbmc_project.Inventory.Item.PCIeSlot SlotType<br/>{<br/>        "type" : "s",<br/>        "data" : "xyz.openbmc_project.Inventory.Item.PCIeSlot.SlotTypes.Unknown"<br/>}<br/><br/>curl -k <a href=https://$bmc/redfish/v1/Chassis/chassis/PCIeSlots>https://$bmc/redfish/v1/Chassis/chassis/PCIeSlots</a><br/>{<br/>  "@odata.id": "/redfish/v1/Chassis/chassis/PCIeSlots",<br/>  "@odata.type": "#PCIeSlots.v1_4_1.PCIeSlots",<br/>  "Id": "1",<br/>  "Name": "PCIe Slot Information",<br/>  "Slots": [<br/>    {<br/>      "HotPluggable": false,<br/>      "Lanes": 0<br/>    },<br/>.....<br/>}<br/><br/>busctl get-property -j xyz.openbmc_project.Inventory.Manager \<br/>/xyz/openbmc_project/inventory/system/chassis/motherboard/pcieslot9 \<br/>xyz.openbmc_project.Inventory.Item.PCIeSlot SlotType<br/>{<br/>        "type" : "s",<br/>        "data" : "xyz.openbmc_project.Inventory.Item.PCIeSlot.SlotTypes.FullLength"<br/>}<br/><br/>curl -k <a href=https://$bmc/redfish/v1/Chassis/chassis/PCIeSlots>https://$bmc/redfish/v1/Chassis/chassis/PCIeSlots</a><br/>{<br/>  "@odata.id": "/redfish/v1/Chassis/chassis/PCIeSlots",<br/>  "@odata.type": "#PCIeSlots.v1_4_1.PCIeSlots",<br/>  "Id": "1",<br/>  "Name": "PCIe Slot Information",<br/>  "Slots": [<br/>    {<br/>      "HotPluggable": false,<br/>      "Lanes": 0<br/>      "SlotType": "FullLength"<br/>    },<br/>.....<br/>}<br/>'''<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>53</td>
+               <td>2023-05-19 13:12:20 </td>
+               <td><a href=https://github.com/openbmc/ipmbbridge/commit/3c796a6fbb2265456e9c845f97a471febcc0a5ed>Link</a></td>
+               <td class='module'>ipmbbridge</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>54</td>
+               <td>2023-05-19 13:11:41 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/99f7a66305d8d0a20d5e36082ce2d2939ca6cbf5>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>systemd: no installation in templated targets<br/><br/>Upstream yocto introduced a change via e510222 (systemd-systemctl:<br/>fix instance template WantedBy symlink construction).<br/><br/>This fixes a bug that we in OpenBMC had been taking advantage of in that<br/>we were able to document our templated target dependencies without it<br/>actually doing anything. The real installation of services within<br/>targets occurs in our bitbake recipes due to the complexity of chassis<br/>and host instances on a per machine basis.<br/><br/>Leave the dependency information in the service files but comment them<br/>out. It's useful to be able to look at a service and understand which<br/>targets it's going to be installed into by the bitbake recipes.<br/><br/>In some cases, we had hard coded the target instance, which does install<br/>the service correctly, but only in that one target. All services should<br/>be installed via the bitbake recipe to ensure the service is properly<br/>installed in all instances of the target. Once the bump for this commit<br/>goes into openbmc/openbmc, I will ensure the recipe is updated to<br/>install all services correctly.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>55</td>
+               <td>2023-05-19 13:11:41 </td>
+               <td><a href=https://github.com/openbmc/openpower-pnor-code-mgmt/commit/67dbb254da45755227fbec472737d3506f086afc>Link</a></td>
+               <td class='module'>openpower-pnor-code-mgmt</td>
+               <td class='content'>systemd: no installation in templated targets<br/><br/>Upstream yocto introduced a change via e510222 (systemd-systemctl:<br/>fix instance template WantedBy symlink construction).<br/><br/>This fixes a bug that we in OpenBMC had been taking advantage of in that<br/>we were able to document our templated target dependencies without it<br/>actually doing anything. The real installation of services within<br/>targets occurs in our bitbake recipes due to the complexity of chassis<br/>and host instances on a per machine basis.<br/><br/>Leave the dependency information in the service files but comment them<br/>out. It's useful to be able to look at a service and understand which<br/>targets it's going to be installed into by the bitbake recipes.<br/><br/>In some cases, we had hard coded the target instance, which does install<br/>the service correctly, but only in that one target. All services should<br/>be installed via the bitbake recipe to ensure the service is properly<br/>installed in all instances of the target (or service). Once the bump for<br/>this commit goes into openbmc/openbmc, I will ensure the recipe is<br/>updated to install all services correctly.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>56</td>
+               <td>2023-05-19 13:11:41 </td>
+               <td><a href=https://github.com/openbmc/phosphor-bmc-code-mgmt/commit/cce26eb063488a4fe3403e55979cac7f8f6a7547>Link</a></td>
+               <td class='module'>phosphor-bmc-code-mgmt</td>
+               <td class='content'>systemd: no installation in templated targets<br/><br/>Upstream yocto introduced a change via e510222 (systemd-systemctl:<br/>fix instance template WantedBy symlink construction).<br/><br/>This fixes a bug that we in OpenBMC had been taking advantage of in that<br/>we were able to document our templated target dependencies without it<br/>actually doing anything. The real installation of services within<br/>targets occurs in our bitbake recipes due to the complexity of chassis<br/>and host instances on a per machine basis.<br/><br/>Leave the dependency information in the service files but comment them<br/>out. It's useful to be able to look at a service and understand which<br/>targets it's going to be installed into by the bitbake recipes.<br/><br/>In some cases, we had hard coded the target instance, which does install<br/>the service correctly, but only in that one target. All services should<br/>be installed via the bitbake recipe to ensure the service is properly<br/>installed in all instances of the target. Once the bump for this commit<br/>goes into openbmc/openbmc, I will ensure the recipe is updated to<br/>install all services correctly.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>57</td>
+               <td>2023-05-19 13:11:41 </td>
+               <td><a href=https://github.com/openbmc/openpower-hw-diags/commit/e043f954b8f1742b294a2f50eb7ad59897f5d7e5>Link</a></td>
+               <td class='module'>openpower-hw-diags</td>
+               <td class='content'>systemd: no installation in templated targets<br/><br/>Upstream yocto introduced a change via e510222 (systemd-systemctl:<br/>fix instance template WantedBy symlink construction).<br/><br/>This fixes a bug that we in OpenBMC had been taking advantage of in that<br/>we were able to document our templated target dependencies without it<br/>actually doing anything. The real installation of services within<br/>targets occurs in our bitbake recipes due to the complexity of chassis<br/>and host instances on a per machine basis.<br/><br/>Leave the dependency information in the service files but comment them<br/>out. It's useful to be able to look at a service and understand which<br/>targets it's going to be installed into by the bitbake recipes.<br/><br/>In some cases, we had hard coded the target instance, which does install<br/>the service correctly, but only in that one target. All services should<br/>be installed via the bitbake recipe to ensure the service is properly<br/>installed in all instances of the target. Once the bump for this commit<br/>goes into openbmc/openbmc, I will ensure the recipe is updated to<br/>install all services correctly.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>58</td>
+               <td>2023-05-17 15:58:49 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/390fccb10f015956f4e4b91252a328d472a6bbfb>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>vpd-tool: Fixing of display of KW values having 0x00s<br/><br/>Keywords with values "0x00..." are being displayed now in Hex.<br/>~# /tmp/vpd_tool -r -H -O "/sys/bus/i2c/drivers/at24/8-0050/eeprom" -R VINI -K B4<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "B4": "0x00"<br/>    }<br/>}<br/>~# /tmp/vpd_tool -r -H -O "/sys/bus/i2c/drivers/at24/8-0050/eeprom" -R VINI -K B3<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "B3": "0x000000000000"<br/>    }<br/>}<br/>~# /tmp/vpd_tool -r -H -O "/sys/bus/i2c/drivers/at24/8-0050/eeprom" -R VINI -K B7<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "B7": "0x000000000000000000000000"<br/>    }<br/>}<br/>HexDump results for comparison:<br/>00000170 80 01 42 33 06 00 00 00 00 00 00 42 34 01 00 42 |..B3.......B4..B|<br/>00000180 37 0c 00 00 00 00 00 00 00 00 00 00 00 00 50 46 |7.............PF|<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>59</td>
+               <td>2023-05-17 15:58:38 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/bd992c9f62dbf127a21de26714662f92eabd0156>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>Add Connect() method to console DBUS object<br/><br/>Added new poller and consumer for the console DBUS data.<br/><br/>Note: We initially developed SocketName attribute but it is now<br/>      deprecated/removed.<br/><br/>The tree of default object:<br/>$ busctl tree xyz.openbmc_project.Console.default<br/>`-/xyz<br/>  `-/xyz/openbmc_project<br/>    `-/xyz/openbmc_project/console<br/>      `-/xyz/openbmc_project/console/default<br/><br/>The introspect of default console:<br/>$ busctl introspect xyz.openbmc_project.Console.default /xyz/openbmc_project/console/default<br/>NAME                                TYPE      SIGNATURE RESULT/VALUE FLAGS<br/>org.freedesktop.DBus.Introspectable interface -         -            -<br/>.Introspect                         method    -         s            -<br/>org.freedesktop.DBus.Peer           interface -         -            -<br/>.GetMachineId                       method    -         s            -<br/>.Ping                               method    -         -            -<br/>org.freedesktop.DBus.Properties     interface -         -            -<br/>.Get                                method    ss        v            -<br/>.GetAll                             method    s         a{sv}        -<br/>.Set                                method    ssv       -            -<br/>.PropertiesChanged                  signal    sa{sv}as  -            -<br/>xyz.openbmc_project.Console.Access  interface -         -            -<br/>.Connect                            method    -         h            -<br/>xyz.openbmc_project.console         interface -         -            -<br/>.setBaudRate                        method    u         x            -<br/>.baudrate                           property  u         0            -<br/><br/>Tested:<br/>  Performed integration testing with bmcweb.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>60</td>
+               <td>2023-05-17 15:24:49 </td>
+               <td><a href=https://github.com/openbmc/openbmc/commit/9c1703edb0359798d3b68e6390af1ae30e69fdc6>Link</a></td>
+               <td class='module'></td>
+               <td class='content'><font style="color:red;">!! (Get commit fail) !!</font>openpower: pdata: srcrev bump. 1ae8abf..86435f2</td>
+           </tr>
+
+
+
+
+
+
+           <tr>
+               <td>61</td>
+               <td>2023-05-17 02:01:40 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/7e6130aab02545f19597c1776d8915ab4c450d11>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>62</td>
+               <td>2023-05-17 02:01:01 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/ddd70dcaa56bd51eaa0b192cd2c5c7bdcc1c3576>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Use array<br/><br/>When passing arrays of json objects around, we should be using the<br/>native nlohmann::json::array_t, rather than using an nlohmann::json, and<br/>interpreting it as an array.  This improves our type safety.<br/><br/>Tested:<br/>EthernetInterfaces returns the same value as before.  Redfish service<br/>validator shows no new failures on those interfaces.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>63</td>
+               <td>2023-05-17 01:10:21 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/5ba20b5bf1351a3550b56c2a6eca7045336d8001>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>obmc-console: Consolidate handling of default socket-id<br/><br/>If console-id is not specified on command line or in the config file<br/>then use the default value. ae2460d0b8e8 ("obmc-console: Provide a<br/>default value for `console-id`.") only implemented the default value for<br/>naming the abstract listening socket and overlooked the new DBus path<br/>naming convention.  This caused issues during dbus registration:<br/><br/>```<br/>obmc-console-server: Object name: /xyz/openbmc_project/console/(null)<br/>obmc-console-server: Failed to issue method call: Invalid argument<br/>```<br/><br/>Fixes: ae2460d0b8e8 ("obmc-console: Provide a default value for `console-id`.")<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>64</td>
+               <td>2023-05-17 01:09:18 </td>
+               <td><a href=https://github.com/openbmc/sdeventplus/commit/a8c11e3ca342b090aec615c832b85686bd4655f6>Link</a></td>
+               <td class='module'>sdeventplus</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>65</td>
+               <td>2023-05-17 01:08:53 </td>
+               <td><a href=https://github.com/openbmc/libmctp/commit/7f7fdc1dcb9b9f6eeabc27e76321f3584e031148>Link</a></td>
+               <td class='module'>libmctp</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>66</td>
+               <td>2023-05-17 01:08:44 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/4e44c790ada85a0af47e0766471658e9f6cbc0b2>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>67</td>
+               <td>2023-05-17 01:08:07 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/7c1dc7ea0b3eec79518b6dcb9552256bfc1cec15>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>pldmd: move to libpldm instance ID alloc/free<br/><br/>Refactor the dbus_api::Requester class to be implemented in terms of<br/>libpldm's instance ID database. To make that easier to deal with we<br/>introduce a light-weight RAII C++ binding along with a helper class for<br/>unit tests.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>68</td>
+               <td>2023-05-17 01:07:59 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/39f883259956e7b2d80581bedf471ae2ccd531d5>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>requester: Make pldm_open() return existing fd<br/><br/>Considering how this is used, it makes more sense to return the fd of<br/>the open transport rather than error out.<br/><br/>Fixes: c1b66f420912 ("requester: Add new APIs to support multiple transports")<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>69</td>
+               <td>2023-05-17 01:07:50 </td>
+               <td><a href=https://github.com/openbmc/ssifbridge/commit/4300d2104bd75e94d4a53e60423a64859e32aeef>Link</a></td>
+               <td class='module'>ssifbridge</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>70</td>
+               <td>2023-05-17 01:07:40 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/69373482529f039de0cfccb3d01fbed562595c7e>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>sdbus++: simplify vtable generation<br/><br/>Move vtable generation into separate mako files to simplify all of<br/>the "*.prototype.hpp.mako" files.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>71</td>
+               <td>2023-05-17 01:07:07 </td>
+               <td><a href=https://github.com/openbmc/phosphor-user-manager/commit/2d042d143b655e1133e1eeeb6a438460bec83e6c>Link</a></td>
+               <td class='module'>phosphor-user-manager</td>
+               <td class='content'>Change to pam_faillock and pam pwquality<br/><br/>pam_tally2 is being replaced by pam_faillock. The parameters in<br/>common-auth have moved to faillock.conf, so this commit adds a new<br/>method to modify paramters in a given configuration file.<br/><br/>The output from the 'faillock' command differs from 'pam_tally2', so<br/>this commit adds a new function to parse the output from 'faillock' to<br/>determine if the user is currently locked.<br/><br/>pam_cracklib is being replaced by pam_pwquality. The parameters in<br/>common-password have moved to pwquality.conf.<br/><br/>I referenced the work done by Joseph Reynolds in this commit [1] to know<br/>what changes were required.<br/><br/>[1]: <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-user-manager/+/39853>https://gerrit.openbmc.org/c/openbmc/phosphor-user-manager/+/39853</a><br/><br/>Tested:<br/>Confirmed that the AccountLockoutDuration and AccountLockoutThreshold<br/>parameters under /redfish/v1/AccountService both return the correct<br/>value from common-auth.<br/><br/>Set deny to 10 and unlock_time to 30 seconds and confirmed that a user<br/>account will correctly show as locked after 10 failed login attempts,<br/>and that user will show as unlocked 30 seconds later.<br/><br/>Used Redfish to PATCH both AccountLockoutDuration and<br/>AccountLockoutThreshold and confirmed that the updated values are<br/>correctly reported in Redfish and that the correct lines in<br/>faillock.conf are modified.<br/><br/>Confirmed that the MinPasswordLength parameter under<br/>/redfish/v1/AccountService returns the correct value from<br/>common-password.<br/><br/>Set minlen to 9 and confirmed that a user password could not be set with<br/>a length of 8.<br/><br/>Used Redfish to PATCH MinPasswordLength and confirmed that the updated<br/>value is correctly reported in Redfish and that the correct line in<br/>pwquality.conf is modified.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>72</td>
+               <td>2023-05-17 01:06:42 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/88a32137fb8173970e2bda25c41561b837f89f7d>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>Fix format in HwmonMain.cpp to pass format check<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>73</td>
+               <td>2023-05-17 01:06:18 </td>
+               <td><a href=https://github.com/openbmc/x86-power-control/commit/d7ea283b7ec6c7718ac70b0d38c654b9a5bac3db>Link</a></td>
+               <td class='module'>x86-power-control</td>
+               <td class='content'>Add option to only log nmiButtonPress when host is running<br/><br/>While NMI button presses are of little interest when the host is off,<br/>some systems (e.g. romed8hm3) generates spurious events on shutdown,<br/>probably due to some lack of electronic stability.<br/>This patch adds an option to disable handling these events when host is off.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>74</td>
+               <td>2023-05-17 01:06:01 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/c78d887ccac761a70f2682fe3d5b948383cf56bd>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>75</td>
+               <td>2023-05-17 01:05:22 </td>
+               <td><a href=https://github.com/openbmc/phosphor-misc/commit/8419820f64f33704a7912715d86ee5c5cbfc121b>Link</a></td>
+               <td class='module'>phosphor-misc</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>76</td>
+               <td>2023-05-17 01:05:15 </td>
+               <td><a href=https://github.com/openbmc/openpower-libhei/commit/2f7537db1e0819814be85a9c79dae7446785e1ce>Link</a></td>
+               <td class='module'>openpower-libhei</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>77</td>
+               <td>2023-05-17 01:04:40 </td>
+               <td><a href=https://github.com/openbmc/openpower-proc-control/commit/933bee764b2a0b796064fb94496dd45c539bd3f0>Link</a></td>
+               <td class='module'>openpower-proc-control</td>
+               <td class='content'>systemd: no installation in templated targets<br/><br/>Upstream yocto introduced a change via e510222 (systemd-systemctl:<br/>fix instance template WantedBy symlink construction).<br/><br/>This fixes a bug that we in OpenBMC had been taking advantage of in that<br/>we were able to document our templated target dependencies without it<br/>actually doing anything. The real installation of services within<br/>targets occurs in our bitbake recipes due to the complexity of chassis<br/>and host instances on a per machine basis.<br/><br/>Leave the dependency information in the service files but comment them<br/>out. It's useful to be able to look at a service and understand which<br/>targets it's going to be installed into by the bitbake recipes.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>78</td>
+               <td>2023-05-17 01:03:57 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/757c0ef3d507678f53ea73c8fcf7182aee8d39fc>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Update README.md with latest functionality<br/><br/>Describe how the code will clear the deconfig flag for replaced fans and<br/>power supplies.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>79</td>
+               <td>2023-05-17 01:03:48 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/b9f7c1de73ad44c4c6ced7dab8b2a402468cec5d>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Added Connect() method in console DBUS interface<br/><br/>The "xyz.openbmc_project.Console.Access" interface is updated to add new<br/>method called Connect(). This method returns the unix socket file<br/>descriptor. The consumer can use this file descriptor to receive the<br/>console data. The leaf node in the object path is a console id.<br/><br/>Also, the "SocketName" property is deprecated and removed to avoid<br/>exposing implementation details about the console.<br/><br/>The tree for the "default" console id.<br/>$ busctl tree xyz.openbmc_project.Console.default<br/>`-/xyz<br/>  `-/xyz/openbmc_project<br/>    `-/xyz/openbmc_project/console<br/>      `-/xyz/openbmc_project/console/default<br/><br/>The introspect for the "default" console id.<br/>$ busctl introspect xyz.openbmc_project.Console.default \<br/>  /xyz/openbmc_project/console/default<br/>NAME                                TYPE      SIGNATURE RESULT/VALUE FLAGS<br/>org.freedesktop.DBus.Introspectable interface -         -            -<br/>.Introspect                         method    -         s            -<br/>org.freedesktop.DBus.Peer           interface -         -            -<br/>.GetMachineId                       method    -         s            -<br/>.Ping                               method    -         -            -<br/>org.freedesktop.DBus.Properties     interface -         -            -<br/>.Get                                method    ss        v            -<br/>.GetAll                             method    s         a{sv}        -<br/>.Set                                method    ssv       -            -<br/>.PropertiesChanged                  signal    sa{sv}as  -            -<br/>xyz.openbmc_project.Console.Access  interface -         -            -<br/>.Connect                            method    -         h            -<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>80</td>
+               <td>2023-05-15 20:04:33 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/8c90f319d579357e671c7ebbf8b845f680bb1aa2>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>systemd: no installation in templated targets<br/><br/>Upstream yocto introduced a change via e510222 (systemd-systemctl:<br/>fix instance template WantedBy symlink construction).<br/><br/>This fixes a bug that we in OpenBMC had been taking advantage of in that<br/>we were able to document our templated target dependencies without it<br/>actually doing anything. The real installation of services within<br/>targets occurs in our bitbake recipes due to the complexity of chassis<br/>and host instances on a per machine basis.<br/><br/>Leave the dependency information in the service files but comment them<br/>out. It's useful to be able to look at a service and understand which<br/>targets it's going to be installed into by the bitbake recipes.<br/><br/>In some cases, we had hard coded the target instance, which does install<br/>the service correctly, but only in that one target. All services should<br/>be installed via the bitbake recipe to ensure the service is properly<br/>installed in all instances of the target. Once the bump for this commit<br/>goes into openbmc/openbmc, I will ensure the recipe is updated to<br/>install all services correctly.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>81</td>
+               <td>2023-05-12 21:12:13 </td>
+               <td><a href=https://github.com/openbmc/phosphor-net-ipmid/commit/099fb097d1671bc057a0b149de58b8b66c14e9a2>Link</a></td>
+               <td class='module'>phosphor-net-ipmid</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>82</td>
+               <td>2023-05-12 21:03:51 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/27884e6b66612e7bf7906642f6ada4c048c11331>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>systemd: no installation in templated targets<br/><br/>Upstream yocto introduced a change via e510222 (systemd-systemctl:<br/>fix instance template WantedBy symlink construction).<br/><br/>This fixes a bug that we in OpenBMC had been taking advantage of in that<br/>we were able to document our templated target dependencies without it<br/>actually doing anything. The real installation of services within<br/>targets occurs in our bitbake recipes due to the complexity of chassis<br/>and host instances on a per machine basis.<br/><br/>Leave the dependency information in the service files but comment them<br/>out. It's useful to be able to look at a service and understand which<br/>targets it's going to be installed into by the bitbake recipes.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>83</td>
+               <td>2023-05-12 20:48:34 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/bad2c4a9a1095e5e41959bfc5bc56102bbd2a79a>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Remove "Manufacturer" from PCIeDevice interface<br/><br/>Remove Manufacturer from the PCIeDevice's PCIeInterface and fix the<br/>following Redfish validator error:<br/>ERROR - Manufacturer not defined in Complex PCIeInterface<br/>PCIeDevice.v1_3_0.PCIeInterface (check version, spelling and casing)<br/><br/>This error is because there is no ["PCIeInterface"]["Manufacturer"] at<br/><a href=https://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_11_0.json.>https://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_11_0.json.</a><br/><br/>"Manufacturer" is already part of the root PCIeDevice and is<br/>implemented on line 219.<br/><br/>On the backend "Manufacturer" is already part of Asset interface so<br/>remove it from PCIeDevice interface in peci-pcie and<br/>phosphor-dbus-interface.<br/><br/>phosphor-dbus-interfaces commit:<br/><a href=https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/61738>https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/61738</a><br/><br/>peci-pcie commit:<br/><a href=https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62256>https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62256</a><br/><br/>Tested:<br/>```<br/>curl -k <a href=https://$bmc/redfish/v1/Systems/system/PCIeDevices/pcie_card10>https://$bmc/redfish/v1/Systems/system/PCIeDevices/pcie_card10</a><br/>{<br/>  "@odata.id": "/redfish/v1/Systems/system/PCIeDevices/pcie_card10",<br/>  "@odata.type": "#PCIeDevice.v1_9_0.PCIeDevice",<br/>  "Id": "pcie_card10",<br/>  "Manufacturer": "",<br/>  "Model": "6B87",<br/>  "Name": "PCIe Device",<br/>  "PCIeFunctions": {<br/>    "@odata.id": "/redfish/v1/Systems/system/PCIeDevices/pcie_card10/PCIeFunctions"<br/>  },<br/>  "PCIeInterface": {<br/>    "LanesInUse": 16,<br/>    "PCIeType": "Gen4"<br/>  },<br/>  "PartNumber": "03FL204",<br/>  "SerialNumber": "YA31UF07200Z",<br/>  "Slot": {<br/>    "Location": {<br/>      "PartLocation": {<br/>        "ServiceLabel": "U78DA.ND0.WZS003T-P0-C10"<br/>      }<br/>    }<br/>  },<br/>  "SparePartNumber": "03FL205"<br/>}<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>84</td>
+               <td>2023-05-12 19:31:49 </td>
+               <td><a href=https://github.com/openbmc/peci-pcie/commit/4fe704c4b2a6c79879922e3875494b7bbe6155d5>Link</a></td>
+               <td class='module'>peci-pcie</td>
+               <td class='content'>Remove "Manufacturer" from PCIeDevice interface<br/><br/>"Manufacturer" is already part of Asset interface. Remove it from<br/>PCIeDevice interface, create Asset Interface and add "Manufacturer".<br/><br/>phosphor-dbus-interfaces commit:<br/><a href=https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/61738>https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/61738</a><br/><br/>bmcweb commit:<br/><a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62257>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62257</a><br/><a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/40051>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/40051</a><br/><br/>Tested: None<br/>I don't have environment to test, need help testing this commit.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>85</td>
+               <td>2023-05-12 19:31:05 </td>
+               <td><a href=https://github.com/openbmc/phosphor-state-manager/commit/57c0a893cd5cb987633d278e09f941f7899a81b0>Link</a></td>
+               <td class='module'>phosphor-state-manager</td>
+               <td class='content'>hypervisor: remove OSStart from state association<br/><br/>Turns out the hypervisor never utilized the OSStart BootProgress.<br/>Remove it from our mapping to hypervisor state.<br/><br/>Our hostboot BIOS team is actually looking to utilize this<br/>BootProgress to indicate when they start the hypervisor. This would just<br/>be a standard BootProgress that PSM needs no special handling of.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>86</td>
+               <td>2023-05-12 19:30:35 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/aca73883ca6bcee3dde8cbc8cf7d4e51f2959b73>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>Add InputUnavailableAsFailed and newer to PID<br/><br/>These apply to both PID and Stepwise, and are the same in both.<br/><br/>Adding InputUnavailableAsFailed, an optional boolean parameter,<br/>already implemented and merged some time ago:<br/><a href=https://gerrit.openbmc.org/c/openbmc/phosphor-pid-control/+/47606>https://gerrit.openbmc.org/c/openbmc/phosphor-pid-control/+/47606</a><br/><br/>Also adding two new parameters, implemented but not yet merged.<br/><br/>MissingIsAcceptable, optional, an array of strings:<br/><a href=https://gerrit.openbmc.org/c/openbmc/phosphor-pid-control/+/60888>https://gerrit.openbmc.org/c/openbmc/phosphor-pid-control/+/60888</a><br/><br/>TempToMargin, optional, an array of numbers:<br/><a href=https://gerrit.openbmc.org/c/openbmc/phosphor-pid-control/+/60303>https://gerrit.openbmc.org/c/openbmc/phosphor-pid-control/+/60303</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>87</td>
+               <td>2023-05-12 19:30:26 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/6d0f27b38148ca5f989d4e7c2f5b512612e2cc27>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>Fix PECI client creation flow<br/><br/>This commit fixes the PECI client creation flow to make it retry<br/>the creation when the client is not exposed correctly.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>88</td>
+               <td>2023-05-12 19:30:18 </td>
+               <td><a href=https://github.com/openbmc/phosphor-fan-presence/commit/61b7329603e737b76b04b98746d69c1f410761b8>Link</a></td>
+               <td class='module'>phosphor-fan-presence</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>89</td>
+               <td>2023-05-12 19:30:10 </td>
+               <td><a href=https://github.com/openbmc/phosphor-time-manager/commit/ea220361b8da915b093a98aa3ad19061b6c2ef88>Link</a></td>
+               <td class='module'>phosphor-time-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>90</td>
+               <td>2023-05-12 19:29:54 </td>
+               <td><a href=https://github.com/openbmc/phosphor-bmc-code-mgmt/commit/d5e8e73b88f52acad408b8adfc7b9fdcc00fd860>Link</a></td>
+               <td class='module'>phosphor-bmc-code-mgmt</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>91</td>
+               <td>2023-05-12 19:29:47 </td>
+               <td><a href=https://github.com/openbmc/phosphor-gpio-monitor/commit/39084b4a64eb5288677f23fdde84c0b69003faf5>Link</a></td>
+               <td class='module'>phosphor-gpio-monitor</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>92</td>
+               <td>2023-05-12 19:28:27 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/2dabfc1bb488f84ec00f19a51aba144b7f71e45d>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Add session timeout in Policies page<br/><br/>This patchset will provide the option to configure the session timeout<br/>for the WebUI. The functionality will provide the below timeout options<br/>to configure.<br/>    1. 30 minutes<br/>    2. 1 hour<br/>    3. 2 hours<br/>    4. 4 hours<br/>    5. 8 hours<br/>    6. 1 Day<br/>For the API, redfish is having the following resource.<br/>URL - /redfish/v1/SessionService<br/>Method<br/>    - GET (to get the configured timeout)<br/>    - PATCH (to configure the timeout value)<br/>Property - { "SessionTimeout": 1800 }<br/><br/>When the user idles up until the configured session timeout, after that<br/>any API call from this session will get 401 status and the web UI will<br/>gets logged out.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>93</td>
+               <td>2023-05-12 19:28:00 </td>
+               <td><a href=https://github.com/openbmc/stdplus/commit/d1984ddc52ee588bc1d1f32c6b309a4c9a8f3be6>Link</a></td>
+               <td class='module'>stdplus</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>94</td>
+               <td>2023-05-12 19:27:52 </td>
+               <td><a href=https://github.com/openbmc/phosphor-certificate-manager/commit/223e460421eebb1c598d9285b0cb01f1150fa50d>Link</a></td>
+               <td class='module'>phosphor-certificate-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>95</td>
+               <td>2023-05-12 19:27:42 </td>
+               <td><a href=https://github.com/openbmc/phosphor-inventory-manager/commit/7edafe0610b592dc25b9633d7d60a68f7639d66e>Link</a></td>
+               <td class='module'>phosphor-inventory-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>96</td>
+               <td>2023-05-12 19:27:31 </td>
+               <td><a href=https://github.com/openbmc/phosphor-buttons/commit/0d038f58f7ae2d8484ef2ba13116042088f133ff>Link</a></td>
+               <td class='module'>phosphor-buttons</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>97</td>
+               <td>2023-05-12 19:13:52 </td>
+               <td><a href=https://github.com/openbmc/gpioplus/commit/7ba248ad685c8a2029f9cfdbae98d161e9664a3b>Link</a></td>
+               <td class='module'>gpioplus</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>98</td>
+               <td>2023-05-12 19:13:44 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ipmi-ethstats/commit/4cf2befc14036b39ed3d63594c7bf16c635c1892>Link</a></td>
+               <td class='module'>phosphor-ipmi-ethstats</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>99</td>
+               <td>2023-05-12 19:13:38 </td>
+               <td><a href=https://github.com/openbmc/phosphor-watchdog/commit/6ac6a347132c431b4ab05ffee0d1bd15a532fba9>Link</a></td>
+               <td class='module'>phosphor-watchdog</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>100</td>
+               <td>2023-05-12 19:13:17 </td>
+               <td><a href=https://github.com/openbmc/phosphor-networkd/commit/89d734b9886c40fa530f9fd6e67eb87b6955ec08>Link</a></td>
+               <td class='module'>phosphor-networkd</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>101</td>
+               <td>2023-05-12 19:13:09 </td>
+               <td><a href=https://github.com/openbmc/phosphor-snmp/commit/edd7082913317591626f81db1d53a2256722e95d>Link</a></td>
+               <td class='module'>phosphor-snmp</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>102</td>
+               <td>2023-05-12 19:13:01 </td>
+               <td><a href=https://github.com/openbmc/openpower-host-ipmi-oem/commit/490126f9ad350b9503e52942ac450a2e831bf3f0>Link</a></td>
+               <td class='module'>openpower-host-ipmi-oem</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>103</td>
+               <td>2023-05-12 19:12:53 </td>
+               <td><a href=https://github.com/openbmc/phosphor-led-sysfs/commit/1c4503e796bafca446412e142c7528ba0a8e4de1>Link</a></td>
+               <td class='module'>phosphor-led-sysfs</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>104</td>
+               <td>2023-05-12 19:12:46 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/6fd81a518d8a021009101038b0d80092f14a9028>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>libpldm: Add a changelog<br/><br/>The changelog is based around the expectations set out in "Keep a<br/>Changelog":<br/><br/><a href=https://keepachangelog.com/en/1.0.0/>https://keepachangelog.com/en/1.0.0/</a><br/><br/>Through review I will set the expectation that people modify<br/>CHANGELOG.md in the patches changing the functionality in relevant ways.<br/><br/>When we need to commit to an API or ABI break we will first create a<br/>tag before merging the breaking changes. This gives consumers of the<br/>library sensible sequence points for migrating their code as we clean up<br/>the library.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>105</td>
+               <td>2023-05-12 19:12:34 </td>
+               <td><a href=https://github.com/openbmc/dbus-top/commit/c3aa2a814fa855589389a1530f6078723cc6a610>Link</a></td>
+               <td class='module'>dbus-top</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>106</td>
+               <td>2023-05-12 19:11:29 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/aded7a0d4401ebd9f2d7d0fd089961aa33818224>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>psu-ng: Retrieve PSU VPD keyword from D-Bus.<br/><br/>Extract PSU VPD keyword from D-Bus and assign associated string value to<br/>VPD string.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>107</td>
+               <td>2023-05-12 19:11:19 </td>
+               <td><a href=https://github.com/openbmc/estoraged/commit/439f0fd8398a7b178f6cc1a5a08f0b77f4cbc226>Link</a></td>
+               <td class='module'>estoraged</td>
+               <td class='content'>clang-tidy: ignore issues in subproject headers<br/><br/>This repository cannot control the settings and strictness of<br/>subprojects, so we need to disable clang-tidy on those.  Leverage<br/>the HeaderFilter option in the .clang-tidy to ignore issues in header<br/>files and leverage the meson `.clang-tidy-ignore` feature to ignore<br/>issues in C++ parts.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>108</td>
+               <td>2023-05-12 19:11:08 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/7410260a3ba74314c9a28d220e0c2a3de9cb844e>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL:log_id_test: Remove file when testcase done<br/><br/>A testcase was missing a delete of a temporary file it created.  Delete<br/>it so it isn't left around.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>109</td>
+               <td>2023-05-12 19:10:41 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/fdfd3af1e7f7a8e4d0caee3edfaa12cd53cd0d17>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>asio: connection: fix clang-tidy warning<br/><br/>With clang-16, numerous users of asio::connection are failing<br/>clang-tidy with something like:<br/><br/>```<br/>/usr/local/include/boost/asio/detail/impl/io_uring_descriptor_service.ipp:109:3: error: Called C++ object pointer is null [clang-analyzer-core.CallAndMessage,-warnings-as-errors]<br/>  io_uring_service_.register_io_object(impl.io_object_data_);<br/>/usr/local/include/boost/asio/detail/impl/io_uring_descriptor_service.ipp:109:3: note: Called C++ object pointer is null<br/>  io_uring_service_.register_io_object(impl.io_object_data_);<br/>```<br/><br/>I have looked through the Boost code and cannot figure out any path<br/>where the object really is null and since we use this code everywhere<br/>I highly suspect it is not.  In any case, by using an alternative<br/>constructor we seem to have appeased clang-tidy.  Switch to the<br/>socket constructor which takes an executor instead of a context.<br/><br/>Tested: Ran `ninja clang-tidy` in openbmc/estoraged with this change in<br/>a subproject.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>110</td>
+               <td>2023-05-12 19:10:31 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/6da4f91b061aae1e7d918006e54ae5e8cd8a162e>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>111</td>
+               <td>2023-05-12 19:10:23 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/23a722ca7c6ca2ac93a8ecbe44550e9429e1a8f1>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>Enable Yocto control of the USING_ENTITY_MANAGER_DECORATORS<br/><br/>The USING_ENTITY_MANAGER_DECORATORS compile switch is hard coded to<br/>enabled in a header file. The changes here allow the feature to be<br/>controlled in recipes via PACKAGECONFIG entries in bbappend files.<br/><br/>Tested:<br/>Applied <a href=https://gerrit.openbmc.org/c/openbmc/openbmc/+/63434>https://gerrit.openbmc.org/c/openbmc/openbmc/+/63434</a><br/>Modified internal bbappend file to PACKAGECONFIG:remove<br/>entity-manager-decorators<br/>Confirmed the code guarded by the ifdef no longer compiled<br/>Removed change to bbappend file<br/>Confirmed the code guarded by the ifdef was restored.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>112</td>
+               <td>2023-05-12 18:20:31 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/ca6a4837d07e4e27445ae7f8ad5c5dfd952a5bbe>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Remove "Manufacturer" from PCIeDevice interface<br/><br/>"Manufacturer" is already part of Asset interface. Remove it from<br/>PCIeDevice interface.<br/><br/>peci-pcie commit to set Manufacturer in the Asset interface:<br/><a href=https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62256>https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62256</a><br/><br/>bmcweb commits:<br/><a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62257>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/62257</a><br/><a href=https://gerrit.openbmc.org/c/openbmc/bmcweb/+/40051>https://gerrit.openbmc.org/c/openbmc/bmcweb/+/40051</a><br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>113</td>
+               <td>2023-05-12 02:37:54 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/ae2460d0b8e808078ba130d63514b20b66cd3375>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>obmc-console: Provide a default value for `console-id`.<br/><br/>4e7186918599 ("Fixed broken dbus interface for multiple consoles")<br/>introduced the requirement that `console-id` be specified in the<br/>configuration files for both the client and server. It was paired with a<br/>fix to platform configurations in the OpenBMC bitbake metadata[1]. In<br/>theory this should have worked, but because specifying `console-id`<br/>wasn't a requirement, not all platforms supplied a client configuration.<br/>Instead they relied on the default behaviour.<br/><br/>[1]: <a href=https://gerrit.openbmc.org/c/openbmc/openbmc/+/62712>https://gerrit.openbmc.org/c/openbmc/openbmc/+/62712</a><br/><br/>Remove the requirement that a `console-id` be specified and instead<br/>provide a default value that can be overridden by configuration. This<br/>carries forward the consequence from 4e7186918599 ("Fixed broken dbus<br/>interface for multiple consoles") that the original `\0obmc-console`<br/>abstract socket will never be created. This doesn't resolve the break in<br/>ipmid or bmcweb, but resolves the break to SSH-based SOL on platforms<br/>not supplying client configuration files for one of their consoles.<br/><br/>The fix to bmcweb (whose strategy can also be applied to ipmid) is<br/>currently being prototyped[2].<br/><br/>[2]: <a href=https://discord.com/channels/775381525260664832/1083551792094249051/1103867159412752424>https://discord.com/channels/775381525260664832/1083551792094249051/1103867159412752424</a><br/><br/>A deeper treatment of the problems, impacts, and solutions is provided<br/>in [3].<br/><br/>[3]: <a href=https://amboar.github.io/notes/2023/05/08/happenings-in-obmc-console.html>https://amboar.github.io/notes/2023/05/08/happenings-in-obmc-console.html</a><br/><br/>Fixes: 4e7186918599 ("Fixed broken dbus interface for multiple consoles")<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>114</td>
+               <td>2023-05-11 13:17:13 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/89492a157c9cf972b342421e24d41fd382510251>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>115</td>
+               <td>2023-05-11 13:14:54 </td>
+               <td><a href=https://github.com/openbmc/slpd-lite/commit/16424ed34cb84832bb477913b6ffa52c9f8737f1>Link</a></td>
+               <td class='module'>slpd-lite</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>116</td>
+               <td>2023-05-11 13:14:47 </td>
+               <td><a href=https://github.com/openbmc/phosphor-user-manager/commit/b704304707be1a8290e61d851274f5de2e49ce6d>Link</a></td>
+               <td class='module'>phosphor-user-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>117</td>
+               <td>2023-05-11 12:54:24 </td>
+               <td><a href=https://github.com/openbmc/phosphor-psu-code-mgmt/commit/5670b188673132cfaf7f9c7418174e98e928382e>Link</a></td>
+               <td class='module'>phosphor-psu-code-mgmt</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>118</td>
+               <td>2023-05-11 12:54:18 </td>
+               <td><a href=https://github.com/openbmc/openpower-debug-collector/commit/a9779c40d874d6a1a26921a87658ca40ebe9c1ac>Link</a></td>
+               <td class='module'>openpower-debug-collector</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>119</td>
+               <td>2023-05-11 12:54:13 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/78e88402a27ba8e7c04c090c3ba9f32f1777fa52>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>120</td>
+               <td>2023-05-11 12:53:51 </td>
+               <td><a href=https://github.com/openbmc/openpower-proc-control/commit/00dd33efc3a2f32aabb3981c81f64ad238716ce0>Link</a></td>
+               <td class='module'>openpower-proc-control</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>121</td>
+               <td>2023-05-11 12:10:39 </td>
+               <td><a href=https://github.com/openbmc/openpower-host-ipmi-flash/commit/0d5b076e9dfe0dc9489cd7febc0aa40f883430ec>Link</a></td>
+               <td class='module'>openpower-host-ipmi-flash</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>122</td>
+               <td>2023-05-11 01:22:39 </td>
+               <td><a href=https://github.com/openbmc/phosphor-led-manager/commit/857da383f2f2a482df3f2e3403bf4a44d7f0d54b>Link</a></td>
+               <td class='module'>phosphor-led-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>123</td>
+               <td>2023-05-11 01:22:33 </td>
+               <td><a href=https://github.com/openbmc/phosphor-health-monitor/commit/658d70aacab5b3d9786f72e860ec49e45012ae05>Link</a></td>
+               <td class='module'>phosphor-health-monitor</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>124</td>
+               <td>2023-05-11 01:22:28 </td>
+               <td><a href=https://github.com/openbmc/phosphor-hostlogger/commit/b675272d351533774b695a8c0d9ff33ef9c7578e>Link</a></td>
+               <td class='module'>phosphor-hostlogger</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>125</td>
+               <td>2023-05-11 01:22:21 </td>
+               <td><a href=https://github.com/openbmc/phosphor-virtual-sensor/commit/1226f20832dc04425b8f3113ae57d5dc8a6ec914>Link</a></td>
+               <td class='module'>phosphor-virtual-sensor</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>126</td>
+               <td>2023-05-11 01:22:02 </td>
+               <td><a href=https://github.com/openbmc/phosphor-settingsd/commit/157063d0e5a10b2b1effb9bde2cfc9cec2def0e4>Link</a></td>
+               <td class='module'>phosphor-settingsd</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>127</td>
+               <td>2023-05-11 01:20:37 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/3e20fa8bd0faae5f2115f8c012c50ce5231de90f>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>stdexec: update to latest commit<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>128</td>
+               <td>2023-05-11 01:20:31 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-postd/commit/0ea7357e6cc44c0340314165d4f50de0de48a6a6>Link</a></td>
+               <td class='module'>phosphor-host-postd</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>129</td>
+               <td>2023-05-11 01:20:10 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/cddbf3df0ea0b78521b62f30f2ce764c6619018a>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>managers: fix bug of searching dbus object path<br/><br/>Notice a bug of patching existed object if the object name contains<br/>space or underscore.<br/><br/>Normally dbus replace space with underscore for object path.<br/>Replacing all spaces in input name with underscore to find the correct<br/>dbus object path.<br/><br/>Tested results:<br/><br/>- Add new object<br/>Input JSON<br/>```<br/>{<br/>    "Oem": {<br/>        "OpenBmc": {<br/>            "Fan": {<br/>                "StepwiseControllers": {<br/>                    "Test_1": {<br/>                        "Direction": "Floor",<br/>                        "Inputs": [<br/>                            "MB_U402_THERM_LOCAL"<br/>                        ],<br/>                        "NegativeHysteresis": 0.0,<br/>                        "PositiveHysteresis": 0.0,<br/>                        "Steps": [<br/>                            {<br/>                                "Output": 0.0,<br/>                                "Target": 48.0<br/>                            },<br/>                            {<br/>                                "Output": 40.0,<br/>                                "Target": 52.0<br/>                            }<br/>                        ],<br/>                        "Zones": [<br/>                            {<br/>                                "@odata.id": "/redfish/v1/Managers/bmc#/Oem/OpenBmc/Fan/FanZones/Zone0"<br/>                            }<br/>                        ]<br/>                    }<br/>                }<br/>            }<br/>        }<br/>    }<br/>}<br/>```<br/><br/>Check result from /redfish/v1/Managers/bmc<br/>```<br/>"Test_1": {<br/>    "@odata.id": "/redfish/v1/Managers/bmc#/Oem/OpenBmc/Fan/StepwiseControllers/Test_1",<br/>    "@odata.type": "#OemManager.StepwiseController",<br/>    "Direction": "Floor",<br/>    "Inputs": [<br/>        "MB U402 THERM LOCAL"<br/>    ],<br/>    "NegativeHysteresis": 0.0,<br/>    "PositiveHysteresis": 0.0,<br/>    "Steps": [<br/>        {<br/>            "Output": 0.0,<br/>            "Target": 48.0<br/>        },<br/>        {<br/>            "Output": 40.0,<br/>            "Target": 52.0<br/>        }<br/>    ],<br/>    "Zones": [<br/>        {<br/>            "@odata.id": "/redfish/v1/Managers/bmc#/Oem/OpenBmc/Fan/FanZones/Zone0"<br/>        }<br/>    ]<br/>}<br/>```<br/><br/>- Patching existed object successful<br/>Input JSON<br/>```<br/>{<br/>    "Oem": {<br/>        "OpenBmc": {<br/>            "Fan": {<br/>                "StepwiseControllers": {<br/>                    "Test_1": {<br/>                        "NegativeHysteresis": 0.0,<br/>                        "PositiveHysteresis": 5.0,<br/>                    }<br/>                }<br/>            }<br/>        }<br/>    }<br/>}<br/>```<br/><br/>Check result from /redfish/v1/Managers/bmc<br/>```<br/>"Test_1": {<br/>    "@odata.id": "/redfish/v1/Managers/bmc#/Oem/OpenBmc/Fan/StepwiseControllers/Test_1",<br/>    "@odata.type": "#OemManager.StepwiseController",<br/>    "Direction": "Floor",<br/>    "Inputs": [<br/>        "MB U402 THERM LOCAL"<br/>    ],<br/>    "NegativeHysteresis": 0.0,<br/>    "PositiveHysteresis": 5.0,<br/>    "Steps": [<br/>        {<br/>            "Output": 0.0,<br/>            "Target": 48.0<br/>        },<br/>        {<br/>            "Output": 40.0,<br/>            "Target": 52.0<br/>        }<br/>    ],<br/>    "Zones": [<br/>        {<br/>            "@odata.id": "/redfish/v1/Managers/bmc#/Oem/OpenBmc/Fan/FanZones/Zone0"<br/>        }<br/>    ]<br/>}<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>130</td>
+               <td>2023-05-11 01:20:01 </td>
+               <td><a href=https://github.com/openbmc/ipmi-blob-tool/commit/c99b19fcb53c5a87b733b1f16a4f105b44d7eecd>Link</a></td>
+               <td class='module'>ipmi-blob-tool</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>131</td>
+               <td>2023-05-11 01:19:55 </td>
+               <td><a href=https://github.com/openbmc/x86-power-control/commit/48aa1f05d51c2f2cc86e9592a3569e022f9171c8>Link</a></td>
+               <td class='module'>x86-power-control</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>132</td>
+               <td>2023-05-11 01:19:50 </td>
+               <td><a href=https://github.com/openbmc/phosphor-sel-logger/commit/69f7fa321895573be8286348dce28da6ddcd10c5>Link</a></td>
+               <td class='module'>phosphor-sel-logger</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>133</td>
+               <td>2023-05-11 01:19:45 </td>
+               <td><a href=https://github.com/openbmc/libpeci/commit/7169faac9eb8a428b4a2ecb680a071f732842004>Link</a></td>
+               <td class='module'>libpeci</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>134</td>
+               <td>2023-05-11 01:19:22 </td>
+               <td><a href=https://github.com/openbmc/peci-pcie/commit/42a9ac884be499e41b52299a4c920028965046f7>Link</a></td>
+               <td class='module'>peci-pcie</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>135</td>
+               <td>2023-05-11 01:19:17 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/8cca11f0c7d7f0dacec15b0c4272703862cbafba>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Add association D-Bus example<br/><br/>Show how the primary/secondary element and association terms map to<br/>D-Bus.  Also add a link to the mapper association documentation.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>136</td>
+               <td>2023-05-11 01:19:12 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/8c051121ade815a46e39d5c669fee77302df2b6d>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>137</td>
+               <td>2023-05-11 01:19:06 </td>
+               <td><a href=https://github.com/openbmc/libbej/commit/435526a58449be9ed716ea385fbb1a882c7356d5>Link</a></td>
+               <td class='module'>libbej</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>138</td>
+               <td>2023-05-11 01:17:39 </td>
+               <td><a href=https://github.com/openbmc/phosphor-hwmon/commit/e8771fd4662ceefac7b75cc0fd6ec8d52105e2d5>Link</a></td>
+               <td class='module'>phosphor-hwmon</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>139</td>
+               <td>2023-05-11 01:17:33 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ipmi-blobs/commit/5250957212ebf851d49df046acd6416a0d17c749>Link</a></td>
+               <td class='module'>phosphor-ipmi-blobs</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>140</td>
+               <td>2023-05-11 01:17:27 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ipmi-flash/commit/1038836c25abccea9f7ba71b97f7a12938132ba4>Link</a></td>
+               <td class='module'>phosphor-ipmi-flash</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>141</td>
+               <td>2023-05-11 01:17:20 </td>
+               <td><a href=https://github.com/openbmc/phosphor-nvme/commit/7da98588dc04f55ce03599dbfd16fd3c072f5955>Link</a></td>
+               <td class='module'>phosphor-nvme</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>142</td>
+               <td>2023-05-11 01:17:15 </td>
+               <td><a href=https://github.com/openbmc/bios-bmc-smm-error-logger/commit/b812576375db58c170dfe6e1e0e6d43331e78e34>Link</a></td>
+               <td class='module'>bios-bmc-smm-error-logger</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>143</td>
+               <td>2023-05-11 01:16:56 </td>
+               <td><a href=https://github.com/openbmc/ibm-logging/commit/6a2b8956487404dd2f7e4aa06055c24a2b7271e1>Link</a></td>
+               <td class='module'>ibm-logging</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>144</td>
+               <td>2023-05-11 01:16:50 </td>
+               <td><a href=https://github.com/openbmc/estoraged/commit/ba000b9511d3d63a53cff3afcab49b8b42f7309e>Link</a></td>
+               <td class='module'>estoraged</td>
+               <td class='content'>clang-tidy: resolve 'readability-redundant-string-cstr'<br/><br/>Eliminate needless `c_str()` call.<br/><br/>```<br/>../src/test/erase/crypto_test.cpp:67:20: error: redundant call to 'c_str' [readability-redundant-string-cstr,-warnings-as-errors]<br/>        CryptErase(testFileName.c_str(), std::move(mockCryptIface));<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>145</td>
+               <td>2023-05-11 01:16:37 </td>
+               <td><a href=https://github.com/openbmc/phosphor-objmgr/commit/1a19e6aaf3663f7698fa17aeb74a887c8740ff93>Link</a></td>
+               <td class='module'>phosphor-objmgr</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>146</td>
+               <td>2023-05-10 22:07:22 </td>
+               <td><a href=https://github.com/openbmc/google-misc/commit/2be45238f16157c7e92d877a0af6408b905ab7e9>Link</a></td>
+               <td class='module'>google-misc</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>147</td>
+               <td>2023-05-09 22:22:00 </td>
+               <td><a href=https://github.com/openbmc/phosphor-time-manager/commit/f1cf9fa0ee66b676aca2f79c8b4222ac830c1fd5>Link</a></td>
+               <td class='module'>phosphor-time-manager</td>
+               <td class='content'>Enable bugprone-reserved-identifier check<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>148</td>
+               <td>2023-05-09 22:21:43 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/d02ad49eb60dd0761686220812b5afabb862693e>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>clang-tidy: reduce repo-specific flags<br/><br/>Adjust the clang-tidy settings so that it does not need to have<br/>a bunch of values related to the libpeci subproject.  In general<br/>we should be ignoring any header files from any subprojects since<br/>they are not under direct control of the repository-under-test.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>149</td>
+               <td>2023-05-09 22:21:31 </td>
+               <td><a href=https://github.com/openbmc/bios-settings-mgr/commit/b3f7a79e39aee2e0afe3b4a158edff94bdc72504>Link</a></td>
+               <td class='module'>bios-settings-mgr</td>
+               <td class='content'>Clean up: Function abstraction in password file<br/><br/>Abstracted verifyPassword function in password source file<br/>to make it more readable by creating a new function named<br/>verifyIntegrityCheck.<br/><br/>Tested:<br/>No oob-bios functionality impact.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>150</td>
+               <td>2023-05-09 22:21:12 </td>
+               <td><a href=https://github.com/openbmc/phosphor-certificate-manager/commit/3c4781446a43a875d6bc0eeb87a9ee5ba0709a01>Link</a></td>
+               <td class='module'>phosphor-certificate-manager</td>
+               <td class='content'>Allow for expired certificate<br/><br/>The code throws for an expired certificate, which results in the below<br/>behavior:<br/><br/>1. If BMC starts when the time is invalid (e.g. the date is in 1970),<br/>bmcweb will create a default certificate with hostname `testhost`;<br/><br/>2. In later reboots when BMC get a valid time, the bmcweb loads the<br/>certificate as before. But phosphor-certificate-manager will throw on<br/>this certificate. Then there is no DBus object created for this<br/>certificate (`/xyz/openbmc_project/certs/server/https/1`)<br/><br/>3. Due to the missing DBus object:<br/> * We will not be able to replace the certificate, e.g. by below<br/> Redfish URI:<br/>```<br/> /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate<br/>```<br/> * When the BMC gets the hostname, bmcweb will generate a new<br/> self-signed certificate with the hostname and replace it, the<br/> replacement fails as well.<br/><br/>This commit adds a config option that allows the expired certificate to<br/>be created on DBus and fixes the above issues and it is enabled by<br/>default.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>151</td>
+               <td>2023-05-09 22:21:03 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/ca2b38a60bf1c2bd4819f275625809dc79471523>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>Add GNR and SRF to cpuinfoapp support<br/><br/>They do support same PCS and PIROM interfaces as previous generations.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>152</td>
+               <td>2023-05-09 22:20:43 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/5bc767aaec712630123d1f60cfd9332b39c6186a>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>sdbus++: async: client: handle readonly flags for properties<br/><br/>When a property is marked 'const' or 'readonly' in an interface,<br/>if we were to make a call to write the property we would end up<br/>getting a dbus error.  Be explicit by not generating the write<br/>function, just like we do in the server interfaces.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>153</td>
+               <td>2023-05-09 21:46:49 </td>
+               <td><a href=https://github.com/openbmc/intel-ipmi-oem/commit/7a8ab9ee86144c94fec33cf5990740e911266d56>Link</a></td>
+               <td class='module'>intel-ipmi-oem</td>
+               <td class='content'>Show option->text of BIOS knob in Redfish response.<br/><br/>GET on /redfish/v1/Registries/BiosAttributeRegistry/BiosAttributeRegistry/<br/>shows list of Attributes under RegistryEntries. Each attribute<br/>corresponds to a knob in BIOS.<br/><br/>If knob in BIOS is of type Enumeration, it will have 'option' with<br/>'text' and 'value'. This text should be mapped to<br/>attribute->Value->ValueDisplayName.<br/><br/>Code changes are made for the same.<br/><br/>Tested<br/>Sample knobs from BIOS.<br/><br/><knob name="AdaptiveRefreshMgmtLevel" ... ><br/>	<options><br/>		<option text="Default" value="0x0"/><br/>		<option text="Level A" value="0x1"/><br/>		<option text="Level B" value="0x2"/><br/>		<option text="Level C" value="0x3"/><br/>	</options><br/></knob><br/><knob name="ADDDCEn" ... ><br/>	<options><br/>		<option text="Disable" value="0x0"/><br/>		<option text="Enable" value="0x1"/><br/>	</options><br/></knob><br/><br/>Corresponding Redfish response in BiosAttributeRegistry<br/><br/>{<br/>	"AttributeName": "AdaptiveRefreshMgmtLevel",<br/>	"CurrentValue": "0x00",<br/>	"DefaultValue": "0x00",<br/>	"DisplayName": "AdaptiveRefreshMgmtLevel",<br/>	"HelpText": "ARFM Level when ... ",<br/>	"MenuPath": "./",<br/>	"ReadOnly": false,<br/>	"Type": "Enumeration",<br/>	"Value": [<br/>		{<br/>			"ValueDisplayName": "Default",<br/>			"ValueName": "0x0"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Level A",<br/>			"ValueName": "0x1"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Level B",<br/>			"ValueName": "0x2"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Level C",<br/>			"ValueName": "0x3"<br/>		}<br/>	]<br/>},<br/>{<br/>	"AttributeName": "ADDDCEn",<br/>	"CurrentValue": "0x00",<br/>	"DefaultValue": "0x00",<br/>	"DisplayName": "ADDDCEn",<br/>	"HelpText": "Enable/Disable ADDDC Sparing",<br/>	"MenuPath": "./",<br/>	"ReadOnly": false,<br/>	"Type": "Enumeration",<br/>	"Value": [<br/>		{<br/>			"ValueDisplayName": "Disable",<br/>			"ValueName": "0x0"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Enable",<br/>			"ValueName": "0x1"<br/>		}<br/>	]<br/>}<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>154</td>
+               <td>2023-05-09 13:16:05 </td>
+               <td><a href=https://github.com/openbmc/phosphor-state-manager/commit/afe12d69a0c8182e7b587d81531e0a9e376f5ce7>Link</a></td>
+               <td class='module'>phosphor-state-manager</td>
+               <td class='content'>optional service to log info log on chassis poweron<br/><br/>This commit introduces a new service that will log an informational log<br/>on every chassis power on.<br/><br/>This new informational error is being created for a couple of reasons:<br/>- An easy eye catcher when reviewing logs to easily distinguish between<br/>  major boots of the system (ones including a chassis power cycle)<br/>- A mechanism for other OpenBMC software which utilizes the log to<br/>  report back to the user when errors from the current boot need<br/>  attention<br/><br/>This service needs to run before any of the power/vrm services run to<br/>ensure any logs from those services can be correlated to running after<br/>the current power on has started.<br/><br/>By default this service will not be installed but can be brought in via<br/>a bbappend if desired.<br/><br/>Tested:<br/>- Built new service into a flash image and confirmed<br/>  - Info log was logged as expected during power on (prior to any vrm,<br/>    power, or fan functions)<br/>  - Info log was not logged when rebooting the BMC from a host running<br/>    state<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>155</td>
+               <td>2023-05-08 23:20:46 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/4ee702a86592edcd1a1dd2c2ab94a50e0a49ee0d>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>console-server: Rationalise acquisition of console_id<br/><br/>It turns out we were also populating console->console_id in<br/>`set_socket_info()`. Remove the open-coded acquisition in main(), as<br/>it's not particularly useful beyond the call to `set_socket_info()`.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>156</td>
+               <td>2023-05-08 23:20:31 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/39963226535a7b13823902c22dcf399c27965923>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>fansensor: fix fan sensor service crash<br/><br/>fs::canonical can throw exception if the path does not exist,<br/>which can happen for i2c fan type. Check for path exists before the<br/>call.<br/><br/>Tested:<br/>fan sensor service successfully detect i2c fan type and does not crash.<br/><br/>Fixes: 9a472e8 ("detect fan type by matching against 'compatible'")<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>157</td>
+               <td>2023-05-08 23:19:59 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/384943be7e81b08ed102abfaa3f2be2ad915e800>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>sdbus++: async: client: fix client_t usage<br/><br/>When using the "Alternatively,..." syntax from calculator-client, we<br/>end up with the compiler error:<br/><br/>```<br/>example/gen/net/poettering/Calculator/client.hpp:149:40: error: ¡¥constexpr sdbusplus::client::net::poettering::details::Calculator<Proxy>::Calculator(sdbusplus::async::context&, Proxy) [with Proxy = sdbusplus::async::proxy_ns::proxy<true, true, false, false>]¡¦ is private within this context<br/>  149 |             std::forward<Args>(args)...)<br/>```<br/><br/>Fix this by making the generated alias class a friend of the details<br/>class, in addition to the client_t proxy. Add a compile test to ensure<br/>this works.  Fix up a few whitespace alignment to better match<br/>clang-format expectations.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>158</td>
+               <td>2023-05-08 23:19:52 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/5629fbc005e4329acf56bc61be7feba85ccb9f5e>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>vpd-tool #kw support<br/><br/>This commit is to enable vpd-tool read and write support for pound<br/>keywords starting with # and for numeric keywords.<br/><br/>This commit enables a way to read and write keyword values using --file<br/>option, where --file takes a file with absolute path.<br/><br/>when --file option used with --readKeyword flag - vpd-tool saves the<br/>output in the given file.<br/>and when the file option used with --writeKeyword flag - the vpd-tool<br/>takes the value from file and performs write operation.<br/><br/>Test:<br/>-----------------------------------------------<br/>Case 1: Read from hardware and save in text file<br/>-----------------------------------------------<br/>vpd-tool -r -H -O /sys/bus/i2c/drivers/at24/8-0050/eeprom -R PSPD -K "#D" --file /tmp/output.txt<br/>Value read is saved in the file /tmp/output.txt<br/><br/>-----------------------------------------------<br/>Case 2: Write to hardware by taking input from a text file<br/>-----------------------------------------------<br/>:~# cat /tmp/write.txt<br/>00102030405060607020304050601020304050606040302010<br/><br/>:~# vpd-tool -w -O /sys/bus/i2c/drivers/at24/8-0050/eeprom -R PSPD -K "#D" --file /tmp/write.txt -H<br/>Data updated successfully<br/><br/>:~# vpd-tool -r -H -O /sys/bus/i2c/drivers/at24/8-0050/eeprom -R PSPD -K "#D"<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "#D": "0x0010203040506060702030405060102030405060604030201000000000 ...0000"<br/>    }<br/>}<br/><br/>-----------------------------------------------<br/>Case 3: Read from cache and pipe to text file<br/>-----------------------------------------------<br/>:~# vpd-tool -r -O /system/chassis/motherboard -R PSPD -K "#D" --file /tmp/read-motherboard-#D.txt<br/>Value read is saved in the file /tmp/read-motherboard-#D.txt<br/><br/>-----------------------------------------------<br/>Case 4: Write to cache by taking input from text file<br/>-----------------------------------------------<br/>:~# cat /tmp/write.txt<br/>00102030405060607020304050601020304050606040302010<br/><br/>:~# vpd-tool -w -O /system/chassis/motherboard -R PSPD -K "#D" --file /tmp/write.txt<br/>Data updated successfully<br/><br/>:~# vpd-tool -r -O /system/chassis/motherboard -R PSPD -K "#D"<br/>{<br/>    "/system/chassis/motherboard": {<br/>        "#D": "0x0010203040506060702030405060102030405060604030201000000000000000000....."<br/>    }<br/>}<br/><br/>-----------------------------------------------<br/>Case 5: Write to cache by taking hex input from console<br/>-----------------------------------------------<br/>:~# vpd-tool -w -O /system/chassis/motherboard -R PSPD -K "#D" -V 0x65<br/>Data updated successfully<br/><br/>:~# vpd-tool -r -O /system/chassis/motherboard -R PSPD -K "#D"<br/>{<br/>    "/system/chassis/motherboard": {<br/>        "#D": "0x65100c0c000000000000000 ...<br/>    }<br/>}<br/><br/>Case 5.1: Write to cache by providing ascii values as input from console<br/><br/>vpd-tool -w -O /system/chassis/motherboard -R PSPD -K "#D" -V abcd<br/>Data updated successfully<br/><br/>vpd-tool -r -O /system/chassis/motherboard -R PSPD -K "#D"<br/>{<br/>    "/system/chassis/motherboard": {<br/>        "#D": "0x6162636440506060702030405060102030405060604030201000000 .."<br/>    }<br/>}<br/><br/>-----------------------------------------------<br/>Case 6: Read from cache and display on console<br/>-----------------------------------------------<br/>:~# vpd-tool -r -O /system/chassis/motherboard -R PSPD -K "#D"<br/>{<br/>    "/system/chassis/motherboard": {<br/>        "#D": "0x00100c0c00000000000000000000000000000000000000 .....<br/>    }<br/>}<br/><br/>-----------------------------------------------<br/>Case 7: Read from hardware and display on console<br/>-----------------------------------------------<br/>vpd-tool -r -O /sys/bus/i2c/drivers/at24/8-0050/eeprom -R PSPD -K "#D" -H<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "#D": "0x651020304050606070203040506010203040506060403020100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 ......... 000000000000000000000000000000000000000"<br/>    }<br/>}<br/><br/>-----------------------------------------------<br/>Case 8: Write to hardware via console<br/>-----------------------------------------------<br/>vpd-tool -w -H -O /sys/bus/i2c/drivers/at24/8-0050/eeprom -R PSPD -K "#D" -V 0x00100c0c000000000000000000000000000000000000<br/>Data updated successfully<br/><br/>vpd-tool -r -O /sys/bus/i2c/drivers/at24/8-0050/eeprom -R PSPD -K "#D" -H<br/>{<br/>    "/sys/bus/i2c/drivers/at24/8-0050/eeprom": {<br/>        "#D": "0x00100c0c00000000000000000000000000000000000030201000000000000000000000000 ...<br/>    }<br/>}<br/><br/>-----------------------------------------------<br/>Case 9: Write 10240 bytes on dbus<br/>-----------------------------------------------<br/>time vpd-tool -w -O /system/chassis/motherboard -R PSPD -K "#D" --file /tmp/output.txt<br/><br/>Data updated successfully<br/><br/>real	0m49.564s<br/>user	0m0.047s<br/>sys	0m0.009s<br/><br/>time vpd-tool -r -O /system/chassis/motherboard -R PSPD -K "#D"<br/>{<br/>    "/system/chassis/motherboard": {<br/>        "#D": "0x01100c0c0000.....0000123456782746002"<br/>    }<br/>}<br/><br/>real	0m0.072s<br/>user	0m0.057s<br/>sys	0m0.001s<br/>------------------------------------------------<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>159</td>
+               <td>2023-05-08 23:19:13 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/662aa6e361f8705cfd91261080324ff0e74778e4>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Update Logging option for the setting log level<br/><br/>In order to be able to more easily debug bmcweb related issue,<br/>a new meson option is added to set a specific logging level<br/>Which generates the targeted logging traces rather than all of<br/>debug traces.<br/><br/>The current option -Dbmcweb-logging which can be either<br/>disabled or enabled is changed to  allow  to set the log level<br/>for the specific level traces (e.g. error or critical traces)<br/>to be written to the journal.<br/><br/>     -Dbmcweb-logging=<log-level><br/><br/>where <log-level> can be disabled, enabled, debug, info,<br/>      warning, error, or critical.<br/><br/>- `disabled`: Turns off all bmcweb log traces.<br/>- `enabled` : treated as `debug`<br/>- Other option can be described in<br/>  [Logging Levels](DEVELOPING.md).<br/><br/>For an example, to enable only 'error', 'critical' log<br/>entries, bmcweb can be built with<br/><br/>    -Dbmcweb-logging=error<br/><br/>Testing:<br/>- Verified that only the specific logs (e.g. error and<br/>  critical logs) were displayed by compiling bmcweb with the<br/>  specific bmcweb-logging level.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>160</td>
+               <td>2023-05-08 12:45:16 </td>
+               <td><a href=https://github.com/openbmc/bios-settings-mgr/commit/1a448ad88fdaec7e082b4a1c437f7f3c990402cd>Link</a></td>
+               <td class='module'>bios-settings-mgr</td>
+               <td class='content'>Show option->text of BIOS knob in Redfish response.<br/><br/>GET on /redfish/v1/Registries/BiosAttributeRegistry/BiosAttributeRegistry/<br/>shows list of Attributes under RegistryEntries. Each attribute<br/>corresponds to a knob in BIOS.<br/><br/>If knob in BIOS is of type Enumeration, it will have 'option' with<br/>'text' and 'value'. This text should be mapped to<br/>attribute->Value->ValueDisplayName.<br/><br/>Code changes are made for the same.<br/><br/>Tested<br/>Sample knobs from BIOS.<br/><br/><knob name="AdaptiveRefreshMgmtLevel" ... ><br/>	<options><br/>		<option text="Default" value="0x0"/><br/>		<option text="Level A" value="0x1"/><br/>		<option text="Level B" value="0x2"/><br/>		<option text="Level C" value="0x3"/><br/>	</options><br/></knob><br/><knob name="ADDDCEn" ... ><br/>	<options><br/>		<option text="Disable" value="0x0"/><br/>		<option text="Enable" value="0x1"/><br/>	</options><br/></knob><br/><br/>Corresponding Redfish response in BiosAttributeRegistry<br/><br/>{<br/>	"AttributeName": "AdaptiveRefreshMgmtLevel",<br/>	"CurrentValue": "0x00",<br/>	"DefaultValue": "0x00",<br/>	"DisplayName": "AdaptiveRefreshMgmtLevel",<br/>	"HelpText": "ARFM Level when ... ",<br/>	"MenuPath": "./",<br/>	"ReadOnly": false,<br/>	"Type": "Enumeration",<br/>	"Value": [<br/>		{<br/>			"ValueDisplayName": "Default",<br/>			"ValueName": "0x0"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Level A",<br/>			"ValueName": "0x1"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Level B",<br/>			"ValueName": "0x2"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Level C",<br/>			"ValueName": "0x3"<br/>		}<br/>	]<br/>},<br/>{<br/>	"AttributeName": "ADDDCEn",<br/>	"CurrentValue": "0x00",<br/>	"DefaultValue": "0x00",<br/>	"DisplayName": "ADDDCEn",<br/>	"HelpText": "Enable/Disable ADDDC Sparing",<br/>	"MenuPath": "./",<br/>	"ReadOnly": false,<br/>	"Type": "Enumeration",<br/>	"Value": [<br/>		{<br/>			"ValueDisplayName": "Disable",<br/>			"ValueName": "0x0"<br/>		},<br/>		{<br/>			"ValueDisplayName": "Enable",<br/>			"ValueName": "0x1"<br/>		}<br/>	]<br/>}<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>161</td>
+               <td>2023-05-08 12:45:16 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/7193e55f600537eaeeb5c4deaf53f9a3f88415c6>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Add a new dbus interface for VSBK record<br/><br/>This commit will add interface to support the new record(VSBK) and its<br/>keywords to store the system backplane's critical data as backup.<br/><br/>The Bonnell BMC is embedded in the system backplane, so if either<br/>fails, the backplane should be replaced as a whole. Thus, we must<br/>backup the system backplane critical keywords on the VSBK record on the<br/>operator panel base EEPROM. Hence VSBK interface being added.<br/><br/>Below is the introspect for VSBK:<br/>busctl introspect xyz.openbmc_project.Inventory.Manager<br/>/xyz/openbmc_project/inventory/system/chassis/motherboard/<br/>base_op_panel_blyth com.ibm.ipzvpd.VSBK<br/><br/>NAME                TYPE      SIGNATURE RESULT/VALUE                             FLAGS<br/>.BR                 property  ay        2 83 48                                  emits-change writable<br/>.D0                 property  ay        1 1                                      emits-change writable<br/>.ES                 property  ay        7 66 90 83 48 48 48 51                   emits-change writable<br/>.F5                 property  ay        16 32 32 32 32 32 32 32 32 32 32 32 3... emits-change writable<br/>.F6                 property  ay        0                                        emits-change writable<br/>.FC                 property  ay        8 50 69 52 65 45 48 48 49                emits-change writable<br/>.FV                 property  ay        32 32 32 32 32 32 32 32 32 32 32 32 3... emits-change writable<br/>.LX                 property  ay        8 49 0 4 1 0 48 0 123                    emits-change writable<br/>.RB                 property  ay        4 49 32 32 32                            emits-change writable<br/>.RG                 property  ay        4 0 0 0 0                                emits-change writable<br/>.RT                 property  ay        4 86 83 66 75                            emits-change writable<br/>.SE                 property  ay        7 66 48 48 48 48 48 51                   emits-change writable<br/>.SU                 property  ay        6 0 4 172 31 28 19                       emits-change writable<br/>.TM                 property  ay        8 57 48 50 56 45 50 49 66                emits-change writable<br/>.VZ                 property  ay        2 48 50                                  emits-change writable<br/>.WN                 property  ay        12 67 48 53 48 55 54 48 67 52 56 57 66   emits-change writable<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>162</td>
+               <td>2023-05-05 01:40:30 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/13c19ddaa5794ae06ce0a3445e9a4268c37e412f>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>asio: Emit PropertiesChanged signal<br/><br/>Earlier refactoring accidentally commented out the PropertiesChanged<br/>signal in the set_handler callback. Add it back.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>163</td>
+               <td>2023-05-04 22:19:24 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ipmi-ethstats/commit/3aafe003ecb76d17e8514f7ff219b71227249dde>Link</a></td>
+               <td class='module'>phosphor-ipmi-ethstats</td>
+               <td class='content'>MAINTAINERS: remove file<br/><br/>The MAINTAINERS file is deprecated in favor of OWNERS.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>164</td>
+               <td>2023-05-04 22:19:15 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/065942290197b436683bca868bf8da755378111d>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>psu-ng: Fix chassis association call<br/><br/>The association name from a power supply to its chassis changed from<br/>'chassis' to 'powering', so change that in the code.<br/><br/>Also update the code to find the association using the new<br/>GetAssociatedSubTreePaths mapper method which is like the existing<br/>GetSubTreePaths but also ensures the results are an endpoint of the<br/>passed in association path.  This way if the 'powering' association is<br/>used to show the power supply powers other things it will still work.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>165</td>
+               <td>2023-05-04 22:18:54 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/095db476d486199c607631c7ec8c4cc561e09f10>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>README: Convert the build instructions to meson<br/><br/>This probably should have been done before the removal of the autotools<br/>build system, but who reads READMEs anyway.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>166</td>
+               <td>2023-05-04 22:18:47 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/5e9a30550405a7b2a5bfbc96d2fe170145560cc8>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>devices: add PIC32 support <br/><br/>Add PIC32 into supported devices list. This is a PDB<br/>controller that is used to control Fans on PDB.<br/><br/>Tested: tested on a machine. Driver is loaded successfully.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>167</td>
+               <td>2023-05-04 22:18:25 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-postd/commit/fd2430d8d6691a41480656db8e1c2a8269a5ea25>Link</a></td>
+               <td class='module'>phosphor-host-postd</td>
+               <td class='content'>Put rate limiting options behind #ifdef<br/><br/>Fixes compile issue when ENABLE_IPMI_SNOOP is set (rateLimit var set but<br/>not used).<br/><br/>Also add usage help text for --rate-limit option.<br/><br/>Tested: Compiles with IPMI snoop feature enabled and disabled.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>168</td>
+               <td>2023-05-04 22:18:10 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/1fc197e6e102fc67ef5e9448be3bfa62ad95bd26>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>server: object: reduce potential warnings<br/><br/>Some compilers and linters are not handling C++20 requirements<br/>similarly and one, rightly, complains when the object class is<br/>used that:<br/><br/>    object.hpp:198:34: error: parameter type '...' is an abstract class<br/><br/>An abstract class cannot be a variable or function parameter, but a<br/>reference to one can be.  Switch the require statement to check a<br/>`T&` instead of a `T` for the `emit_added` function calls.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>169</td>
+               <td>2023-05-04 22:17:55 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/730935fe0c89d6667608475461a2ac0241f0929a>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: new info log for when chassis power on is started<br/><br/>This new informational error is being defined for a couple of reasons:<br/>- An easy eye catcher when reviewing logs to easily distinguish between<br/>  major boots of the system (ones including a chassis power cycle)<br/>- A mechanism for other OpenBMC software which utilizes the log to<br/>  report back to the user when errors from the current boot need<br/>  attention<br/><br/>This log will be created by an optional opt-in service within<br/>phosphor-state-manager as a part of the obmc-chassis-poweron@.target.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>170</td>
+               <td>2023-05-04 22:17:33 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/1f61b589db22b6774d11805505863d75c41509ad>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>Adding bios attributes for VMI Support<br/><br/>- Adding host controlled VMI support bios attribute<br/>for HMC Enablement Control for eBMC based systems.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>171</td>
+               <td>2023-05-04 19:10:12 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/f7afb17bf0a84101b26474bbd4dfc8f3aa3eb3f7>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>bugfix: find existing powersupply for power sensor<br/><br/>Fix lookup for existing powersupplies<br/>when building json. (dbus: '_' , json: ' ')<br/><br/>Tested: manually with 2 Supermicro Power Supplies.<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+           <tr>
+               <td>172</td>
+               <td>2023-05-02 21:28:24 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/8eb20f282bb52dc40bccf336ecb0feb0882e24df>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>responder: Add PollForPlatformEventMessage APIs<br/><br/>Added APIs to encode/decode PollForPlatformEventMessage command(0x0B)<br/>which is defined in DSP0248 Version 1.2.2 sec:16.7.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>173</td>
+               <td>2023-05-02 21:28:16 </td>
+               <td><a href=https://github.com/openbmc/dbus-top/commit/8c5208f16572b65a88b669f113ac73cb46255e5f>Link</a></td>
+               <td class='module'>dbus-top</td>
+               <td class='content'>Populate info in background thread<br/><br/>This change incorporates<br/><a href=https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50784 and>https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50784 and</a><br/><a href=https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50088.>https://gerrit.openbmc.org/c/openbmc/openbmc-tools/+/50088.</a><br/><br/>The function `ListAllSensors` populates a list of DBus sensor objects.<br/>Currently it runs in the main thread before the UI gets created.<br/><br/>To enhance user experience, this routine is moved to a separate thread,<br/>so the information is populated by that thread, so the main thread does<br/>not get blocked while the list is being filled.<br/><br/>Originally, change 50784's ListAllSensors function includes the<br/>following steps:<br/>1) List DBus connections currently on the Bus<br/>2) Get Creds for each of the DBus connections<br/>3) Examine objects in ObjectMapper to ..<br/>  * See if they are Sensor objects<br/>  * If so mark a "Sensor" as "visible in ObjectMapper"<br/>4) List all Associations recorded in the ObjectMapper<br/>  * So they can be shown in the sensor info panel<br/>5) Find association definitions<br/>6) Find association endpoints<br/>7) Check all objects from HwMon daemons<br/>  * Objects from the DBus-Sensors daemon will be added later<br/>8) Check `ipmitool sdr`<br/><br/>Step 8) is currently removed in this change since running `ipmitool sdr`<br/>can potentially take a long time.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>174</td>
+               <td>2023-05-02 21:27:50 </td>
+               <td><a href=https://github.com/openbmc/phosphor-buttons/commit/395c764c2bb51a108b76dd80c3a7db16c8ec28d2>Link</a></td>
+               <td class='module'>phosphor-buttons</td>
+               <td class='content'>Remove power button long-press<br/><br/>So far, counting power button's pressing duration is supported.<br/>There's no need to handle redundant case for button long-press.<br/><br/>Tested:<br/>Press buttons and check corresponding behaviors.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>175</td>
+               <td>2023-05-02 21:27:22 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/2ea4d28e130f0019a3a060f249783ecc4d2022d0>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>ibm: Add new properties to Logging.PEL.Entry interface<br/><br/>Expose four more PEL (IBM's event log format) fields on D-Bus so they<br/>are available for other applications.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>176</td>
+               <td>2023-05-02 21:27:11 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/46b302837c3c44376da3ba6b72fb70b7b2ce1c11>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Aggregation: Process subordinate top collections<br/><br/>Adds a function to process responses from URIs that are uptree from<br/>a top level collection.  A follow-up patch will hook this into the<br/>aggregation code to allow adding links to top level collections which<br/>are only supported by satellite BMCs.<br/><br/>Adds test cases to validate this function is working correctly.<br/><br/>Tested:<br/>New test cases pass<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>177</td>
+               <td>2023-05-02 20:00:30 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ecc/commit/c0b4eae01f4919531ef4eaef3df67df3928f6f18>Link</a></td>
+               <td class='module'>phosphor-ecc</td>
+               <td class='content'>meson: remove deprecated get_pkgconfig_variable<br/><br/>Since meson 0.56, the `get_pkgconfig_variable` has been deprecated.  In<br/>meson 0.58 the `get_variable` was enhanced to no longer require the<br/>`pkgconfig` keyword argument.  Ensure meson 0.58 is required and update<br/>the usage of all `get_pkgconfig_variable` and `get_variable` to be the<br/>modern variant.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>178</td>
+               <td>2023-05-01 17:50:33 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/df7f12f0d4111a4646d5cad261473894676df132>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix PCIeDevice redfish validator failure<br/><br/>Specify correct  interface for getSubTreePaths in getPCIeDeviceList.<br/><br/>This commit addresses a Redfish validator failure that occurred after a<br/>previous commit.<br/>'''<br/><a href=https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5>https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5</a><br/>'''<br/>Both the inventory path and interface were incorrect, and the inventory<br/>path was fixed in the previous commit. This commit fixes the interface<br/>in the getSubTreePaths function to ensure that it returns the correct<br/>PCIeDevice list. Without the correct interface, the function was<br/>returning incorrect devices, which was causing the Redfish validator<br/>failure.<br/><br/>Tested: Validator passed for PCIeDevice<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>179</td>
+               <td>2023-05-01 13:34:59 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/94c3a10b94c3ce063d6c1aed3a597f0d524594d5>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Revert:
+Cleanup pcie code<br/><br/>Remove unused variable pcieService, fix pciePath and use global<br/>variables pciePath and pcieDeviceInterface.<br/><br/>Tested: tested PCIeDeviceCollection and PCIeDevice, and tested<br/>the changes with the peci-pcie commit<br/><a href=https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100>https://gerrit.openbmc.org/c/openbmc/peci-pcie/+/62100</a><br/><br/></td>
+           </tr>
+
+
+       </tbody>
+   </table>
+</body>
+</html>
