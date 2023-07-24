@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+   <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
+   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js" ></script>
+   <script>
+       $(document).ready(function () {
+           $('#dt').DataTable();
+       });
+   </script>
+   <style>
+       a {
+         color: #007bff;
+         text-decoration: none;
+       }
+       a:hover {
+         text-decoration: underline;
+       }
+   </style>
+</head>
+<body>
+   <p style=font-size:20px;>2023-06-01 00:00:00 ~ 2023-06-30 23:59:59</p>   <p style=font-size:20px;>Total commits:<font style=color:blue;font-weight:bold;>126</font> (without meta-xxx)   <table id=dt class=display hover>
+       <thead>
+           <tr>
+               <th/>
+               <th>Commit date</th>
+               <th>URL</th>
+               <th>Module</th>
+               <th style>Content</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>1</td>
+               <td>2023-06-30 21:45:37 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/a56174963e1d8bd9fc90cdeb3aa7f1b7f2e0dca4>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Add topology links for Chassis<br/><br/>Implement the physical topology design[0] for Chassis resources to<br/>report which Chassis contain or are contained by other Chassis.<br/><br/>Query this information from the object mapper using associations<br/>defined in phosphor-dbus-interfaces[1] and make it available in the<br/>Links section of the Redfish result.<br/><br/>[0] <a href=https://gerrit.openbmc.org/c/openbmc/docs/+/54205>https://gerrit.openbmc.org/c/openbmc/docs/+/54205</a><br/>[1] <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/58441>https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/58441</a><br/><br/>Tested:<br/>Built for evb-ast2600 with example JSON configs and ran in QEMU<br/><br/>Ran Redfish Service Validator with no new warnings<br/><br/>Sample output:<br/>'''<br/>curl -k -u root:0penBmc -X GET <a href=https://127.0.0.1:60443/redfish/v1/Chassis/Subchassis>https://127.0.0.1:60443/redfish/v1/Chassis/Subchassis</a><br/>{<br/>  "@odata.id": "/redfish/v1/Chassis/Subchassis",<br/>  "@odata.type": "#Chassis.v1_16_0.Chassis",<br/>...<br/>  "Id": "Subchassis",<br/>  "Links": {<br/>    "ComputerSystems": [<br/>      {<br/>        "@odata.id": "/redfish/v1/Systems/system"<br/>      }<br/>    ],<br/>    "ContainedBy": {<br/>      "@odata.id": "/redfish/v1/Chassis/Superchassis"<br/>    },<br/>    "ManagedBy": [<br/>      {<br/>        "@odata.id": "/redfish/v1/Managers/bmc"<br/>      }<br/>    ]<br/>  },<br/>...<br/>}<br/><br/>curl -k -u root:0penBmc -X GET <a href=https://127.0.0.1:60443/redfish/v1/Chassis/Superchassis>https://127.0.0.1:60443/redfish/v1/Chassis/Superchassis</a><br/>{<br/>  "@odata.id": "/redfish/v1/Chassis/Superchassis",<br/>  "@odata.type": "#Chassis.v1_16_0.Chassis",<br/>...<br/>  "Id": "Superchassis",<br/>  "Links": {<br/>    "ComputerSystems": [<br/>      {<br/>        "@odata.id": "/redfish/v1/Systems/system"<br/>      }<br/>    ],<br/>    "Contains": [<br/>      {<br/>        "@odata.id": "/redfish/v1/Chassis/Subchassis"<br/>      }<br/>    ],<br/>    "Contains@odata.count": 1,<br/>    "ManagedBy": [<br/>      {<br/>        "@odata.id": "/redfish/v1/Managers/bmc"<br/>      }<br/>    ]<br/>  },<br/>...<br/>}<br/>'''<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>2</td>
+               <td>2023-06-30 21:30:09 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/36a82ebedb0ac3e59efc420da515ea44662db953>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Error log entries for ECC errors<br/><br/>This commit adds three new error log entries for ECC errors.<br/><br/>The new entries include:<br/>- Correctable ECC memory error collection limit is reached.<br/>- Correctable ECC/other correctable memory error.<br/>- Uncorrectable ECC/other uncorrectable memory error.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>3</td>
+               <td>2023-06-30 21:29:49 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/7986595ff7f7766978a7e0c6000f7865c009a29e>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>configuration: correct Mt.Jade platform name<br/><br/>Mt.Jade platform has the platform name of mtjade, not mt_jade.<br/>This commit updates the Mt.Jade entity-manager configuration file name<br/>to mtjade.json to match its platform name.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>4</td>
+               <td>2023-06-30 21:29:41 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/eae2d6143da1ad85342a09d2614029edcfdf4829>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>pseq: Add support for UCD90160 EM configuration<br/><br/>Add power control support for receiving Entity Manager configuration for<br/>a UCD90160 device and instantiating an object of that type.<br/><br/>Tested:<br/>* Test where EntityManager information is available when application<br/>  starts<br/>* Test where EntityManager information is not available when application<br/>  starts<br/>  * Verify the EntityManager information is found later via<br/>    InterfacesAdded events<br/>* Test where xyz.openbmc_project.Configuration.UCD90320 interface is<br/>  found<br/>  * Verify UCD90320Monitor object is created<br/>* Test where xyz.openbmc_project.Configuration.UCD90160 interface is<br/>  found<br/>  * Verify UCD90160Monitor object is created<br/>* Verify chassis can be powered on without errors<br/>* Verify chassis can be powered off without errors<br/>* Verify pgood error is detected and logged<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>5</td>
+               <td>2023-06-30 21:29:33 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/a71095744edd2b5b3be4db0d42d57a5818f3b0df>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>intrusion sensor: fix default reading value<br/><br/>As-is the updateValue method will never update the mOldValue and trigger<br/>a redfish message.  This can be fixed by changing the default mOldValue<br/>to "Normal".  With this change it'll detect an intrusion event at boot<br/>and then any changes in intrusion state thereafter.<br/><br/>Tested:<br/>Before change no redfish messages were being triggered.<br/><br/>After change asserting intrusion even triggered redfish message<br/>and any changes to the intrusion jumper triggered redfish messages.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>6</td>
+               <td>2023-06-30 21:28:46 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/4e1ba8a736a4272e15f8e4541858407821d6b59e>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>requester: Return PLDM_REQUESTER_OPEN_FAIL from pldm_open() on error<br/><br/>As it stood the reimplementation of pldm_open() passed back the return<br/>value of the pldm_transport_mctp_demux_*() APIs, which don't align with<br/>the specified behaviour of pldm_open()'s return values.<br/><br/>Rework the return values such that PLDM_REQUESTER_OPEN_FAIL is always<br/>returned on error. This fixes error handling in at least<br/>openpower-occ-control, which only tested for that value and considered<br/>all other values as success.<br/><br/>Further, handle any external close(2) of the returned file descriptor.<br/>This again caters to openpower-occ-control which issues close() in its<br/>response handler.<br/><br/>Fixes: 39f883259956 ("requester: Make pldm_open() return existing fd")<br/>Fixes: c1b66f420912 ("requester: Add new APIs to support multiple transports")<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>7</td>
+               <td>2023-06-30 21:28:37 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/036374a29d4192367f1a3fed2f074bde52b82fc6>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>Change the byte of the MemoryAttributes attribute to the size type<br/><br/>We prefer to use size_t type instead of byte type in PDI[1]<br/><br/>[1] <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/63799>https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/63799</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>8</td>
+               <td>2023-06-30 21:28:29 </td>
+               <td><a href=https://github.com/openbmc/stdplus/commit/e38e42abbbeb4ad8237d117962cbfee6936eebf4>Link</a></td>
+               <td class='module'>stdplus</td>
+               <td class='content'>net/addr/ip: Fix operator== abiguity<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>9</td>
+               <td>2023-06-30 21:28:21 </td>
+               <td><a href=https://github.com/openbmc/phosphor-buttons/commit/b748fdb520d63c32c02e24b54f4b16b06c6f0d05>Link</a></td>
+               <td class='module'>phosphor-buttons</td>
+               <td class='content'>Describe button behavior in the README<br/><br/>Explain what the various button presses do.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>10</td>
+               <td>2023-06-30 21:25:16 </td>
+               <td><a href=https://github.com/openbmc/x86-power-control/commit/edd211e4124356eb4186d227bc7f8afcea3d9cfe>Link</a></td>
+               <td class='module'>x86-power-control</td>
+               <td class='content'>Handle possible SdBus exceptions<br/><br/>Right now service allows to access several signals using DBus<br/>interface, instead of GPIO pins. In case of that option selected in<br/>config, service will try to read given DBus property using function<br/>getProperty. Unfortunately that attempt might fail, for example when<br/>that specific object doesn't exist yet, which will cause with<br/>unhandled exception and evantually service restart.<br/><br/>This change adds handler for that sort of exception. If read property<br/>fails, another one will be scheduled in the next second. That process<br/>shall be repeated until value is successfully read. As there are<br/>several possible properties to read, each one shall utilize its own<br/>timer, so that every failure can be handled independently from each<br/>other.<br/><br/>Tested:<br/>Change has been tested on Intel platform, which showed symptoms<br/>described above: service tried to get property which has not yet been<br/>created, which caused its crash and restart. With this fix applied,<br/>issue stopped reproducing.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>11</td>
+               <td>2023-06-30 21:25:04 </td>
+               <td><a href=https://github.com/openbmc/phosphor-hostlogger/commit/5e10dabcfdcf35e6396614c11bbbb6acd2e8bfcb>Link</a></td>
+               <td class='module'>phosphor-hostlogger</td>
+               <td class='content'>Update socket path<br/><br/>The obmc-console application now uses "\0obmc-console.default" as the<br/>default socket name for a console server. Update code to use the new<br/>name.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>12</td>
+               <td>2023-06-30 19:00:36 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/0c63fddcaea47aac9f3e17f98d2a9debc5f61bc2>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>RU: Sessions page Client ID is not displayed<br/><br/>Fix minor difference in EN/RU translation that was introduced in a<br/>commit 568b8a93af49d35891f042f73add850cfa651308<br/>("Sessions page Client ID is not displayed").<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+
+
+           <tr>
+               <td>13</td>
+               <td>2023-06-27 15:10:08 </td>
+               <td><a href=https://github.com/openbmc/host-error-monitor/commit/1c0d047713fe603fecebd42cf4c21cf98a31e44a>Link</a></td>
+               <td class='module'>host-error-monitor</td>
+               <td class='content'>Handle crashdump busy error<br/><br/>We currently fail out and immediately handle system recovery if there is<br/>any error in starting crashdump. There are cases where crashdump is in<br/>progress, and we don't want to reset. This adds a check for a busy error<br/>code to continue waiting.<br/><br/>Tested:<br/>Confirmed that if crashdump fails, the system is recovered. But if<br/>crashdump is busy, it continues waiting for completion.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>14</td>
+               <td>2023-06-27 12:19:44 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/aa9bb3dde7c1d1b81d0c2a3b027a6fc8c7340e84>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>configurations: Add Mori BMC configuration<br/><br/>- Add mori_bmc.json in configurations<br/>- Update meson.build<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>15</td>
+               <td>2023-06-27 12:19:27 </td>
+               <td><a href=https://github.com/openbmc/libpeci/commit/c4c3feec24f7acd979475d7fb93f6a6dba0d8f6f>Link</a></td>
+               <td class='module'>libpeci</td>
+               <td class='content'>libpeci: Add 64-bit MMIO Read variable<br/><br/>MMIO Reads can support 8 byte reads but the variable used is only 4<br/>bytes.  Use new 8 byte variable.<br/><br/>Tested: Can now read 8 byte variables<br/>Before:<br/>   >> peci_cmds RdEndpointConfigMMIO <register info> -s 8<br/>   cc:0x40 0x0000000001100100<br/>After:<br/>   >> peci_cmds RdEndpointConfigMMIO <register info> -s 8<br/>   cc:0x40 0x00ff000001100100<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>16</td>
+               <td>2023-06-27 12:19:19 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/b6c06f18e8e8c24e61da417a6eeb244a75cfb80f>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>abi: Update for v0.3.0 tag<br/><br/>This should have been done at the time of the v0.3.0 tag but I<br/>overlooked it. To fix that I've written a blog post on how and when the<br/>ABI dumps should be updated:<br/><br/><a href=https://amboar.github.io/notes/2023/06/26/managing-the-libpldm-abi-reference-dumps.html>https://amboar.github.io/notes/2023/06/26/managing-the-libpldm-abi-reference-dumps.html</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>17</td>
+               <td>2023-06-27 04:40:21 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/ea632b81bcf03aa623d861ef5af002567cca9e30>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>OpenPOWER: Allow system dump in TransitioningToOff state<br/><br/>There are cases the host can be stuck in the<br/>TransitioningToOff state, a system dump from that<br/>state is needed for further debug on host side.<br/><br/>Tests:<br/>Initiate dump when system is in TransitioningToOff state<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>18</td>
+               <td>2023-06-26 21:09:19 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/95c872c1adab015a9cc22425e07eeee8896f4a52>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>oem: ibm: Use `truncate(1)` to create NVRAM related files<br/><br/>Use of `dd(1)` results in back-to-back `read(2)` and `write(2)` syscalls;<br/>the performance of `dd(1)` is O(n) with respect to the file size. Poor<br/>choice of the `bs=` parameter to `dd(1)` can significantly amplify the<br/>amount of syscalls required to achieve the task.<br/><br/>By contrast, `truncate(1)` generally invokes a single syscall, either<br/>`truncate(2)` or `ftruncate(2)`. As a consequence, `truncate(1)` is O(1)<br/>with respect to file size.<br/><br/>Switch to `truncate(1)` to improve runtime efficiency of the scripts.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>19</td>
+               <td>2023-06-26 21:09:11 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/6409c8a0240defcc96a680fac427199d51c188ef>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>bios_table: Remove deprecated APIs sanitized by assert()<br/><br/>pldmd has now been reworked to remove its use of the unchecked APIs[1].<br/><br/>[1]: <a href=https://gerrit.openbmc.org/c/openbmc/pldm/+/64181>https://gerrit.openbmc.org/c/openbmc/pldm/+/64181</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>20</td>
+               <td>2023-06-26 21:08:55 </td>
+               <td><a href=https://github.com/openbmc/libmctp/commit/99b9d238bc163ffa82ecd0b704eb0489f4a86e32>Link</a></td>
+               <td class='module'>libmctp</td>
+               <td class='content'>astlpc: Log changes to KCS status register<br/><br/>Break down what the current state of the interface is whenever it<br/>changes.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>21</td>
+               <td>2023-06-26 21:08:40 </td>
+               <td><a href=https://github.com/openbmc/phosphor-health-monitor/commit/2a9400112d68fcb3ef47553671db72346abe48a0>Link</a></td>
+               <td class='module'>phosphor-health-monitor</td>
+               <td class='content'>misc: Move to steady_timer<br/><br/>We found that the system clock can affect the deadline timer, causing<br/>the timer to be cancelled if it does not meet expectations, so we<br/>replaced it with steady_timer here, which many repositories have<br/>already done, and this should have no other effect.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>22</td>
+               <td>2023-06-26 21:07:30 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/7a54389415ea264ffdd9605002ee6f61bd6a995f>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>sdbusplus: use shorter type aliases<br/><br/>The sdbusplus headers provide shortened aliases for many types.<br/>Switch to using them to provide better code clarity and shorter<br/>lines.  Possible replacements are for:<br/>  * bus_t<br/>  * exception_t<br/>  * manager_t<br/>  * match_t<br/>  * message_t<br/>  * object_t<br/>  * slot_t<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>23</td>
+               <td>2023-06-26 21:07:10 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ipmi-blobs-binarystore/commit/53992e85d2dc5864db7a7e4a8ee6f6676974e9ba>Link</a></td>
+               <td class='module'>phosphor-ipmi-blobs-binarystore</td>
+               <td class='content'>markdownlint: reformat README.md<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>24</td>
+               <td>2023-06-26 21:04:49 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/c04e0e0a7022ac8cfdf3c820e59c71c71a5676d8>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>Add linux trace events<br/><br/>Add the output of the linux trace buffer to user dumps, with<br/>lowest priority since the file can be large (~10MB).<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>25</td>
+               <td>2023-06-24 10:48:15 </td>
+               <td><a href=https://github.com/openbmc/telemetry/commit/3995a361af50f6708090bf853494cf1659864cd4>Link</a></td>
+               <td class='module'>telemetry</td>
+               <td class='content'>Remove OWNERS which are unqualified<br/><br/>Commit cc8abc0be58c19acd088da455454fdf466a1745f added owners which<br/>do not qualify based on the overall project requirements:<br/><br/><a href=https://github.com/openbmc/docs/blob/master/community-membership.md#subproject-owner>https://github.com/openbmc/docs/blob/master/community-membership.md#subproject-owner</a><br/><br/>There has been no response on Gerrit to an inquiry about this by anyone<br/>currently listed as an OWNER.  Removing the "owner add" portion of<br/>cc8abc0be58c19acd088da455454fdf466a1745f until this can be resolved.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>26</td>
+               <td>2023-06-24 10:48:00 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/7f5e44105dfe53818b09185a5c606958202f60b4>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>lg2: simplify source_location for clang-16<br/><br/>As of clang-16, `source_location` is fully supported, so we do not need<br/>to use the `experimental::source_location` workarounds anymore.<br/>Eliminate them and use `std::source_location` directly rather than the<br/>`lg2::source_location` alias.<br/><br/>Tested: Compiled the repository with CXX=clang++.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>27</td>
+               <td>2023-06-24 10:47:42 </td>
+               <td><a href=https://github.com/openbmc/stdplus/commit/69a00d76b8c5ce5571cde254c1d5396705b83f19>Link</a></td>
+               <td class='module'>stdplus</td>
+               <td class='content'>str/buf: Fix when sizeof(CharT) == sizeof(CharT*)<br/><br/>We weren't allocating enough space for the proper structure alignment on<br/>little endian systems.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>28</td>
+               <td>2023-06-24 10:47:29 </td>
+               <td><a href=https://github.com/openbmc/sdbusplus/commit/fa663aec1ec21036f972318cb9cd59b3623f7afd>Link</a></td>
+               <td class='module'>sdbusplus</td>
+               <td class='content'>stdexec: update to latest commit<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>29</td>
+               <td>2023-06-24 10:20:14 </td>
+               <td><a href=https://github.com/openbmc/phosphor-snmp/commit/40f769bb411f26b56442d676ae5010b44e84bd3b>Link</a></td>
+               <td class='module'>phosphor-snmp</td>
+               <td class='content'>Add UDP protocol by default in SNMP client<br/><br/>Set UDP protocol as transport protocol by default on Client<br/>instantiation.<br/><br/>Tested: protocol set as UDP by default when creating subscribers.<br/><br/>```<br/>busctl call xyz.openbmc_project.Network.SNMP /xyz/openbmc_project/network/snmp/manager xyz.openbmc_project.Network.Client.Create Client sq 192.168.1.25 999<br/>s "/xyz/openbmc_project/network/snmp/manager/1"<br/><br/>busctl get-property xyz.openbmc_project.Network.SNMP /xyz/openbmc_project/network/snmp/manager/1 xyz.openbmc_project.Network.Client Address<br/>s "192.168.1.25"<br/><br/>busctl get-property xyz.openbmc_project.Network.SNMP /xyz/openbmc_project/network/snmp/manager/1 xyz.openbmc_project.Network.Client TransportProtocol<br/>s "xyz.openbmc_project.Network.Client.TransportProtocol.UDP"<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>30</td>
+               <td>2023-06-22 22:10:24 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/488f19d00acb640abf8cba774f0b6f6730c179de>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>pldm: Convert to pldm_bios_table_*_check() APIs<br/><br/>The pldm_bios_table_*_check() APIs wrap around unchecked equivalents<br/>that only sanitize their parameters using assert(). The checks included<br/>in the pldm_bios_table_*_check() APIs test the same conditions that<br/>would trigger the assert()s in the unchecked APIs but instead return an<br/>error code on failure.<br/><br/>Use of the unchecked APIs has the potential to blow up the pldmd<br/>process, but also requires that libpldm continue to be built with<br/>`-UNDEBUG` to avoid undefined behaviour (by aborting the process). This<br/>impacts the performance of the library in addition to be a bit of a UX<br/>disaster.<br/><br/>The unchecked APIs are deprecated in libpldm as a step improve its<br/>safety and code generation:<br/><br/><a href=https://gerrit.openbmc.org/c/openbmc/libpldm/+/64179>https://gerrit.openbmc.org/c/openbmc/libpldm/+/64179</a><br/><br/>Tested: Booted the host on a p10bmc system with the patch applied.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>31</td>
+               <td>2023-06-22 20:36:18 </td>
+               <td><a href=https://github.com/openbmc/google-ipmi-sys/commit/dd04017914c3c656bbebc22e7899c40a79e520fc>Link</a></td>
+               <td class='module'>google-ipmi-sys</td>
+               <td class='content'>bmc_mode: Add #pragma once<br/><br/>This was missed initially<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>32</td>
+               <td>2023-06-22 19:48:15 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/95f49937b8d4246974cf40d6d134e61e29c6eff4>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>intrusionsensor: Add hwmon reading method<br/><br/>This commit adds a new reading method for intrusionsensor, which reads<br/>the chassis intrusion status from hwmon.<br/><br/>Example:<br/>    {<br/>         "Class": "Aspeed2600_Hwmon",<br/>         "Name": "Chassis_Intrusion_Status",<br/>         "Type": "ChassisIntrusionSensor"<br/>    }<br/><br/>intrusionsensor will search for the sysfs hwmon name string in the<br/>compatibleHwmonNames map using the Class string (e.g intrusion0_alarm<br/>for Aspeed2600_Hwmon class) and read the chassis intrusion status from<br/>it. This currently just supports Aspeed2600_Hwmon class which is based<br/>on the aspeed-chassis driver from Aspeed SDK. The driver reads the<br/>Intrusion Status bit in the CHAI10 register from AST2600. This bit<br/>needs to be cleared every read in order to get the current state (which<br/>means to write 0 to the hwmon file). In the condition of being cleared<br/>every read, it will show 0 in hwmon for the normal state, and 1 for the<br/>intrusion state.<br/><br/>Tested:<br/><br/>$ busctl get-property xyz.openbmc_project.IntrusionSensor \<br/> /xyz/openbmc_project/Chassis/Intrusion \<br/> xyz.openbmc_project.Chassis.Intrusion Status<br/><br/>If the chassis cover is closed: "Normal"<br/>If the chassis cover is open: "HardwareIntrusion"<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>33</td>
+               <td>2023-06-22 16:46:20 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/3bbd4827527ae41ea9e20c499506ff3a83027534>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>DIMM: Refactor the byte attribute to size type<br/><br/>There is currently a problem that because the parameter types defined<br/>in PDI are too complicated, not all types are fully compatible in the<br/>Notify method.<br/>The intent behind this commit is replace "byte" type in the DIMM<br/>interface with "size", because it is more reasonable to use size for<br/>byte, uint16 and other types, and we also tend to change the uint16<br/>type to size in the future.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>34</td>
+               <td>2023-06-22 15:00:37 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/6995c1ce42d5bc2d223af7d3b2f3cae613d3b231>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Change the byte of the MemoryAttributes attribute to the size type<br/><br/>There is a patch [1] about changing the byte type of the<br/>MemoryAttributes attribute to size_t, so we need to update the<br/>relevant code in bmcweb synchronously.<br/><br/>[1] <a href=https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/63799>https://gerrit.openbmc.org/c/openbmc/phosphor-dbus-interfaces/+/63799</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>35</td>
+               <td>2023-06-22 11:50:31 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/a72daf5c4128b27229685c0d555ac656d6c60000>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>OpenPOWER: Fix compile error in p10bmc<br/><br/>There is fix in a line missed after testing in downstream<br/>with lastest review comment which caused the compile<br/>failure in p10bmc<br/><br/>Test:<br/>Created a system dump<br/>busctl --verbose call xyz.openbmc_project.Dump.Manager\<br/>  /xyz/openbmc_project/dump/system \<br/>  xyz.openbmc_project.Dump.Create CreateDump a{sv} 0<br/><br/>MESSAGE "o" {<br/>        OBJECT_PATH "/xyz/openbmc_project/dump/system/\<br/>        entry/1";<br/>};<br/><br/>Once the dump is completed check the value of<br/>pvm_sys_dump_active<br/>busctl call xyz.openbmc_project.BIOSConfigManager \<br/>       /xyz/openbmc_project/bios_config/manager \<br/>        xyz.openbmc_project.BIOSConfig.Manager \<br/>        GetAttribute s pvm_sys_dump_active<br/>svv "xyz.openbmc_project.BIOSConfig.Manager.AttributeType.\<br/>     Enumeration" s "Enabled" s ""<br/><br/>Try another system dump<br/>busctl --verbose call xyz.openbmc_project.Dump.Manager \<br/>    /xyz/openbmc_project/dump/system \<br/>    xyz.openbmc_project.Dump.Create CreateDump a{sv} 0<br/>Call failed: The service is temporarily unavailable.<br/><br/>System dump is not allowed when another dump is in<br/>progress<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>36</td>
+               <td>2023-06-21 22:06:10 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/fb6c6de90cba53dff84d687d6b3f2b07b822b1dc>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Fix kvm session and add event bus<br/><br/>Bug description:<br/>    Before this commit KVM window wasn't being closed<br/>    after logging out<br/><br/>Test: Step1. Launch webui on browser and see KVM page on /#/operations/kvm.<br/>    Step2. Open additional window using 'Open in new tab'.<br/>    Step3. Navigate to another page. For example, /#/operations/key-clear.<br/>    Step4. Logout. Window is still open.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>37</td>
+               <td>2023-06-21 22:05:45 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/7ba17c349bf3216128994c743424a62719fa6438>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>Don't throw on Settings access fail<br/><br/>The isQuiesceOnErrorEnabled() function makes a call to the Settings<br/>daemon.  If that throws an exception, the code just re-throws the<br/>exception.  While that exception is caught by sdbusplus, it causes the<br/>function to exit early and not actually save the event log in the class.<br/><br/>To fix this, just change the code to say quiesceOnError isn't enabled<br/>and continue on.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>38</td>
+               <td>2023-06-21 22:05:37 </td>
+               <td><a href=https://github.com/openbmc/phosphor-ecc/commit/527190b2b7b16eecae33904d4396380bf269627b>Link</a></td>
+               <td class='module'>phosphor-ecc</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>39</td>
+               <td>2023-06-21 22:05:21 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/132d037edfeedfc74e97d51358dbd41db0f8fdf3>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>Clear cpuInfoMap on platform config discovery<br/><br/>UniqueIdentifier D-Bus interface from cpuInfo (struct) was not<br/>getting removed from dbus on platform configuration discovery.<br/><br/>Later as CPUInfo object gets reconstructed for same UniqueIdentifier interface throws exception since interface is still there followed shortly by a crash:<br/><br/> terminate called after throwing an instance of 'sdbusplus::exception::SdBusError'<br/>    what():  sd_bus_add_object_vtable: org.freedesktop.DBus.Error.FileExists: File exists<br/><br/>With this change in place, cpuinfoapp runs smoothly across a host reboot/entity-manager restart.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>40</td>
+               <td>2023-06-21 21:47:22 </td>
+               <td><a href=https://github.com/openbmc/phosphor-state-manager/commit/2038e4925b56c4c7471c763794d02b4bf94f3ae8>Link</a></td>
+               <td class='module'>phosphor-state-manager</td>
+               <td class='content'>reboot-cause: look for pinhole reset first<br/><br/>A pinhole reset is usually a users last try and recovering a hung<br/>system. On some systems, a pinhole reset will result in both a BMC reset<br/>and a power off to the chassis. Need to ensure the real reason is<br/>recorded so look for the pinhole reset first before looking to see if an<br/>AC loss has occurred.<br/><br/>Testing:<br/>- None, logic seems fairly obvious<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>41</td>
+               <td>2023-06-21 21:42:59 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/3d30708fb65e40cd28da601b3e91a527a8862e15>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Redfish: Implement SNMP Trap<br/><br/>Implement SNMPTrap in EventDestination of Redfish. We can use<br/>this Redfish interface to add/get/delete the SNMPTrap port and<br/>destination address. When the error<br/><br/>log is generated, phosphor-snmp<br/>will send SNMPTrap messages to our configured SNMPTrap destination.<br/><br/>The MIB is here:<br/>[1] <a href=https://github.com/openbmc/phosphor-snmp/blob/master/mibs/NotificationMIB.txt>https://github.com/openbmc/phosphor-snmp/blob/master/mibs/NotificationMIB.txt</a><br/><br/>Refer:<br/>[1] <a href=https://www.dmtf.org/sites/default/files/standards/documents/DSP0268_2019.3.pdf>https://www.dmtf.org/sites/default/files/standards/documents/DSP0268_2019.3.pdf</a><br/><br/>SNMPTrap test: Tested ok on the Witherspoon machine.<br/>Steps are as follows:<br/>1. Use this Redfish interface to configure the port and<br/>   destination address:<br/>   curl -k -H "X-Auth-Token: $token" -X POST<br/>   <a href=https://${bmc}/redfish/v1/EventService/Subscriptions>https://${bmc}/redfish/v1/EventService/Subscriptions</a><br/>   -d '{"Destination": "snmp://192.168.31.89:162",<br/>   "SubscriptionType": "SNMPTrap", "Protocol": "SNMPv2c"}'<br/>2. Run the SNMPTrap receiver tool in the destination<br/>   computer(192.168.31.89),I used iReasoning MIB Browser as the<br/>   SNMPTrap receiving tool.<br/>3. Trigger error logs such as power supply AC Lost. We will see<br/>   the error log under /xyz/openbmc_project/logging.<br/>4. The SNMPTrap receiver tool in the destination computer received<br/>   the SNMPTrap sent by OpenBMC.<br/><br/>Tested: Validator passes<br/>1. Add snmp client:<br/>        curl -k -H "X-Auth-Token: $token" -X POST<br/>        <a href=https://${bmc}/redfish/v1/EventService/Subscriptions>https://${bmc}/redfish/v1/EventService/Subscriptions</a><br/>        -d '{"Destination": "snmp://192.168.31.89:162",<br/>       "SubscriptionType": "SNMPTrap", "Protocol": "SNMPv2c",<br/>       "Context": "testContext"}'<br/>        {<br/>          "@Message.ExtendedInfo": [<br/>            {<br/>              "@odata.type": "#Message.v1_0_0.Message",<br/>              "Message": "The resource has been created successfully",<br/>              "MessageArgs": [],<br/>              "MessageId": "Base.1.8.1.Created",<br/>              "MessageSeverity": "OK",<br/>              "Resolution": "None"<br/>            }<br/>          ]<br/>        }<br/>2. Get snmp trap client configurations:<br/>curl -k -H "X-Auth-Token: $token" -X GET<br/><a href=https://${bmc}/redfish/v1/EventService/Subscriptions/snmp1>https://${bmc}/redfish/v1/EventService/Subscriptions/snmp1</a><br/>{<br/>  "@odata.id": "/redfish/v1/EventService/Subscriptions/snmp1",<br/>  "@odata.type": "#EventDestination.v1_7_0.EventDestination",<br/>  "Context": "testContext",<br/>  "Destination": "snmp://192.168.31.89:162",<br/>  "EventFormatType": "Event",<br/>  "Id": "snmp1",<br/>  "Name": "Event Destination snmp1",<br/>  "Protocol": "SNMPv2c",<br/>  "SubscriptionType": "SNMPTrap"<br/>}<br/><br/>Reboot the BMC, and get the snmp trap client again:<br/>curl -k -H "X-Auth-Token: $token" -X GET<br/><a href=https://${bmc}/redfish/v1/EventService/Subscriptions/snmp1>https://${bmc}/redfish/v1/EventService/Subscriptions/snmp1</a><br/>{<br/>  "@odata.id": "/redfish/v1/EventService/Subscriptions/snmp1",<br/>  "@odata.type": "#EventDestination.v1_7_0.EventDestination",<br/>  "Context": "testContext",<br/>  "Destination": "snmp://192.168.31.89:162",<br/>  "EventFormatType": "Event",<br/>  "Id": "snmp1",<br/>  "Name": "Event Destination snmp1",<br/>  "Protocol": "SNMPv2c",<br/>  "SubscriptionType": "SNMPTrap"<br/>}<br/><br/>3. Delete snmp client:<br/>curl -k -H "X-Auth-Token: $token" -X DELETE<br/><a href=https://${bmc}/redfish/v1/EventService/Subscriptions/snmp1>https://${bmc}/redfish/v1/EventService/Subscriptions/snmp1</a><br/>{<br/>  "@Message.ExtendedInfo": [<br/>    {<br/>      "@odata.type": "#Message.v1_1_1.Message",<br/>      "Message": "Successfully Completed Request",<br/>      "MessageArgs": [],<br/>      "MessageId": "Base.1.8.1.Success",<br/>      "MessageSeverity": "OK",<br/>      "Resolution": "None"<br/>    }<br/>  ]<br/>}<br/>4. After we have added some SNMP clients using Redfish, we can see them<br/>   in Dbus:<br/>busctl tree xyz.openbmc_project.Network.SNMP<br/>`-/xyz<br/>  `-/xyz/openbmc_project<br/>    `-/xyz/openbmc_project/network<br/>      `-/xyz/openbmc_project/network/snmp<br/>        `-/xyz/openbmc_project/network/snmp/manager<br/>          |-/xyz/openbmc_project/network/snmp/manager/1<br/><br/>busctl introspect xyz.openbmc_project.Network.SNMP<br/>/xyz/openbmc_project/network/snmp/manager/1<br/>xyz.openbmc_project.Network.Client<br/>NAME       TYPE      SIGNATURE RESULT/VALUE    FLAGS<br/>.Address   property  s         "192.168.31.89" emits-change writable<br/>.Port      property  q         162             emits-change writable<br/><br/>5. Use "busctl call" add client<br/>busctl call xyz.openbmc_project.Network.SNMP<br/>/xyz/openbmc_project/network/snmp/manager<br/>xyz.openbmc_project.Network.Client.Create<br/>Client sq 192.168.31.90 162<br/>s "/xyz/openbmc_project/network/snmp/manager/2"<br/><br/>We will see it use the redfish url:<br/>curl -k -H "X-Auth-Token: $token" -X GET<br/><a href=https://${bmc}/redfish/v1/EventService/Subscriptions/snmp2>https://${bmc}/redfish/v1/EventService/Subscriptions/snmp2</a><br/>{<br/>  "@odata.id": "/redfish/v1/EventService/Subscriptions/snmp2",<br/>  "@odata.type": "#EventDestination.v1_7_0.EventDestination",<br/>  "Context": "",<br/>  "Destination": "snmp://192.168.31.90:162",<br/>  "EventFormatType": "Event",<br/>  "Id": "snmp2",<br/>  "Name": "Event Destination snmp2",<br/>  "Protocol": "SNMPv2c",<br/>  "SubscriptionType": "SNMPTrap"<br/>}<br/><br/>6. Deleting snmp client using "busctl"<br/>First, we use redfish to add some SNMP clients:<br/> curl -k -H "X-Auth-Token: $token" -X POST<br/> <a href=https://${bmc}/redfish/v1/EventService/Subscriptions>https://${bmc}/redfish/v1/EventService/Subscriptions</a><br/> -d '{"Destination": "snmp://192.168.31.90:162",<br/> "SubscriptionType": "SNMPTrap", "Protocol": "SNMPv2c",<br/> "Context": "testContext0"}'<br/><br/> curl -k -H "X-Auth-Token: $token" -X POST<br/> <a href=https://${bmc}/redfish/v1/EventService/Subscriptions>https://${bmc}/redfish/v1/EventService/Subscriptions</a><br/> -d '{"Destination": "snmp://192.168.31.91:162",<br/> "SubscriptionType": "SNMPTrap", "Protocol": "SNMPv2c",<br/> "Context": "testContext1"}'<br/><br/>Then we can use redfish to get the subscriptions:<br/> curl -k -H "X-Auth-Token: $token" -XGET<br/> <a href=https://${bmc}/redfish/v1/EventService/Subscriptions>https://${bmc}/redfish/v1/EventService/Subscriptions</a><br/> {<br/>  "@odata.id": "/redfish/v1/EventService/Subscriptions",<br/>"@odata.type":"#EventDestinationCollection.EventDestinationCollection",<br/>  "Members": [<br/>    {<br/>      "@odata.id": "/redfish/v1/EventService/Subscriptions/snmp1"<br/>    },<br/>    {<br/>      "@odata.id": "/redfish/v1/EventService/Subscriptions/snmp2"<br/>    }<br/>  ],<br/>  "Members@odata.count": 2,<br/>  "Name": "Event Destination Collections"<br/> }<br/><br/>Now we use busctl to delete SNMP client 2:<br/> busctl call xyz.openbmc_project.Network.SNMP<br/> /xyz/openbmc_project/network/snmp/manager/2<br/> xyz.openbmc_project.Object.Delete Delete<br/><br/>Then we won't see snmp2 in the subscriptions of redfish:<br/> curl -k -H "X-Auth-Token: $token" -XGET<br/> <a href=https://${bmc}/redfish/v1/EventService/Subscriptions>https://${bmc}/redfish/v1/EventService/Subscriptions</a><br/> {<br/>  "@odata.id": "/redfish/v1/EventService/Subscriptions",<br/>"@odata.type":"#EventDestinationCollection.EventDestinationCollection",<br/><br/>  "Members": [<br/>    {<br/>      "@odata.id": "/redfish/v1/EventService/Subscriptions/snmp1"<br/>    }<br/>  ],<br/>  "Members@odata.count": 1,<br/>  "Name": "Event Destination Collections"<br/> }<br/><br/>7. Test the generic event subscription to make sure it didn't impacted<br/>Add Redfish subscription:<br/>curl -k -H "X-Auth-Token: $token" -X POST<br/> <a href=https://${bmc}/redfish/v1/EventService/Subscriptions>https://${bmc}/redfish/v1/EventService/Subscriptions</a><br/> -d '{"Destination": "<a href=https://192.168.31.189:443",>https://192.168.31.189:443",</a><br/>"SubscriptionType": "RedfishEvent", "Protocol": "Redfish",<br/>"Context": "testContext"}'<br/>{<br/>  "@Message.ExtendedInfo": [<br/>    {<br/>      "@odata.type": "#Message.v1_1_1.Message",<br/>      "Message": "The resource has been created successfully.",<br/>      "MessageArgs": [],<br/>      "MessageId": "Base.1.13.0.Created",<br/>      "MessageSeverity": "OK",<br/>      "Resolution": "None."<br/>    }<br/>  ]<br/><br/>Get Redfish subscription:<br/> curl -k -H "X-Auth-Token: $token" -X GET<br/> <a href=https://${bmc}/redfish/v1/EventService/Subscriptions/1358109191>https://${bmc}/redfish/v1/EventService/Subscriptions/1358109191</a><br/>{<br/>  "@odata.id": "/redfish/v1/EventService/Subscriptions/1358109191",<br/>  "@odata.type": "#EventDestination.v1_8_0.EventDestination",<br/>  "Context": "testContext",<br/>  "DeliveryRetryPolicy": "TerminateAfterRetries",<br/>  "Destination": "<a href=https://192.168.31.189:443",>https://192.168.31.189:443",</a><br/>  "EventFormatType": "Event",<br/>  "HttpHeaders": [],<br/>  "Id": "1358109191",<br/>  "MessageIds": [],<br/><br/>  "MetricReportDefinitions": [],<br/>  "Name": "Event Destination 1358109191",<br/>  "Protocol": "Redfish",<br/>  "RegistryPrefixes": [],<br/>  "ResourceTypes": [],<br/>  "SubscriptionType": "RedfishEvent"<br/>}<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>42</td>
+               <td>2023-06-21 20:10:05 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/e6718c5e42ec886e4c1d3e4dd1a4be093721c548>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>network/client: add TCP/UDP as Transport Protocol for Client<br/><br/>Add TCP/UDP transport protocol for Client interface to make it use for<br/>different applications like rsyslog as example.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>43</td>
+               <td>2023-06-21 17:13:54 </td>
+               <td><a href=https://github.com/openbmc/openbmc/commit/70d6fedb4dcac7d835380e09aeffa6a5c2a300da>Link</a></td>
+               <td class='module'></td>
+               <td class='content'><font style="color:red;">!! (Get commit fail) !!</font>PDC:srcrev bump 0b566d5497..64f8da9e7</td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>44</td>
+               <td>2023-06-21 12:00:32 </td>
+               <td><a href=https://github.com/openbmc/pfr-manager/commit/d5c499082f191ad729c034f955e0131c4c398f73>Link</a></td>
+               <td class='module'>pfr-manager</td>
+               <td class='content'>Updated Additional Error/Status codes<br/><br/>This commit adds  new Error/Status codes under:<br/>1.Platform state map - Added Combined CPLD authenication,Combined CPLD image update<br/>                       Combined CPLD image recovery,Combined CPLD booted from Active CFM entries.<br/><br/>2. Recovery reason map - Added BMC and CPU attestation failure entries<br/><br/>3. Panic Reason map - Added  Attestation failure entry.<br/><br/>4. Major error code map - Added  Attestation failure , Attestation challenge timeout,<br/>   SPDM protocol timeout, memcpy Failed  and Combined CPLD authenication failure entries.<br/><br/>Tested:<br/>- Manually triggered all the newly added events and observed the entry<br/>  in redfish file(/var/log/redfish)<br/>- Event logs in web UI displayed the event correctly.<br/>  Example:<br/>  CPLD firmware resiliency error.<br/>  Error reason: Combined CPLD Authentication failure (MinorCode:0x05).<br/><br/>- GET on redfish/v1/Systems/system/LogServices/EventLog/Entries<br/><br/>    {<br/>            "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1686766462",<br/>            "@odata.type": "#LogEntry.v1_9_0.LogEntry",<br/>            "Created": "2023-06-14T18:14:22+00:00",<br/>            "EntryType": "Event",<br/>            "Id": "1686766462",<br/>            "Message": "CPLD firmware resiliency error. Error reason: Combined CPLD authenication failure(MinorCode:0x05).",<br/>            "MessageArgs": [<br/>                "Combined CPLD authenication failure(MinorCode:0x05)"<br/>            ],<br/>            "MessageId": "OpenBMC.0.1.CPLDFirmwareResiliencyError",<br/>            "Name": "System Event Log Entry",<br/>            "Severity": "Critical"<br/>        },<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+           <tr>
+               <td>45</td>
+               <td>2023-06-19 21:15:28 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/9a7db6af2010ce9ca6ca9e1e53850aa6456b6b38>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>hwmontemp: add tmp464<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>46</td>
+               <td>2023-06-19 21:15:03 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/5dc025719dc3cc7369b23f81bcf1e792df50d489>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>pdr: Add pldm_pdr_find_container_id_range_exclude() API<br/><br/>This API is necessary to find the container id of contained entity<br/>which is not within the record handle ranges of the remote endpoint<br/>PDRs.The remote endpoint has their own set of PDRs and have record<br/>handle ranges defined.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>47</td>
+               <td>2023-06-19 21:05:14 </td>
+               <td><a href=https://github.com/openbmc/fb-ipmi-oem/commit/21a79235d372dcbd8282f09dfc819c24bd080183>Link</a></td>
+               <td class='module'>fb-ipmi-oem</td>
+               <td class='content'>selcommands: send sel entry on dbus<br/><br/>Send sel entry on dbus via logging service. Redfish api will get entries from dbus.<br/><br/>Expected event entry:<br/>{<br/>  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/63",<br/>  "@odata.type": "#LogEntry.v1_9_0.LogEntry",<br/>  "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/63/attachment",<br/>  "Created": "2018-03-14T11:34:35.178+00:00",<br/>  "EntryType": "Event",<br/>  "Id": "63",<br/>  "Message": SEL Entry Added: SEL Entry: FRU: 1, Record: Standard (0x02), Time: Fri Feb 18 16:06:25 1972\n, Sensor: THERM_THRESH_EVT (0x7D), Event Data: (010000) Limit Exceeded Assertion<br/>  "Modified": "2018-03-14T11:34:35.178+00:00",<br/>  "Name": "System Event Log Entry",<br/>  "Resolved": false,<br/>  "Severity": "OK"<br/>}<br/><br/>Tested: Tested and verified on greatlakes platform.<br/></td>
+           </tr>
+
+
+
+
+
+
+
+
+           <tr>
+               <td>48</td>
+               <td>2023-06-16 22:00:28 </td>
+               <td><a href=https://github.com/openbmc/intel-ipmi-oem/commit/152e9145400e422015d7715446a85b0b4bfae38e>Link</a></td>
+               <td class='module'>intel-ipmi-oem</td>
+               <td class='content'>Fix IPMI firmware update programming failure<br/><br/>The IPMI Firmware Update sequence fails on some systems. The update<br/>process receives the new firmware image data in the /tmp file<br/>system. During the final update phase the image is copied into the<br/>/tmp/images subdirectory. If /tmp and /tmp/images are not part of the<br/>same filesystem the std::filesystem::rename() function fails.<br/><br/>This commit changes the update process. The rename() is still<br/>attempted. In the event the rename() fails, a copy() operation is<br/>performed in the belief the destination is on a separate filesystem.<br/><br/>Tested:<br/>Confirmed this change works on systems with a common /tmp filesystem.<br/>Confirmed this change works on systems with the source file and the<br/>destination file on different filesystems.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>49</td>
+               <td>2023-06-16 21:29:19 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/57a7af6a4f7ca9ce0be7e5d4a4f9b561d9c4fd57>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>fix compile error when enable meson test option<br/><br/>- Fix compile error:<br/>  [-Werror=sign-compare]<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>50</td>
+               <td>2023-06-16 21:28:49 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/477922744e65ca1a766520897cce1b8b9f32ee65>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>pldm: Include config.h via compiler argument<br/><br/>This removes any ambiguity about which config.h is being included.<br/>Subprojects such as libpldm and phosphor-logging also generate config.h<br/>files, and these are exposed in the include path.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>51</td>
+               <td>2023-06-16 21:28:31 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/65fa7bf8c8bb0f3f856c69f7d8aa61808ad6994a>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>OpenLDAP and Active Directory is taken from translation file<br/><br/>- OpenLDAP and Active Directory were hardcoded in the file, Hence, now, it is taken from the<br/>  translation file in this commit.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>52</td>
+               <td>2023-06-16 21:28:24 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/a5c3287e9b2b08ad810f5c9d4fc8805a0125ba73>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>bios_table: pldm_bios_table_attr_entry_string_encode_check() values<br/><br/>Document the pre-conditions that lead to failures and their associated<br/>error codes.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>53</td>
+               <td>2023-06-16 21:27:55 </td>
+               <td><a href=https://github.com/openbmc/phosphor-buttons/commit/ccd7db054ccced63c25e66fe7ab8e1847f9d38ae>Link</a></td>
+               <td class='module'>phosphor-buttons</td>
+               <td class='content'>Support host selector using cpld definitions<br/><br/>Description:<br/>- Support host selector using cpld definitions<br/><br/>Design:<br/>- Because the current structure only supports config defined by GPIO<br/>  (Yosemite V2), but there are also have the system (Yosemite V3.5)<br/>  gets the host-selector's selection from CPLD.<br/><br/>- So this commit is to extend the current configuration to use CPLD<br/>  definitions. Also, support adding event io from the register file<br/>  which was exported from the CLD driver.<br/><br/>- For example with config json below:<br/>{<br/>   "cpld_definitions": [<br/>        {<br/>            "name": "HOST_SELECTOR",<br/>            "i2c_address": 15,<br/>            "i2c_bus": 12,<br/>            "register_name": "uart-selection-debug-card",<br/>            "max_position": 4<br/>        }<br/>   ]<br/>}<br/><br/>Dependency:<br/>- CLD driver is required (link: <a href=https://lore.kernel.org/lkml/20230117094425.19004-1-Delphine_CC_Chiu@Wiwynn.com/)>https://lore.kernel.org/lkml/20230117094425.19004-1-Delphine_CC_Chiu@Wiwynn.com/)</a><br/><br/>Test Case:<br/>- When ocp debug card uart button is pressed the position property on<br/>  dbus is correct.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>54</td>
+               <td>2023-06-16 21:27:48 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/55832f37ec543619e335db7cb39d0e787818a934>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>Rename Sensor class variable<br/><br/>The name of the entity-manager D-Bus interface the sensor was created<br/>from was stored in a variable called objectType.  Rename that to<br/>configInterface to make it obvious it's an interface name.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>55</td>
+               <td>2023-06-16 21:27:31 </td>
+               <td><a href=https://github.com/openbmc/bios-settings-mgr/commit/f19e2713e5394eec42a2b8dfdd57abe4376ea186>Link</a></td>
+               <td class='module'>bios-settings-mgr</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>56</td>
+               <td>2023-06-16 21:27:25 </td>
+               <td><a href=https://github.com/openbmc/service-config-manager/commit/dfc7270a24b5c4d2554f50a1047b5ef555878452>Link</a></td>
+               <td class='module'>service-config-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>57</td>
+               <td>2023-06-16 21:27:11 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/cbfa6e1d2bb51f5c38d03a220c79653a0f569e9a>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>Block creating IPv4 address 0.0.0.0 via Set LAN Configuration<br/><br/>The IPMI Set LAN Configuration IP Address operation allows any 32-bit<br/>value to be sent to addressed NIC. The current OpenBMC behavior is to<br/>treat all values identically, and insert them into the<br/>systemd-networkd configuration file. This only allows IPMI to write<br/>new values, but to never have a way to remove an entry.<br/><br/>Traditionally IPMI has used 0.0.0.0 to remove a static IP address<br/>entry from being applied to the NIC. This commit implements the<br/>ability to remove an active static IPv4 address by assigning 0.0.0.0<br/>to the NIC.<br/><br/>Preventing 0.0.0.0 from being written to the systemd-networkd<br/>configuration file also prevents systemd-networkd from creating one or<br/>more self assigned 192.x.x.x NAT style addresses.<br/><br/>Tested:<br/>Manually inserted several 'Address=' entries containing valid IPv4<br/>addresses. Rebooted the BMC to enable them.<br/>Issued 'ipmitool raw 12 1 1 3 0 0 0 0' and confirmed no<br/>'Address=0.0.0.0' entry was added to the configuration file.<br/>Confirmed no self assigned NAT addresses were created.<br/>Confirmed one static IPv4 address entry was removed from the config<br/>file.<br/>Repeated 'ipmitool' requests removed one static address per request.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>58</td>
+               <td>2023-06-16 21:26:53 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/e164f1b66eb2cde5b885df342c9a5bb4e0c2beeb>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Add Health information for PCIeDevice<br/><br/>This commit is to add Health information according to the Redfish<br/>PCIeDevice schema.<br/>ref: <a href=https://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_9_0.json>https://redfish.dmtf.org/schemas/v1/PCIeDevice.v1_9_0.json</a><br/><br/>Code that updates the OperationalStatus for all the inventory<br/><a href=https://github.com/openbmc/openpower-vpd-parser/blob/ \>https://github.com/openbmc/openpower-vpd-parser/blob/ \</a><br/>3fb026386546cfd288ab4f86156c9aa0ffa145d6/ibm_vpd_app.cpp#L620<br/><br/>Tested: Validator passed<br/><br/>'''<br/> curl -k <a href=https://$bmc/redfish/v1/Systems/system/PCIeDevices/pcie_card8>https://$bmc/redfish/v1/Systems/system/PCIeDevices/pcie_card8</a><br/>{<br/>  "@odata.id": "/redfish/v1/Systems/system/PCIeDevices/pcie_card8",<br/>  "@odata.type": "#PCIeDevice.v1_9_0.PCIeDevice",<br/>  "Id": "pcie_card8",<br/>  "Manufacturer": "",<br/>  "Model": "6B87",<br/>  "Name": "PCIe Device",<br/>  "PCIeFunctions": {<br/>    "@odata.id": "/redfish/v1/Systems/system/PCIeDevices/pcie_card8/PCIeFunctions"<br/>  },<br/>  "PCIeInterface": {<br/>    "LanesInUse": -1<br/>  },<br/>  "PartNumber": "03FL194",<br/>  "SerialNumber": "Y131UF09S00J",<br/>  "Slot": {<br/>    "Location": {<br/>      "PartLocation": {<br/>        "ServiceLabel": "U78DB.ND0.WZS0018-P0-C8"<br/>      }<br/>    }<br/>  },<br/>  "SparePartNumber": "03FL195",<br/>  "Status": {<br/>    "Health": "OK",<br/>    "State": "Enabled"<br/>  }<br/>}<br/>'''<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>59</td>
+               <td>2023-06-16 17:00:28 </td>
+               <td><a href=https://github.com/openbmc/pfr-manager/commit/304e82e1a3a38c16cecffc169b47714153daa8b1>Link</a></td>
+               <td class='module'>pfr-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+
+
+           <tr>
+               <td>60</td>
+               <td>2023-06-16 12:58:27 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/01a89a1f05f960fa91b7e90a641faa3850e3c3ff>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix regression in @odata failure paths<br/><br/>5b224921d765a93c5f93a6012109a9a748ef7cd4<br/>and<br/>a1e0871d2425b3f42d0e5893d548593e5ed576b<br/><br/>Added code to handle links looked correct in review, but the<br/>deduplication of the HEAD methods now causes the return code of<br/>setUpRedfishRoute to be ignored.  This means that query parameter<br/>or other header failures don't stop the request, which is bad.<br/><br/>Tested:<br/><br/>GET /redfish/v1 (ie ServiceRoot) returns the correct header.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>61</td>
+               <td>2023-06-15 21:33:25 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/7768e783af7713a5d4c398bdd716e590e3b40d2e>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Remove How do I become a Design Partner<br/><br/>Nicole is no longer working on the project, remove her name and the<br/>section about becoming a design partner.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>62</td>
+               <td>2023-06-15 21:33:16 </td>
+               <td><a href=https://github.com/openbmc/openpower-hw-diags/commit/7ad677a03cf85a2359335264c1b2a59eb4e6d9f3>Link</a></td>
+               <td class='module'>openpower-hw-diags</td>
+               <td class='content'>Reserved bit updates for Odyssey RAS data json<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>63</td>
+               <td>2023-06-15 21:32:39 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/2ebec8dbe8db54e425d52472b0fdcacb8f2c7f25>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>bios_table: s/stroe/store/<br/><br/>Fix a minor typo in the doxygen of<br/>pldm_bios_table_attr_entry_enum_decode_def_num_check() and<br/>pldm_bios_table_attr_entry_enum_decode_pv_hdls().<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>64</td>
+               <td>2023-06-15 21:32:10 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/28c56bf19cf0b83fde9b834d13e0832824feae30>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>IntelCPUSensor: use libpeci to open peciFd<br/><br/>To stay consistent with libpeci usage we should use<br/>dedicated functions to open PECI file descriptors<br/>when using peci-legacy.<br/><br/>Tested: hwmons are successfully created in the same way<br/>they were created opening peciFd directly<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>65</td>
+               <td>2023-06-15 21:31:26 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/0b566d54978e4462e51e01414bcfc13918efcb45>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>Minor cleanup: Remove unused header file and namespace<br/><br/>This commit performs minor by removing an unnecessary<br/>header file: phosphor-logging/log.hpp<br/>and namespace: using namespace phosphor::logging<br/><br/>These cleanup changes have no impact on the functionality.<br/>They enhance code cleanliness, reduce potential confusion,<br/>and promote better code maintenance and readability.<br/><br/>Test:<br/>Created a full build to make sure no errors<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>66</td>
+               <td>2023-06-15 21:31:15 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/9138c209c796ea49edf73d6039b6644ce32c959c>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>PLDM : Change the dbus timeout to 5 seconds<br/><br/>Dbus timeout value for every dbus call in PLDM is set to 5 seconds<br/>instead of default 25 seconds so that all dbus calls that expect a<br/>reply exists after 5 seconds if there is no response from the client.<br/>While BMC is still waiting for a response on any dbus calls it is<br/>possible that host can timeout and return an error.<br/>Another reason is that memory address from where BMC would read data<br/>sent by host may get deallocated after 20 seconds and it is possible<br/>for this to happen even before BMC has read the data. This has lead<br/>to DMA issues.<br/><br/>Tested by adding a sleep for 10 seconds inside main function of<br/>phospher-host-postd and executed get dbus property on snoopd<br/>interface from pldm. PLDM dbus call timed out after 5 seconds.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>67</td>
+               <td>2023-06-15 18:00:23 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/49152e76b4c1eb28cef59de5591535387941eee0>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>dbus-sdr: fix undefined symbols error<br/><br/>- When enable hybrid-sensors option, it will include sensordatahandler<br/>  in sensorcommands.cpp. So need to add some src and dependency in<br/>  meson.build.<br/><br/>Test:<br/>Before:<br/>```<br/>ipmitool sdr elist<br/>Err in cmd get sensor sdr info<br/>Unable to open SDR for reading<br/><br/>journalctl -o json-pretty MESSAGE="ERROR opening IPMI provider"<br/>{<br/>    "SYSLOG_IDENTIFIER" : "ipmid",<br/>    "_MACHINE_ID" : "0e6c70e7379c41fc9388fd64e1433923",<br/>    "_BOOT_ID" : "2cfdedb0cafd43758e2469ea1bc81a19",<br/>    "_PID" : "1306",<br/>    "ERROR" : "/usr/lib/ipmid-providers/libdynamiccmds.so.0.1: undefined symbol: _ZN4ipmi6sensor7sensorsE",<br/>    "MESSAGE" : "ERROR opening IPMI provider",<br/>    "_SYSTEMD_UNIT" : "phosphor-ipmi-host.service",<br/>    "_SYSTEMD_INVOCATION_ID" : "fd19f671e20147aea359bef0fc59c2c6",<br/>    "_SYSTEMD_SLICE" : "system.slice",<br/>    "_CAP_EFFECTIVE" : "1ffffffffff",<br/>    "_GID" : "0",<br/>    "_SOURCE_REALTIME_TIMESTAMP" : "1678071749865544",<br/>    "__REALTIME_TIMESTAMP" : "1678071749865607",<br/>    "_EXE" : "/usr/bin/ipmid",<br/>    "CODE_LINE" : "77",<br/>    "_COMM" : "ipmid",<br/>    "_TRANSPORT" : "journal",<br/>    "__MONOTONIC_TIMESTAMP" : "45349903",<br/>    "PRIORITY" : "3",<br/>    "CODE_FUNC" : "helper_log",<br/>    "PROVIDER" : "/usr/lib/ipmid-providers/libdynamiccmds.so.0.1",<br/>    "_HOSTNAME" : "gsz",<br/>    "CODE_FILE" : "/usr/include/phosphor-logging/log.hpp",<br/>    "__CURSOR" : "s=d8544f6ea872488fa319e44a1e5da636;i=39d;b=2cfdedb0cafd43758e2469ea1bc81a19;m=2b3fc0f;t=5f632868ef087;x=c4b27446a5eae068",<br/>    "_RUNTIME_SCOPE" : "system",<br/>    "_UID" : "0",<br/>    "TRANSACTION_ID" : "2224375320",<br/>    "_CMDLINE" : "ipmid",<br/>    "_SYSTEMD_CGROUP" : "/system.slice/phosphor-ipmi-host.service"<br/>}<br/>```<br/><br/>After:<br/>```<br/>ipmitool sdr elist<br/>power            | 00h | ok  | 23.2 |<br/>reset            | 01h | ok  | 23.1 |<br/>CATERR           | 02h | ok  | 65.2 |<br/>...<br/>...<br/>```<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+
+
+
+
+           <tr>
+               <td>68</td>
+               <td>2023-06-14 01:20:47 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/40bd6718985c93d3ac8db21fdae42c4143dd6398>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>psusensor: Add xdpe152c4 support<br/><br/>Tested: Combined with related driver and entity-manager changes from<br/><a href=https://gerrit.openbmc.org/c/openbmc/entity-manager/+/63921>https://gerrit.openbmc.org/c/openbmc/entity-manager/+/63921</a><br/>sensors properly show up in IPMI sensors<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>69</td>
+               <td>2023-06-14 01:20:01 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/a115d87f837f06a2a61646bd3cc5304c09956ef4>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Add missing pragma once<br/><br/>This header didn't include a pragma once.  Fix it.<br/><br/>Tested: Code compiles<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>70</td>
+               <td>2023-06-14 00:02:45 </td>
+               <td><a href=https://github.com/openbmc/phosphor-net-ipmid/commit/be1aa083203d4e80702fb702d4e070750de58d61>Link</a></td>
+               <td class='module'>phosphor-net-ipmid</td>
+               <td class='content'>Use new default obmc-console socket path<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>71</td>
+               <td>2023-06-14 00:02:26 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/4d694346dcd480a30afba14fd8b2095caf4a7e0f>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>pdr: Add pldm_pdr_find_last_in_range()<br/><br/>Adds a new libpldm API to find the last PDR record from the PDR repo<br/>based on the range of record handle values given as input. This API is<br/>used when a record needs to be added in a particular range of record<br/>handles to the repo that contains all PDRs (inclusive of BMC and remote<br/>endpoints).<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>72</td>
+               <td>2023-06-14 00:02:09 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/4066a19d94b4017e5d5a65d7585f1a506c441a77>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>Change the default partition mode to A_Mode<br/><br/>Traditional IBM systems since 1988 used to ship with A_Mode<br/>as the default partition mode for iBMi. Changing the default<br/>value from D_Mode to A_Mode to match the behaviour of our systems<br/>and align them with the earlier behaviour.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>73</td>
+               <td>2023-06-14 00:01:55 </td>
+               <td><a href=https://github.com/openbmc/openpower-hw-diags/commit/a68302797149f0ed37920a5a9fe9e78039d899e3>Link</a></td>
+               <td class='module'>openpower-hw-diags</td>
+               <td class='content'>Minor updates for RAS data json for Odyssey<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>74</td>
+               <td>2023-06-13 22:39:36 </td>
+               <td><a href=https://github.com/openbmc/pfr-manager/commit/b29a15c60c97a518f6758dabce100893cdd6f35c>Link</a></td>
+               <td class='module'>pfr-manager</td>
+               <td class='content'>[pfr-manager]Implement BMCBusy Period<br/><br/>BMC busy period is the time for which BMC is busy<br/>(e.g. Flashing).PFR-Manager should not send the security<br/>packets to BMC during that interval.<br/>This patch introduces capability to intimate PFR about<br/>BMC busy period. Also ReadMBRegister D-Bus method is<br/>exposed in order to facilitate OEM IPMI commands to<br/>read the mail box register values<br/><br/><br/>Tested:<br/>Both the dbus methods InitiateBMCBusyPeriod and ReadMBRegister<br/>are working properly now. Logs below:<br/><br/>root@bmc-maca4bf018cc4b0:~# busctl call xyz.openbmc_project.PFR.Manager /xyz/openbmc_project/pfr xyz.openbmc_project.PFR.Mailbox  ReadMBRegister u 0x63<br/>y 0<br/>root@bmc-maca4bf018cc4b0:~# busctl call xyz.openbmc_project.PFR.Manager /xyz/openbmc_project/pfr xyz.openbmc_project.PFR.Mailbox  InitiateBMCBusyPeriod b 1<br/>b true<br/>root@bmc-maca4bf018cc4b0:~# busctl call xyz.openbmc_project.PFR.Manager /xyz/openbmc_project/pfr xyz.openbmc_project.PFR.Mailbox  ReadMBRegister u 0x63<br/>y 1<br/>root@bmc-maca4bf018cc4b0:~# busctl call xyz.openbmc_project.PFR.Manager /xyz/openbmc_project/pfr xyz.openbmc_project.PFR.Mailbox  InitiateBMCBusyPeriod b 0<br/>b true<br/>root@bmc-maca4bf018cc4b0:~# busctl call xyz.openbmc_project.PFR.Manager /xyz/openbmc_project/pfr xyz.openbmc_project.PFR.Mailbox  ReadMBRegister u 0x63<br/>y 0<br/>root@bmc-maca4bf018cc4b0:~#<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>75</td>
+               <td>2023-06-12 21:03:27 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/d15fa0993382e215061993582fa8fff1eb4a9b38>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>Bios: support IPv4-mapped IPv6 address length<br/><br/>The existing code will allow ::<ipv4_address> without<br/>any error. However, if the address is expanded like the<br/>below, there will be "length out of range" error:<br/>0000:0000:0000:0000:0000:ffff:xxx.xxx.xxx.xxx<br/><br/>This commit changes the maximum string length of<br/>IPv6 address from 39 to 45, to support IPv4-mapped<br/>IPv6 address.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>76</td>
+               <td>2023-06-12 21:03:13 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/b25e8a328bb66f82489a6ba736ab3e01c2a2a640>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: No PC signals when updating entry props<br/><br/>The PEL code has to update properties on the<br/>xyz.openbmc_project.Logging.Entry interface after the corresponding PEL<br/>has been created.  These updates don't need to send PropertiesChanged<br/>signals since it is when the event log is being created.<br/><br/>The ipmid daemon is watching for PC signals and it was triggering a<br/>bunch of unnecessary activity.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>77</td>
+               <td>2023-06-12 16:51:06 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/54fbdafc684cc437681be56d6000ef3b94914b36>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>OWNERS: add Kirankumar Ballapalli<br/><br/>Propose myself (Kirankumar Ballapalli) as an additional maintainer.<br/>I have contributed following patches to the webui-vue package.<br/>[1] commits:<br/><a href=https://gerrit.openbmc.org/q/owner:kirankumarb%2540ami.com>https://gerrit.openbmc.org/q/owner:kirankumarb%2540ami.com</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>78</td>
+               <td>2023-06-09 19:20:28 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/994fd86a3f6649a820f66313765e85e762ad105a>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix hack on Set-Cookie<br/><br/>This is one that I couldn't figure out for a while.  Turns out that<br/>fields has both a set() and an insert() method.  Whereas set() replaces,<br/>insert() appends, which is what we want in this case.<br/><br/>This allows us to call the actual methods several times, instead of<br/>essentially string injecting our own code, which should make it clearer.<br/><br/>At the same time, there was one unit test that was structured such that<br/>it was using addHeader to clear a header, so this commit adds an<br/>explicit "clearHeader()" method, so we can be explicit.<br/><br/>Tested:<br/>Logging into the webui in chrome (which uses POST /login) shows:<br/>401 with no cookie header if the incorrect password is used<br/>200 with 2 Set-Cookie headers set:<br/>Set-Cookie:<br/>SESSION=<session tag>; SameSite=Strict; Secure; HttpOnly<br/>Set-Cookie:<br/>XSRF-TOKEN=<token tag>; SameSite=Strict; Secure<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>79</td>
+               <td>2023-06-09 19:11:20 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/3fb026386546cfd288ab4f86156c9aa0ffa145d6>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>Update service files in repo (#133)<br/><br/>The service files in the repo are currently used for<br/>upstream compilation only, we will move to use this at<br/>a later stage , so we will need to keep the data in sync.<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+           <tr>
+               <td>80</td>
+               <td>2023-06-09 12:50:39 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/dfda5afb4ff7c76c4df3ebebbf496fdbda0fbbae>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>config: Drop support for the `socket-id` configuration key<br/><br/>9a8f30ec5b58 ("obmc-console: Introduce console-id, deprecate socket-id")<br/>replaces the `socket-id` configuration key with a better name. Now that<br/>we've fixed up all in-tree users in OpenBMC with 7a612d4fa70f<br/>("obmc-console: Convert configs from socket-id to console-id"), drop<br/>support for `socket-id`.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>81</td>
+               <td>2023-06-09 12:50:30 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/9fe3a3c767cc7932f526edb2fded7962d848b8a4>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>Set failsafePwm by pid configuration<br/><br/><motivation><br/>Current phosphor-pid-control service supports one zone with<br/>one failsafepwm. However, for some platforms there are<br/>different pluggable cards in a zone. Different combinations<br/>may require different failsafe pwm settings. Why not just<br/>use one zone failsafepwm for all the combinations? because if<br/>we take power consumption or acoustic into consideration,<br/>we will find that not all the cases need the same high<br/>failsafepwm. Each case just need high enough failsafepwm<br/>to cool down the system in that condition.<br/><br/>For example<br/>case1:  zone0 : gpuA card + motherboard in zone0<br/>=>requires failsafepwm = 80<br/><br/>case2:  zone1 : gpuB card + motherboard in zone0<br/>=>requires failsafepwm = 60<br/><br/>In order to solve the problem described above , we propose<br/>the design that. Each pidloop has its own failsafepwm.<br/>The final failsafepwm will be calculated during building<br/>zone process. The detailed design concept is described in<br/>design concept section.<br/><br/><design concept><br/>a zone has several pid loops, each one has its own pid<br/>failsafe pwm defined in its configuration.<br/><br/>The calculation flow goes as below:<br/>1.Take failsafepwm of the pidloops and the zone from the configuration<br/>  files, if any is missing , set it to zero.<br/>2.Take max value of (zone failsafepwm and pid loops failsafepwm).<br/>3.If the max value from 'step 2' is zero indicates none of failsafepwm<br/>  is configured, set it to default setting 100%.<br/><br/><note><br/>1.this is intended for dbus configuration method, since one zone<br/>  may have different pidloops from different pluggable boards<br/>  entity json, but this design also works for static configuration<br/>  method, therefore, the zone with different boards will need<br/>  different failsafepwm.<br/>2.keep it back compatible with original design , also take zone<br/>  failsafepwm into calculation.<br/><br/>Working example as below<br/><br/>Case1<br/>Zone0:<br/>zone0 pidloop failsafepwm = 60<br/>gpuA pidloop failsafepwm = 70<br/>Motherboard failsafepwm = 40<br/><br/>=>final failsafepwm = 70<br/><br/>Case2<br/>Zone0:<br/>zone0 pidloop failsafepwm = 60<br/>gpuB pidloop failsafepwm = 80<br/>Motherboard failsafepwm = 40<br/><br/>=>final failsafepwm = 80<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>82</td>
+               <td>2023-06-09 12:50:10 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/29aaa9e89246dc52e0eaa7e3a72dd0963fd2aa6c>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Maintainership: Remove Sandeepa<br/><br/>Sandeepa has left the project. Thank you for all the work on OpenBMC!<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>83</td>
+               <td>2023-06-09 12:49:37 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/b5ca3fdcf15c029e36b05d619752711871bf0e8d>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>POST EthernetInterfaceCollection for VLAN<br/><br/>With EthernetInterface 1.9.0, creation of VLAN interface is done by<br/>POST EthernetInterfaceCollection. This patch implements the POST<br/>handler to do so.<br/><br/>Tested:<br/>* With valid RelatedInterfaces and VLANId provided, new VLAN interface<br/>  is successfully created.<br/>* Creating VLAN over another VLAN or non-existent interface returns<br/>  error.<br/>* Creating an existing VLAN returns ResourceAlreadyExists error.<br/>* Invalid RelatedInterfaces links are rejected.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>84</td>
+               <td>2023-06-09 12:49:13 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/83841fb5af529d0fb610ac0c1439ebbcce4556df>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>README: Add a section on working with libpldm<br/><br/>9d2a1c6ad095 ("libpldm: Explicit deprecated, stable and testing ABI<br/>classes") gave us the ability to merge new APIs without having to review<br/>them to death before merging. Now we can merge and iterate on an API<br/>before locking into the library's ABI.<br/><br/>Given this, document how people should consume the library, and<br/>expectations on developers contributing to the library.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>85</td>
+               <td>2023-06-09 12:48:41 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/e2400c8cc82976a0f0cd272c50aecdb92989a3fd>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>configurations: Add configurations for mtmichell<br/><br/>This commit adds Entity-Manager configurations for Ampere's Mt.Mitchell<br/>platform.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>86</td>
+               <td>2023-06-09 12:48:12 </td>
+               <td><a href=https://github.com/openbmc/phosphor-state-manager/commit/e56feb492ef70295d49b6856cd649c1bf13a86eb>Link</a></td>
+               <td class='module'>phosphor-state-manager</td>
+               <td class='content'>bmc-ready: update documentation about new optional feature<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+           <tr>
+               <td>87</td>
+               <td>2023-06-08 18:48:16 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/b2665cdf3961ac30ff178a5e67e3624eb619c66f>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>gcc13 : fix argument format issues<br/><br/>gcc13 based build failed with below errors.<br/>error: static assertion failed: Cannot format an argument.<br/>  To make type T formattable provide a formatter<T> specialization:<br/>  <a href=https://fmt.dev/latest/api.html#udt>https://fmt.dev/latest/api.html#udt</a><br/><br/>Problem reported during enum type input is similar to<br/><a href=https://github.com/fmtlib/fmt/issues/391>https://github.com/fmtlib/fmt/issues/391</a><br/>Fix is to static_cast the "enum" type to "underlying_type" in<br/>fmt::format function.<br/><br/>Problem related file descriptor input is to static_cast enum<br/>to "underlying_type".<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>88</td>
+               <td>2023-06-08 17:40:24 </td>
+               <td><a href=https://github.com/openbmc/openpower-proc-control/commit/cb23cb2d0846bfc8e550e3fbadc683fb7b026e6c>Link</a></td>
+               <td class='module'>openpower-proc-control</td>
+               <td class='content'>gcc13 : fix argument format issues<br/><br/>gcc13 based build failed with below error.<br/>  error: static assertion failed: Cannot format an argument.<br/>  To make type T formattable provide a formatter<T> specialization:<br/>  <a href=https://fmt.dev/latest/api.html#udt>https://fmt.dev/latest/api.html#udt</a><br/><br/>Problem looks similar to <a href=https://github.com/fmtlib/fmt/issues/391>https://github.com/fmtlib/fmt/issues/391</a><br/><br/>Fix is to convert the "enum" type to underlying_type in fmt::format function.<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+
+
+
+
+           <tr>
+               <td>89</td>
+               <td>2023-06-07 23:04:31 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/da5b76b241cb5386916f01ae604e525fd52dcf85>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Support for CheckstopFlag msg reg field<br/><br/>Similiar to the DeconfigFlag field that was recently added, this one<br/>indicates the PEL is for a hardware checkstop and results in a bit in<br/>SRC hex word 5 being set.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>90</td>
+               <td>2023-06-07 23:04:18 </td>
+               <td><a href=https://github.com/openbmc/openpower-occ-control/commit/423187e6479516af95465de10895edd501c68ebf>Link</a></td>
+               <td class='module'>openpower-occ-control</td>
+               <td class='content'>Fix PLDM dependency string<br/><br/>After systemd daemon-reload an error was found:<br/>  open_power.OCC.Control.service:7: Failed to add dependency on xyz.openbmc_project.PLDM, ignoring: Invalid argument<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>91</td>
+               <td>2023-06-07 23:03:49 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/04b0b013e5020f43258e05116ddd49f80cbfecfc>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>schema: ibm: add default power mode props. schema<br/><br/>Add PowerModeProperties schema to define the factory default power mode<br/>properties of a system:<br/>- Power Mode<br/>- Idle Power Saver Parameters<br/><br/>All of these parameters are part of the version 2021.2 Redfish Schema<br/>Supplement under the ComputerSystem 1.16.0 schema:<br/>For details on the values and descriptions, see the PowerMode and<br/>IdlePowerSaver schemas in the Redfish documentation:<br/><a href=https://www.dmtf.org/sites/default/files/standards/documents/DSP0268_2021.2.pdf>https://www.dmtf.org/sites/default/files/standards/documents/DSP0268_2021.2.pdf</a><br/><br/>These are the factory default values as defined by the system architect.<br/>All of these parameters are system-wide parameters and are used to<br/>define the operation of that system as it relates to power.<br/><br/>These are the values will be used the first time a system is powered on.<br/>They can also be used if the customer wants to restore these settings to<br/>their factory defaults.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>92</td>
+               <td>2023-06-07 23:03:00 </td>
+               <td><a href=https://github.com/openbmc/openpower-hw-diags/commit/bdb8667c351f22c461b4184603b4b03fe01085a8>Link</a></td>
+               <td class='module'>openpower-hw-diags</td>
+               <td class='content'>Attn: Added needed cstdint include<br/><br/>Moving to gcc13 requires explicitly including some<br/>previously indirectly resolved includes. In this<br/>case cstdint was needed to resolve uint32_t type.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>93</td>
+               <td>2023-06-07 23:02:49 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/9ba73934501fc4bfe8edf74b8a0211701b6d58ca>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Add AccountTypes in POST Accounts service<br/><br/>This drop adds support to specify AccountTypes at the time of user<br/>creation. Made sure that HostConsole is only supported for user with<br/>administrator role.<br/><br/>Testing:<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>   -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>   "Administrator", "AccountTypes": ["HostConsole"]}'<br/>{<br/>  "@Message.ExtendedInfo": [<br/>    {<br/>      "@odata.type": "#Message.v1_1_1.Message",<br/>      "Message": "The resource has been created successfully.",<br/>      "MessageArgs": [],<br/>      "MessageId": "Base.1.13.0.Created",<br/>      "MessageSeverity": "OK",<br/>      "Resolution": "None."<br/>    }<br/>  ]<br/>}<br/>$ curl -k<br/> <a href=https://root:0penBmc@bmc1:443/redfish/v1/AccountService/Accounts/user99>https://root:0penBmc@bmc1:443/redfish/v1/AccountService/Accounts/user99</a><br/>{<br/>  "@odata.id": "/redfish/v1/AccountService/Accounts/user99",<br/>  "@odata.type": "#ManagerAccount.v1_7_0.ManagerAccount",<br/>  "AccountTypes": [<br/>    "HostConsole"<br/>  ],<br/>  "Description": "User Account",<br/>  "Enabled": true,<br/>  "Id": "user99",<br/>  "Links": {<br/>    "Role": {<br/>      "@odata.id": "/redfish/v1/AccountService/Roles/Administrator"<br/>    }<br/>  },<br/>  "Locked": false,<br/>  "Locked@Redfish.AllowableValues": [<br/>    "false"<br/>  ],<br/>  "Name": "User Account",<br/>  "Password": null,<br/>  "PasswordChangeRequired": false,<br/>  "RoleId": "Administrator",<br/>  "StrictAccountTypes": true,<br/>  "UserName": "user99"<br/>}<br/><br/>Also ran following testcases:<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["HostConsole"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Operator", "AccountTypes": ["HostConsole"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "ReadOnly", "AccountTypes": ["HostConsole"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["ManagerConsole"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["Redfish"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["WebUI"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["IPMI"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["Redfish", "IPMI", "HostConsole",<br/>  "ManagerConsole", "WebUI"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["Redfish", "HostConsole",<br/>  "ManagerConsole", "WebUI"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["Redfish", "ManagerConsole",<br/>  "WebUI"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["Redfish", "HostConsole", "WebUI"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Administrator", "AccountTypes": ["IPMI", "HostConsole",<br/>  "ManagerConsole"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "Operator", "AccountTypes": ["Redfish", "ManagerConsole", "WebUI"]}'<br/>$ curl -k -X POST <a href=https://${bmc}/redfish/v1/AccountService/Accounts>https://${bmc}/redfish/v1/AccountService/Accounts</a><br/>  -d '{"UserName": "user99", "Password": "0penBmc0", "RoleId":<br/>  "ReadOnly", "AccountTypes": ["Redfish", "ManagerConsole", "WebUI"]}'<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>94</td>
+               <td>2023-06-07 21:53:01 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/9d2a1c6ad095d0b04d1c39a794487eafda1f34fb>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>libpldm: Explicit deprecated, stable and testing ABI classes<br/><br/>Experimenting with new APIs is important, but ABI stability of the<br/>library is also important. We wish to have the freedom to add APIs<br/>without being burdened by them being immediately set in stone.<br/><br/>We implement this wish by introducing three classes of ABI:<br/><br/>1. deprecated<br/>2. stable<br/>3. testing<br/><br/>These are enforced by corresponding function attributes:<br/><br/>1. LIBPLDM_ABI_DEPRECATED<br/>2. LIBPLDM_ABI_STABLE<br/>3. LIBPLDM_ABI_TESTING<br/><br/>Symbol visibility in the library is flipped to 'hidden' by default, so<br/>one of these annotations must be used for the symbol to be exposed.<br/><br/>With these classes in place there are now clear points in time at which<br/>we update the ABI dumps captured under the abi/ directory: When an API<br/>is migrated from the 'testing' class to the 'stable' class, or when<br/>removed from the 'deprecated' class.<br/><br/>Which classes of functions are exposed by the build is controlled by the<br/>new 'abi' meson option. The option is of array type which contains the<br/>list of ABI classes the build should consider. It defaults to enabling<br/>all classes to provide test coverage in CI. The classes used should be<br/>constrained to deprecated and stable (and not test) in any dependent<br/>projects.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>95</td>
+               <td>2023-06-07 20:51:37 </td>
+               <td><a href=https://github.com/openbmc/stdplus/commit/8a6eca3ae3c9a78b8ebfddc2c37fa94e09733bdf>Link</a></td>
+               <td class='module'>stdplus</td>
+               <td class='content'>build: Enable clang-tidy<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>96</td>
+               <td>2023-06-07 20:51:05 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/3fb026386546cfd288ab4f86156c9aa0ffa145d6>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>Update service files in repo (#133)<br/><br/>The service files in the repo are currently used for<br/>upstream compilation only, we will move to use this at<br/>a later stage , so we will need to keep the data in sync.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>97</td>
+               <td>2023-06-07 20:50:46 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/ba0a5a74ef699f2bd7d3dbbce24b26fa1ce5e6d5>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>Remove deprecated D-Bus interface<br/><br/>9598b866d8e2 ("Add new D-Bus UART interface") adds the interface that's<br/>described in phosphor-dbus-interface and deprecates the old interface.<br/>Now that the new interface is merged, follow through and delete the<br/>deprecated interface.<br/><br/>[AJ: Rebase on master and update changelog]<br/></td>
+           </tr>
+
+
+           <tr>
+               <td>98</td>
+               <td>2023-06-07 13:30:20 </td>
+               <td><a href=https://github.com/openbmc/telemetry/commit/cc8abc0be58c19acd088da455454fdf466a1745f>Link</a></td>
+               <td class='module'>telemetry</td>
+               <td class='content'>passing owner responsibilities<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>99</td>
+               <td>2023-06-06 20:36:43 </td>
+               <td><a href=https://github.com/openbmc/phosphor-logging/commit/81bc56119cf2d8e058371b007816aada99110498>Link</a></td>
+               <td class='module'>phosphor-logging</td>
+               <td class='content'>PEL: Fixes for gcc13<br/><br/>* Add the cstdint header file as now required to get the uint* types.<br/>* Fix a move assignment test<br/>* Refactor some nlohmann::json code to avoid:<br/><br/>```<br/>/usr/include/c++/13/valarray:1201:1: note:   template argument deduction/substitution failed:<br/>../extensions/openpower-pels/registry.cpp:665:43: note:   ．const nlohmann::json_abi_v3_11_2::basic_json<>::value_type・ {aka ．const nlohmann::json_abi_v3_11_2::basic_json<>・} is not derived from ．const std::valarray<_Tp>・<br/>  665 |             (name == j["SRC"]["ReasonCode"] && type == LookupType::reasonCode));<br/>```<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>100</td>
+               <td>2023-06-06 20:36:26 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/b4ea2e159cf10ae18e59471611bcbbeaf377f60d>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>Add myself as a maintainer<br/><br/>This repository has a fairly large backlog of reviews, and I'd like to<br/>help out.  I've made changes to the codebase before and I've also been<br/>an active maintainer for other repositories for several years.<br/><br/>I don't meet the new requirements put out in the docs repo, but EM has a<br/>fairly small and mostly stable codebase already. Most of the reviews are<br/>for the JSON configuration files that define cards.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>101</td>
+               <td>2023-06-06 17:50:34 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/0a9c11e85eb92140ba8d7120244b97cad615d483>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Fix meson warning<br/><br/>NOTICE: Future-deprecated features used:<br/> * 0.64.0: {'copy arg in configure_file'}<br/><br/> Port to the new version of this, which is install_data.<br/><br/>Tested: Meson configure no longer throws the above warning.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>102</td>
+               <td>2023-06-06 12:41:36 </td>
+               <td><a href=https://github.com/openbmc/phosphor-host-ipmid/commit/6615d479a694ead0e806f34d16d79dcbd69fae5d>Link</a></td>
+               <td class='module'>phosphor-host-ipmid</td>
+               <td class='content'>dbus-sdr: Log error only after all paths failed<br/><br/>getManagedObjects is now checking multiple paths and log errors whenever<br/>it fails with a path. However, for instance,<br/>xyz.openbmc_project.ExternalSensor only supports<br/>/xyz/openbmc_project/sensors (and not supports /xyz/openbmc_project/vr).<br/>We should only log error when getManagedObjects fail for all paths.<br/><br/>Also, log the service name when failing.<br/><br/>Tested: with the change, there is no getManagedObjects errors in our<br/>system.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>103</td>
+               <td>2023-06-06 12:41:09 </td>
+               <td><a href=https://github.com/openbmc/phosphor-pid-control/commit/7c6d35d5c439196254a7ca600b2d6bc0650adf4a>Link</a></td>
+               <td class='module'>phosphor-pid-control</td>
+               <td class='content'>Allow disabling PID loops at runtime<br/><br/><design concept><br/>Add the map of object enable interface to pid loops<br/>in the zone then we can disable/enable each pid loop<br/>process in a zone by dbus command.<br/><br/>[note]<br/>Enable = true  : enable process (default)<br/>Enable = false : disable process<br/><br/>Tested:<br/>In this case: we set Enable = false to disable<br/>pidloop:Zone_Temp_0, and see how it affects<br/>the zone final pwm, when pidloop: Zone_Temp_0<br/>in zone 0 is disabled.<br/><br/>then even we are trying to heat up the temperature<br/>of a sensor: Temp_0 in pidloop: Zone_Temp_0, this<br/>set point of the pidloop will not be taken into the<br/>calculation for the final set point of the whole zone.<br/><br/>```<br/><service object><br/>root@openbmc:/tmp# busctl tree xyz.openbmc_project.State.FanCtrl<br/>`-/xyz<br/>  `-/xyz/openbmc_project<br/>    `-/xyz/openbmc_project/settings<br/>      `-/xyz/openbmc_project/settings/fanctrl<br/>        |-/xyz/openbmc_project/settings/fanctrl/zone0<br/>        | |-/xyz/openbmc_project/settings/fanctrl/zone0/Zone_Temp<br/>        | |-/xyz/openbmc_project/settings/fanctrl/zone0/Zone_Temp_0<br/>        | `-/xyz/openbmc_project/settings/fanctrl/zone0/Zone_Temp_1<br/><br/>====Enable process for pidloop:Zone_Temp_0 with p-switch temperature sensor:Temp_0 at runtime====<br/>root@openbmc:~# busctl introspect xyz.openbmc_project.State.FanCtrl /xyz/openbmc_project/settings/fanctrl/zone0/Zone_Temp_0<br/>NAME                                TYPE      SIGNATURE RESULT/VALUE FLAGS<br/>xyz.openbmc_project.Object.Enable   interface -         -            -<br/>.Enabled                            property  b         true         emits-change writable<br/><br/>====Disable process for pidloop:Zone_Temp_0 with p-switch temperature sensor: Temp_0====<br/>root@openbmc:~# busctl set-property xyz.openbmc_project.State.FanCtrl /xyz/openbmc_project/settings/fanctrl/zone0/Zone_Temp_0 xyz.openbmc_project.Object.Enable Enabled b false<br/>root@openbmc:~# busctl introspect xyz.openbmc_project.State.FanCtrl /xyz/openbmc_project/settings/fanctrl/zone0/Zone_Temp_0<br/>NAME                                TYPE      SIGNATURE RESULT/VALUE FLAGS<br/>xyz.openbmc_project.Object.Enable   interface -         -            -<br/>.Enabled                            property  b         false        emits-change writable<br/>```<br/><br/>when Disable the process of the pidloop: Zone_Temp_0,<br/>the requester switches from Zone_Temp_0 to the others,<br/>when you enable the pidloop: Zone_Temp_0, the setpoint<br/>of Zone_Temp_0 will be take into consideration again<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>104</td>
+               <td>2023-06-06 12:40:48 </td>
+               <td><a href=https://github.com/openbmc/dbus-sensors/commit/cebb28c2a0247ccefe6e14f290029358f3d66672>Link</a></td>
+               <td class='module'>dbus-sensors</td>
+               <td class='content'>intrusionsensor: Refactor source code<br/><br/>This commit splits the intrusionsensor source code into a base class and<br/>derived classes to dictate sensor of different methods. Only one method<br/>of chassis intrusion detection is expected for one given system.<br/><br/>Tested with hwmon method on Ampere Mt.Mitchell platform which is<br/>implemented in the patch:<br/><a href=https://gerrit.openbmc.org/c/openbmc/dbus-sensors/+/62775>https://gerrit.openbmc.org/c/openbmc/dbus-sensors/+/62775</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>105</td>
+               <td>2023-06-06 12:40:17 </td>
+               <td><a href=https://github.com/openbmc/obmc-console/commit/7c02ae1ebe2689422fc233cddd91f1a265d293fc>Link</a></td>
+               <td class='module'>obmc-console</td>
+               <td class='content'>console-server: Use correct attribute name in VUART test<br/><br/>The test was looking for a sysfs attribute named `lpc_addr`, but the<br/>attribute actually exposed is `lpc_address`:<br/><br/><a href=https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/ABI/stable/sysfs-driver-aspeed-vuart?h=v6.3#n1>https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/ABI/stable/sysfs-driver-aspeed-vuart?h=v6.3#n1</a><br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>106</td>
+               <td>2023-06-06 12:39:43 </td>
+               <td><a href=https://github.com/openbmc/phosphor-bmc-code-mgmt/commit/dedcb9a6a4f5e756b1996e99a0a4e5e03b06d84c>Link</a></td>
+               <td class='module'>phosphor-bmc-code-mgmt</td>
+               <td class='content'>mmc: Don't remove hostfw if it's not being updated<br/><br/>The image-hostfw is optional, therefore don't delete it unless it's<br/>going to be updated, to prevent ending up with a system that doesn't<br/>have a bios image to boot with.<br/><br/>Tested: Verify the hostfw image doesn't get deleted unless the tarball<br/>contains an image-hostfw file.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>107</td>
+               <td>2023-06-06 12:34:56 </td>
+               <td><a href=https://github.com/openbmc/smbios-mdr/commit/5a122a6e1b620e79c5c6807e83f1cd75fe872fb6>Link</a></td>
+               <td class='module'>smbios-mdr</td>
+               <td class='content'>mdrv2: Attempt to update D-Bus objects in place<br/><br/>When systemInfoUpdate() is called multiple times, there's a potential<br/>race condition of a user polling for the objects while the array of<br/>D-Bus objects are erased and being repopulated. This results in<br/>incomplete set of memory or CPU counts, which can lead to unforseen<br/>consequences.<br/><br/>Tested: Verified that a corner case that was hitting this case<br/>consistently (when SMBIOS was transferred using ipmi-blob repeatedly)<br/>goes away with this implementation.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>108</td>
+               <td>2023-06-06 12:34:44 </td>
+               <td><a href=https://github.com/openbmc/entity-manager/commit/5f58ddfac925e0f15a5827447cb5d50f75030ba8>Link</a></td>
+               <td class='module'>entity-manager</td>
+               <td class='content'>configuration: Fix Bonnell PSU I2C addresses<br/><br/>Fix the Bonnell Power Supply I2C addresses.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>109</td>
+               <td>2023-06-06 12:34:32 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/8085efe0f1ef3f0560076088bb867bf7920ffeb3>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>changelog: Note the removal of requester-api meson option<br/><br/>This should be noted for anyone who might be using it, though it appears<br/>no-one was (hence its removal).<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+
+
+           <tr>
+               <td>110</td>
+               <td>2023-06-02 13:40:36 </td>
+               <td><a href=https://github.com/openbmc/bmcweb/commit/c1c7b94bf8327a20ccce4f628c9b43c75db2023a>Link</a></td>
+               <td class='module'>bmcweb</td>
+               <td class='content'>Remove duplicated stringValueTooLong<br/><br/>This prototype got added twice, once with int as a value, and once with<br/>size_t.  This builds fine in 64 bit, but in 32 bit, fails.<br/><br/>Tested: Code compiles<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>111</td>
+               <td>2023-06-02 13:06:09 </td>
+               <td><a href=https://github.com/openbmc/phosphor-psu-code-mgmt/commit/5a490937b506b83f935c550b19f33625e8601c7c>Link</a></td>
+               <td class='module'>phosphor-psu-code-mgmt</td>
+               <td class='content'>meson: remove cppfs dependency<br/><br/>The dependency on the c++fs library is something very old from the C++14<br/>era and is no longer necessary with a modern compiler.  Remove the<br/>explicit dependency from the meson setup.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>112</td>
+               <td>2023-06-02 13:05:03 </td>
+               <td><a href=https://github.com/openbmc/libpeci/commit/b65de2d694438a0fb3198f09a2aae3c9b8c40bd9>Link</a></td>
+               <td class='module'>libpeci</td>
+               <td class='content'>Fix GCC 13 issue<br/><br/>GCC identifies an uninitialized local variable that is later used.<br/>Initialize the variable to a sane status.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>113</td>
+               <td>2023-06-02 13:04:52 </td>
+               <td><a href=https://github.com/openbmc/openpower-vpd-parser/commit/9cf56eeda726addff04e3844cac3bb5f949c00aa>Link</a></td>
+               <td class='module'>openpower-vpd-parser</td>
+               <td class='content'>fix GCC 13 issues<br/><br/>GCC 13 removes `uint*_t` family of types from one of the common<br/>includes so we need to explicitly include cstdint.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>114</td>
+               <td>2023-06-02 13:04:41 </td>
+               <td><a href=https://github.com/openbmc/openpower-occ-control/commit/c86d80fa358c3a088bce0f9bc0e48a73476599b4>Link</a></td>
+               <td class='module'>openpower-occ-control</td>
+               <td class='content'>Implement processor throttle dbus properties<br/><br/>- create processor throttle dbus objects for each OCC (processor)<br/>- update throttle properties based on OCC poll response data<br/>  or safe mode status.<br/><br/>Throttle data will be made available via Redfish<br/><br/>NAME                                       TYPE      SIGNATURE RESULT/VALUE FLAGS<br/>org.freedesktop.DBus.Introspectable        interface -         -            -<br/>.Introspect                                method    -         s            -<br/>org.freedesktop.DBus.Peer                  interface -         -            -<br/>.GetMachineId                              method    -         s            -<br/>.Ping                                      method    -         -            -<br/>org.freedesktop.DBus.Properties            interface -         -            -<br/>.Get                                       method    ss        v            -<br/>.GetAll                                    method    s         a{sv}        -<br/>.Set                                       method    ssv       -            -<br/>.PropertiesChanged                         signal    sa{sv}as  -            -<br/>xyz.openbmc_project.Control.Power.Throttle interface -         -            -<br/>.ThrottleCauses                            property  as        0            emits-change<br/>.Throttled                                 property  b         false        emits-change<br/><br/>Example of throttled processor (due to a power limit):<br/>as 1 "xyz.openbmc_project.Control.Power.Throttle.ThrottleReasons.PowerLimit"<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>115</td>
+               <td>2023-06-02 11:16:30 </td>
+               <td><a href=https://github.com/openbmc/pldm/commit/2b85d7844c6a0731a25fa103aebd5f5d53475500>Link</a></td>
+               <td class='module'>pldm</td>
+               <td class='content'>pldmtool: Close socket connection<br/><br/>With pldm commands like getPDR, pldmtool opens new socket for each PDR.<br/>In case we have hundred number of PDRs, pldmtool open hundred number of<br/>socket connection to server. It causes mctp-demux (role as server) reach<br/>limit number of clients can handle.<br/><br/>So pldmtool should close socket connection to server after completely<br/>using it.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>116</td>
+               <td>2023-06-02 11:12:59 </td>
+               <td><a href=https://github.com/openbmc/stdplus/commit/521475e48faf4c9e3f66eec48476e5c4fbd34bea>Link</a></td>
+               <td class='module'>stdplus</td>
+               <td class='content'>str/maps: Add commonly used cheaper string map<br/><br/>These maps allow for the use of string_views to find elements so we<br/>don't need to construct std::strings for lookups.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>117</td>
+               <td>2023-06-02 11:12:53 </td>
+               <td><a href=https://github.com/openbmc/phosphor-debug-collector/commit/16eafec02e004281b98eb350a348fce79ee53c91>Link</a></td>
+               <td class='module'>phosphor-debug-collector</td>
+               <td class='content'>OpenPOWER: Remove duplicate OriginatedBy interface<br/><br/>The OriginatedBy interface is added to the base entry<br/>class but again added to resource and system dump entries<br/>which is causing issue while starting the service.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>118</td>
+               <td>2023-06-02 11:12:39 </td>
+               <td><a href=https://github.com/openbmc/webui-vue/commit/780733a1b426a927140619857d732fb472d5cf38>Link</a></td>
+               <td class='module'>webui-vue</td>
+               <td class='content'>Fix logout button not work on Safari<br/><br/>After logged on via Safari web browser, click <user> -> Log out button<br/>does not take effect until clicking on other tab. The current page still<br/>works normally. For example, in Virtual Media page, after clicking on<br/>the Log out button, nothing happens and we can still mount ISO file.<br/>The issue does not happen on Chrome or Firefox.<br/><br/>Fix the issue by changing router.go() to router.push().<br/><br/>Reference:<br/> <a href=https://github.com/vuejs/vue-router/issues/2554>https://github.com/vuejs/vue-router/issues/2554</a><br/> <a href=https://codewithandrea.com/articles/flutter-navigation-gorouter-go-vs-push/>https://codewithandrea.com/articles/flutter-navigation-gorouter-go-vs-push/</a><br/><br/>Tested:<br/>1. Check if the issue does not happen on Safari anymore.<br/>2. Check if no issue with Google Chrome and Mozilla Firefox.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>119</td>
+               <td>2023-06-02 11:12:18 </td>
+               <td><a href=https://github.com/openbmc/phosphor-post-code-manager/commit/e7e197b3afc0ce14c5fcbf5c1da00dd04b65e2aa>Link</a></td>
+               <td class='module'>phosphor-post-code-manager</td>
+               <td class='content'>clang-format: copy latest and re-format<br/><br/>clang-format-16 has some backwards incompatible changes that require<br/>additional settings for best compatibility and re-running the formatter.<br/>Copy the latest .clang-format from the docs repository and reformat the<br/>repository.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>120</td>
+               <td>2023-06-02 11:12:10 </td>
+               <td><a href=https://github.com/openbmc/estoraged/commit/19825057f05902e74df392b54d959551d3dcd914>Link</a></td>
+               <td class='module'>estoraged</td>
+               <td class='content'>Add support for LocationCode<br/><br/>LocationCode is needed to populate ServiceLabel by BMCWeb for Redfish<br/>resource associated with eStorage.<br/>LocationCode is derived from config object exported by Entity Manager<br/>in the the following interface:<br/>    "xyz.openbmc_project.Configuration.EmmcDevice<br/><br/>To surface LocationCode, the "Exposes" entry in board's Entity Manager<br/>config can add "LocationCode" property as follows:<br/>{<br/>    "Name": "example_emmc",<br/>    "Type": "EmmcDevice",<br/>    "LocationCode": "U1000"<br/>}<br/><br/>Here the LocationCode is the silk screen label.<br/><br/>Tested:<br/><br/>busctl introspect xyz.openbmc_project.eStoraged \<br/>/xyz/openbmc_project/inventory/storage/mmcblk0  \<br/>xyz.openbmc_project.Inventory.Decorator.LocationCode<br/><br/>NAME                TYPE      SIGNATURE RESULT/VALUE FLAGS<br/>.LocationCode    property  s         "U1000"      emits-change<br/><br/>wget -qO- localhost:80/redfish/v1/Chassis/DCSCM/Drives/mmcblk0<br/>{<br/>    "@odata.id": "/redfish/v1/Chassis/DCSCM/Drives/mmcblk0",<br/>    "@odata.type": "#Drive.v1_7_0.Drive",<br/>    "Id": "mmcblk0",<br/>    "Links": {<br/>    "Chassis": {<br/>        "@odata.id": "/redfish/v1/Chassis/DCSCM"<br/>    }<br/>    },<br/>    "Name": "mmcblk0",<br/>    "PhysicalLocation": {<br/>    "PartLocation": {<br/>        "LocationType": "Embedded",<br/>        "ServiceLabel": "U1000"<br/>    },<br/>    "PartLocationContext": "DC_SCM"<br/>    },<br/>    "PredictedMediaLifeLeftPercent": 100,<br/>    "Status": {<br/>    "State": "Enabled"<br/>    }<br/>}<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>121</td>
+               <td>2023-06-02 11:12:01 </td>
+               <td><a href=https://github.com/openbmc/libpldm/commit/4bd6eef3885d90dd9a0efde3c3d90e442849a6f0>Link</a></td>
+               <td class='module'>libpldm</td>
+               <td class='content'>meson: Allow absence of abi-compliance-check tools<br/><br/>Fixes:<br/><br/>```<br/>Configuring config.h using configuration<br/>Dependency gtest found: YES 1.12.1 (cached)<br/>Dependency gmock found: YES 1.12.1 (cached)<br/>Program abi-dumper found: NO<br/>Program abi-compliance-checker found: NO<br/><br/>../meson.build:85:4: ERROR: Tried to use not-found external program in "command"<br/>```<br/><br/>Tested by issuing `meson setup build && meson compile -C build` both<br/>without and with `abi-dump` and `abi-compliance-checker` installed.<br/>I verified that in the former case we don't fail setup and in the latter<br/>case we check for ABI compliance.<br/><br/>Reported-by: Rashmica Gupta <rashmica@linux.ibm.com><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>122</td>
+               <td>2023-06-02 11:11:04 </td>
+               <td><a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit/3826910ef8f91c05562a716929221745c92dd9d7>Link</a></td>
+               <td class='module'>phosphor-dbus-interfaces</td>
+               <td class='content'>Add xyz.openbmc_project.Console.UART<br/><br/>Formalize an ad-hoc interface currently implemented in obmc-console.<br/>This will contain attributes for each console object that is connected<br/>to a physical UART. Other console objects (e.g. VUART) would not<br/>implement this interface. could be extended to support additional<br/>console attributes, but for now a writable `Baud` property is the only<br/>item.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>123</td>
+               <td>2023-06-02 11:10:58 </td>
+               <td><a href=https://github.com/openbmc/phosphor-led-manager/commit/fcf3a9d08e475b6ae325de4e8ab384f8104f54b1>Link</a></td>
+               <td class='module'>phosphor-led-manager</td>
+               <td class='content'>LED:Invalid association for fault LED group<br/><br/>The LED fault association group name has been changed from<br/>fault_led_group to fault_identifying as a part of this change<br/><<a href=https://github.com/openbmc/phosphor-dbus-interfaces/commit>https://github.com/openbmc/phosphor-dbus-interfaces/commit</a><br/>/e7c10bd5cdab6cd898e5cad0daab8c1128adc0c8>.<br/><br/>The current code points to the invalid group name. This commit<br/>has the fix for it.<br/><br/>Test:<br/><br/>busctl set-property xyz.openbmc_project.Inventory.Manager /xyz/openbmc_project/inventory/system/chassis/motherboard/vdd_vrm1 xyz.openbmc_project.State.Decorator.OperationalStatus Functional b false<br/><br/>busctl set-property xyz.openbmc_project.Inventory.Manager /xyz/openbmc_project/inventory/system/chassis/motherboard/ebmc_card_bmc xyz.openbmc_project.State.Decorator.OperationalStatus Functional b true<br/><br/>Before the fix: Error traces are found when we try to set Functional property.<br/>phosphor-fru-fault-monitor[1180]: Failed to get endpoints property, ERROR = sd_bus_call: xyz.openbmc_project.Common.Error.ResourceNotFound: The resource is not found., PATH = /xyz/openbmc_project/inventory/system/chassis/motherboard/vdd_vrm1/fault_led_group<br/>May 31 02:17:32 rain127bmc phosphor-fru-fault-monitor[1180]: The inventory D-Bus object is not associated with the LED group D-Bus object. INVENTORY_PATH = /xyz/openbmc_project/inventory/system/chassis/motherboard/vdd_vrm1<br/><br/>After the fix:<br/>No error traces are found and Functional property has been updated.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>124</td>
+               <td>2023-06-02 11:10:37 </td>
+               <td><a href=https://github.com/openbmc/phosphor-gpio-monitor/commit/0172969c58370a0f4f41d646dce76c23dd0637cd>Link</a></td>
+               <td class='module'>phosphor-gpio-monitor</td>
+               <td class='content'>meson: add subproject support<br/><br/>Enable building the repository outside of an OpenBMC Docker container or<br/>SDK by leveraging meson subproject support.  Copy wrap files from<br/>elsewhere in the organization and update the meson dependencies for some<br/>missing dependencies.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>125</td>
+               <td>2023-06-02 10:20:26 </td>
+               <td><a href=https://github.com/openbmc/phosphor-user-manager/commit/cf7aeddd82e300d9a0846ece3f23ac11b3d582c5>Link</a></td>
+               <td class='module'>phosphor-user-manager</td>
+               <td class='content'>meson: remove cppfs dependency<br/><br/>The dependency on the c++fs library is something very old from the C++14<br/>era and is no longer necessary with a modern compiler.  Remove the<br/>explicit dependency from the meson setup.<br/><br/></td>
+           </tr>
+
+
+           <tr>
+               <td>126</td>
+               <td>2023-06-01 22:30:29 </td>
+               <td><a href=https://github.com/openbmc/phosphor-power/commit/5a355ba3e968f1a83604a715a5272fd8ddfb9b18>Link</a></td>
+               <td class='module'>phosphor-power</td>
+               <td class='content'>phosphor-regulators: squash warning on GCC-13 only<br/><br/>The change to squash the warning for dangling-reference can only be<br/>applied to GCC-13.  On GCC-12, the compiler doesn't know about this<br/>warning and fails when it comes across the unknown warning parameter.<br/><br/>Hopefully the false positives present here will be resolved in a future<br/>version of GCC so we are being specific about GCC-13 instead of<br/>exempting for GCC 13 and higher so that we are forced to revisit<br/>this later.<br/><br/>Fixes 974a794021c1c7430f17a9dfcf5d7b9cebf582a9<br/><br/></td>
+           </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+       </tbody>
+   </table>
+</body>
+</html>
